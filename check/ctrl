@@ -1,0 +1,77 @@
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3/check[0m
+[32;01m> [0m[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3/check[0m
+[32;01m> [0m~/quarantedeux/sh3
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mtoto=
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mtoto=42
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mtoto=42=23
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mtototo=to
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m21sh: command not found: ls
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m21sh
+Makefile
+README.md
+auteur
+check
+edit
+inc
+libft
+obj
+src
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m.
+..
+21sh
+auteur
+check
+edit
+.git
+inc
+libft
+Makefile
+obj
+README.md
+src
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m21sh
+auteur
+check
+edit
+inc
+libft
+Makefile
+obj
+README.md
+src
+ls: cannot access eglk: No such file or directory
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m1
+21sh
+auteur
+check
+edit
+inc
+libft
+Makefile
+obj
+README.md
+src
+yo
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mmcanal$
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m? ? ? ? hey youpla boum
+tsoin tsoin
+bye
+[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0m[31;01mmcanal[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~/quarantedeux/sh3[0m
+[32;01m> [0mexit
+[31;01mmarvin[0m[33;01m@21sh[0m[37;01m:[0m[32;01m~[0m
+[32;01m> [0m21sh: no such file or directory: ./21sh
+exit
+42
