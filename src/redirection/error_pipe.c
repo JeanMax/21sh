@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 23:21:24 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 01:24:34 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:01:33 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ static void		fork_that(char **cmd1, char **cmd2, t_env *e)
 {
 	int			pipe_fd[2];
 
-	pipe(pipe_fd) < 0 ? error("Pipe", NULL) : (void)0;
-	(g_pid2 = fork()) < 0 ? error("Fork", NULL) : (void)0;
-	if (!g_pid2)
+	if (pipe(pipe_fd) < 0)
+		error(E_PIPE, NULL);
+	if ((g_pid2 = fork()) < 0)
+		error(E_FORK, NULL);
+	else if (!g_pid2)
 		child(pipe_fd, cmd2, e);
 	else
 		father(pipe_fd, cmd1, e);
@@ -74,7 +76,7 @@ void			error_pipe(char **cmd, t_env *e)
 	while (cmd[i] && ft_strcmp(cmd[i], "|&"))
 		i++;
 	if (!ft_strcmp(cmd[0], "|&") || !cmd[i + 1])
-		ft_putendl_fd("Invalid null command.", 2);
+		failn("Invalid null command.");
 	if (!cmd[i + 1] || !ft_strcmp(cmd[0], "|&"))
 		return ;
 	new_cmd = ft_cpystab(&cmd[i + 1], NULL);

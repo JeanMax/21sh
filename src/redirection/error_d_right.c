@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/12 19:49:32 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:32:44 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,10 @@ void			error_d_right(char **c, t_env *e)
 	if (!c[i + 1] || !ft_strcmp(c[0], ">>&") || is_ambiguous(c))
 		return ;
 	if ((file_fd = open(c[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0664)) < 0)
-		error("open", c[i + 1]);
+	{
+		error(E_OPEN | E_NOEXIT, c[i + 1]);
+		return ;
+	}
 	while (c[i])
 		ft_memdel((void *)&c[i++]);
 	handle_fd(file_fd, c, e);

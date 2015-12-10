@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/12 19:49:11 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:31:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ void		doble_right(char **cmd, t_env *e)
 	if (!cmd[i + 1] || !ft_strcmp(cmd[0], ">>") || is_ambiguous(cmd))
 		return ;
 	if ((file_fd = open(cmd[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0664)) < 0)
-		error("open", cmd[i + 1]);
+	{
+		error(E_OPEN | E_NOEXIT, cmd[i + 1]);
+		return ;
+	}
 	while (cmd[i])
 		ft_memdel((void *)&cmd[i++]);
 	base_fd = dup(1);

@@ -6,44 +6,53 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/03 22:53:15 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:29:17 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** errors handling
-** type: c = command not found, e = no such file, b = bus error, s = segfault,
-**		 f = floating-point excepion, a = too many arg, p = $PATH not found
-**		 e = execve error, c = cmd not found, o = open, F = fork fail,
-**		 P = pipe fail
+** first arg is a flag including enums e_error (cf .h) (ex: E_OPEN | E_NOEXIT)
+** second arg is an optionnal error message
 */
 
 #include "flex_shell.h"
 
-void		error(char *type, char *msg) //TODO
+//I'm pretty sure there is another way...
+static int  get_index(t_int flag)
 {
-	if (type[0] == 'c')
-		fail("21sh: command not found: ");
-	else if (type[0] == 'e')
-		fail("21sh: no such file or directory: ");
-	else if (type[0] == 'o')
-		fail("21sh: can't make file: ");
-	if (type[0] == 'c' || type[0] == 'e' || type[0] == 'o')
+    int index;
+
+    index = 0;
+    while ((flag /= 2))
+        index++;
+    return (index - 1);
+}
+
+void		error(t_int flag, char *msg)
+{
+	const char	*error[] =
+	{
+		"21sh: command not found: ",
+		"21sh: no such file or directory: ",
+		"21sh: can't make file: ",
+		"Pipe failed. Try Again...",
+		"Fork failed. Try Again...",
+		"Too many arguments.",
+		"$PATH missing from env.",
+		"This is not a tty.",
+		"Getattr failed. Try Again...",
+		"Setattr failed. Try Again...",
+		"$TERM missing from env."
+	};
+
+	if (msg)
+	{
+		fail(error[get_index(flag & (t_int)~E_NOEXIT)]);
 		failn(msg);
-	else if (type[0] == 'b')
-		failn("Bus error. Try Again...");
-	else if (type[0] == 'P')
-		failn("Pipe failed. Try Again...");
-	else if (type[0] == 'F')
-		failn("Fork failed. Try Again...");
-	else if (type[0] == 's')
-		failn("Segmentation fault. Try Again...");
-	else if (type[0] == 'f')
-		failn("Floating-point exception. Try Again...");
-	else if (type[0] == 'a')
-		failn("Too many arguments.");
-	else if (type[0] == 'p')
-		failn("$PATH missing from env.");
-	if (type[0] != 'o')
-		exit((type[0] == 'c' || type[0] == 'e') ? 1 : -1); //wut?
+	}
+	else
+		failn(error[get_index(flag & (t_int)~E_NOEXIT)]);
+	if (!(flag & E_NOEXIT))
+		exit(EXIT_FAILURE); //TODO: restore term?
 }

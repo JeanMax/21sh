@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:58:39 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 04:15:33 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:40:05 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ static void	debug_list(t_lst *link)
 	write(1, link->content, 1);
 	debug_list(link->next);
 }
-*/
 
-/*
+
 static enum e_status debug_buf(char *buf)
 {
 	printf("\\x%lx\\x%lx\\x%lx\\x%lx\\x%lx\\x%lx\n",		 \
@@ -39,12 +38,14 @@ static enum e_status debug_buf(char *buf)
 	return (KEEP_TRYING);
 }
 */
+
  //debug
 
-static void				*get_f_array(void)
+static void		*get_f_array(void)
 {
 	static enum e_status	(*f[])(char *) = //static?
 		{
+			/* debug_buf,			/\* debug *\/ */
 			clear_term,
 			del,
 			backspace,
@@ -63,12 +64,11 @@ static void				*get_f_array(void)
 			set_history,
 			get_history,
 			insert, //need to be last...
-			/* debug_buf,			/\* debug *\/ */
 			NULL
 		};
 	return ((void *)f);
 }
-enum e_status			do_stuff_with_key(char *buf)
+enum e_status	do_stuff_with_key(char *buf)
 {
 	enum e_status	status;
 	enum e_status	(**f)(char *);
@@ -93,22 +93,19 @@ static t_bool	read_loop(char *buf, enum e_status status)
 	return (read_loop(buf, do_stuff_with_key(buf)));
 }
 
-t_bool	handle_pipe(char **line)
+t_bool			handle_pipe(char **line)
 {
 	char		buf;
 	t_cursor	*c;
 
 	switch_term();
-	if (*line)
-		ft_memdel((void *)line);
 	c = get_cursor();
-	if (tputs(tgetstr("u7", NULL), 0, tputs_output) == ERR)
-        ;//     error(TPUTS, "nd"); 
+	tputs(tgetstr("u7", NULL), 0, tputs_output);
 	while (read(STDIN_FILENO, &buf, 1) > 0)
 	{
 		ft_laddlast(&c->first_l, ft_lnew((void *)&buf, 1));
 		if (c->first_l && c->first_l->next 
-			&& *(char *)c->first_l->content == '\e'
+			&& *(char *)c->first_l->content == '\033'
 			&& *(char *)c->first_l->next->content == '[')
 		{
 			ft_lclean(&c->first_l);
@@ -126,7 +123,7 @@ t_bool	handle_pipe(char **line)
 }
 
 //start with null pointer bro!
-t_bool		read_stdin(char **line)
+t_bool			read_stdin(char **line)
 {
 	t_cursor	*c;
 	char		buf[KEY_BUF_SIZE + 1];
@@ -135,15 +132,15 @@ t_bool		read_stdin(char **line)
 	c = get_cursor();
 	c->first_l = NULL;
 	c->current_l = NULL;
-	c->prompt_len = get_cursor_col() - 1;
-
-	if (*line)
-		ft_memdel((void *)line);
+	c->prompt_len = (size_t)get_cursor_col() - 1;
 
 	if (read_loop(buf, KEEP_READING))
 		*line = to_string();
 	else
+	{
 		ft_lclean(&c->first_l);
+		*line = NULL;
+	}
 
 	switch_term();
 	return (*line ? TRUE : FALSE);

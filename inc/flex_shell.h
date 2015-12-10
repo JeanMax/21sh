@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 03:55:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:34:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define FLEX_SHELL_H
 
 # define PATH_SIZE				128
+# define LINE_SIZE				1024
 # define KEY_BUF_SIZE			6
 
 # define K_UP					"\x1b\x5b\x41\x0\x0\x0"
@@ -38,12 +39,12 @@
 # define K_CTRL_A				"\x1\x0\x0\x0\x0\x0" //OK
 # define K_CTRL_E				"\x5\x0\x0\x0\x0\x0" //OK
 # define K_CTRL_R				"\x12\x0\x0\x0\x0\x0"
-# define K_F3					"\x1b\x4f\x52\x0\x0\x0" //OK
-# define K_F4					"\x1b\x4f\x53\x0\x0\x0" //OK
-# define K_F5					"\x1b\x5b\x31\x35\x7e\x0" //OK
-# define K_F6					"\x1b\x5b\x31\x37\x7e\x0" //OK
 # define K_CTRL_D				"\x4\x0\x0\x0\x0\x0" //OK
 # define K_CTRL_L				"\xc\x0\x0\x0\x0\x0" //OK
+# define K_CTRL_K				"\xb\x0\x0\x0\x0\x0" //OK
+# define K_CTRL_Y				"\x19\x0\x0\x0\x0\x0" //OK
+# define K_CTRL_U				"\x15\x0\x0\x0\x0\x0" //OK
+# define K_CTRL_P				"\x10\x0\x0\x0\x0\x0" //OK
 
 /*
 ** include
@@ -66,10 +67,21 @@
 */
 enum	e_error
 {
-	TODO //TODO
+	E_NOERROR		= 0, //wtf...
+	E_NOEXIT		= (1 << 0),
+	E_CMDNOTFOUND	= (1 << 1),
+	E_NOSUCHFILE	= (1 << 2),
+	E_OPEN			= (1 << 3),
+	E_PIPE			= (1 << 4),
+	E_FORK			= (1 << 5),
+	E_ARG			= (1 << 6),
+	E_PATH			= (1 << 7),
+	E_TTY			= (1 << 8),
+	E_GETATTR		= (1 << 9),
+	E_SETATTR		= (1 << 10),
+	E_TERM			= (1 << 11)
 };
 
-/* typedef enum e_status	t_status; */
 enum	e_status //TODO: rename
 {
 	KEEP_TRYING,
@@ -93,18 +105,18 @@ struct	s_env
 typedef struct s_cursor	t_cursor; //TODO: rename
 struct	s_cursor
 {
+	size_t	prompt_len;
 	t_lst	*first_l;
 	t_lst	*current_l;
 	t_lst	*save;
 	t_lst	*history;
-	int		prompt_len;
 };
 
 /*
 ** BASE
 */
 void				prompt(t_env *e);
-void				error(char *type, char *msg);
+void				error(t_int flag, char *msg);
 void				get_path(t_env *e);
 char				**set_av(char *s1, char *s2, t_env *e, int go);
 char				*get_env(char *var, t_env *e);
@@ -184,6 +196,7 @@ enum e_status		move_prev_word(char *buf);
 **	clear.c
 */
 enum e_status		clear_term(char *buf);
+void				clear_line(void);
 
 /*
 ** insert.c

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:45:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 04:29:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:36:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ enum e_status		insert(char *buf)
 		return (KEEP_TRYING);
 
 	c = get_cursor();
+	if (ft_llen(c->first_l) + 1 >= LINE_SIZE)
+		return (KEEP_READING);
 	if (c->current_l)
 		ft_linser(&(c->current_l), ft_lnew(buf, 1));
 	else
@@ -77,7 +79,7 @@ enum e_status		copy(char *buf)
 {
 	t_cursor	*c;
 
-	if (memcmp(buf, K_F3, KEY_BUF_SIZE))
+	if (memcmp(buf, K_CTRL_P, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 	c = get_cursor();
 	if (c->save)
@@ -90,11 +92,12 @@ enum e_status		cut_forward(char *buf)
 {
 	t_cursor	*c;
 
-	if (memcmp(buf, K_F5, KEY_BUF_SIZE))
+	if (memcmp(buf, K_CTRL_K, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 	c = get_cursor();
 	if (!c->current_l && !c->first_l)
 		return (KEEP_READING);
+	clear_line();
 	if (c->save)
 		ft_lclean(&c->save);
 	if (c->current_l)
@@ -120,9 +123,10 @@ enum e_status		cut_backward(char *buf)
 	t_cursor	*c;
 	t_lst		*current;
 
-	if (memcmp(buf, K_F6, KEY_BUF_SIZE))
+	if (memcmp(buf, K_CTRL_U, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 	c = get_cursor();
+
 	if (!c->current_l || !c->first_l)
 		return (KEEP_READING);
 	if (c->save)
@@ -130,6 +134,7 @@ enum e_status		cut_backward(char *buf)
 
 	current = c->current_l;
 	move_begin(NULL);
+	clear_line();
 	c->save = c->first_l;
 	if ((c->first_l = current->next))
 		c->first_l->prev = NULL;
@@ -145,12 +150,12 @@ enum e_status		paste(char *buf)
 	t_cursor	*c;
 	t_lst		*last;
 	t_lst		*cpy;
-	int			len;
+	size_t		len;
 
-	if (memcmp(buf, K_F4, KEY_BUF_SIZE))
+	if (memcmp(buf, K_CTRL_Y, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 	c = get_cursor();
-	if (!c->save)
+	if (!c->save || ft_llen(c->first_l) + ft_llen(c->save) >= LINE_SIZE)
 		return (KEEP_READING);
 	cpy = ft_lmap(c->save, cp);
 	len = ft_llen(c->save);

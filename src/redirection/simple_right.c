@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:09 by mcanal            #+#    #+#             */
-/*   Updated: 2015/02/12 19:46:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:30:28 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ static void	check_error(char **cmd, char *pgm)
 	{
 		if (ft_strcmp(">", cmd[i - 1]) && ft_strcmp(">", cmd[i]))
 		{
-			ft_putstr_fd(pgm, 2);
+			fail(pgm);
 			if (!ft_strcmp("ls", pgm))
 			{
-				ft_putstr_fd(": cannot access ", 2);
+				fail(": cannot access ");
 			}
 			else
-				ft_putstr_fd(": ", 2);
-			ft_putstr_fd(cmd[i], 2);
-			ft_putendl_fd(": No such file or directory ", 2);
+				fail(": ");
+			fail(cmd[i]);
+			failn(": No such file or directory ");
 		}
 		i++;
 	}
@@ -103,7 +103,10 @@ void		simple_right(char **cmd, t_env *e)
 	if (!cmd[i + 1] || !ft_strcmp(cmd[0], ">") || is_ambiguous(cmd))
 		return ;
 	if ((file_fd = open(cmd[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0664)) < 0)
-		error("open", cmd[i + 1]);
+	{
+		error(E_OPEN | E_NOEXIT, cmd[i + 1]);
+		return ;
+	}
 	while (cmd[i])
 		ft_memdel((void *)&cmd[i++]);
 	base_fd = dup(1);

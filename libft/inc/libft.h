@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/04 18:43:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 21:21:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <string.h>
 
 typedef unsigned char	t_char;
+typedef unsigned int	t_int;
 typedef int				t_bool;
 
 /*

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 21:32:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/03 22:36:44 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 21:57:51 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void		call_execve(char **cmd, t_env *e)
 	get_path(e);
 	if ((execve(cmd[0], cmd, e->env)) < 0)
 	{
-		(cmd[0][0] == '.' && cmd[0][1] == '/') ? error("exe", cmd[0]) : (void)0;
+		if (cmd[0][0] == '.' && cmd[0][1] == '/')
+			error(E_NOSUCHFILE, cmd[0]);
 		i = 0;
 		while ((e->path)[i])
 		{
@@ -39,14 +40,14 @@ static void		call_execve(char **cmd, t_env *e)
 			execve(join, cmd, e->env);
 			ft_memdel((void *)&join);
 		}
-		error("cmd", cmd[0]);
+		error(E_CMDNOTFOUND, cmd[0]);
 	}
 }
 
 static void		fork_it(char **cmd, t_env *e)
 {
 	if ((g_pid2 = fork()) < 0)
-		error("Fork", NULL);
+		error(E_FORK, NULL);
 	else if (!g_pid2)
 		call_execve(cmd, e);
 	else

@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/09 22:30:12 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/10 22:42:05 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -68,11 +68,10 @@ me_cry:
 	@$(MAKE) -C libft
 	@$(MAKE) $(NAME) \
 		"CFLAGS = -Wpedantic -Wshadow -Wcast-qual -Wconversion -Wcast-align \
-				  -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code \
-				  -Winit-self -Wmissing-declarations -Wfloat-equal \
-				  -Wbad-function-cast -Wundef -Waggregate-return \
-				  -Wstrict-overflow=5 -Wold-style-definition -Wpadded \
-				  -Wredundant-decls -Wall -Werror -Wextra -O2"
+-Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code -Winit-self \
+-Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
+-Waggregate-return -Wstrict-overflow=5 -Wold-style-definition -Wpadded \
+-Wredundant-decls -Wall -Werror -Wextra -O2"
 
 -include $(DEPS)
 

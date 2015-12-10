@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/03 23:05:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:07:17 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void			fork_that(char **cmd, t_env *e, int *pipe_fd, char *all)
 	int				save_fd0;
 	int				save_fd1;
 
-	((g_pid2 = fork()) < 0) ? error("Fork", NULL) : (void)0;
+	((g_pid2 = fork()) < 0) ? error(E_FORK, NULL) : (void)0;
 	if (!g_pid2)
 	{
 		save_fd0 = dup(0);
@@ -96,14 +96,14 @@ void				doble_left(char **cmd, t_env *e)
 	while (cmd[i] && ft_strcmp(cmd[i], "<<"))
 		i++;
 	if (!cmd[i + 1])
-		ft_putendl_fd("Missing name for redirect.", 2);
+		failn("Missing name for redirect.");
 	else if (!ft_strcmp(cmd[0], "<<"))
-		ft_putendl_fd("Invalid null command.", 2);
+		failn("Invalid null command.");
 	if (!cmd[i + 1] || !ft_strcmp(cmd[0], "<<"))
 		return ;
 	get_text(&all, cmd[i + 1]);
 	compress_cmd(cmd, i);
-	pipe(pipe_fd) < 0 ? error("Pipe", NULL) : (void)0;
+	pipe(pipe_fd) < 0 ? error(E_PIPE, NULL) : (void)0;
 	fork_that(cmd, e, pipe_fd, all);
 	ft_memdel((void *)&all);
 }

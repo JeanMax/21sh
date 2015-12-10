@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 04:27:20 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 22:35:48 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,26 @@ t_cursor		*get_cursor(void)
 
 char			*to_string(void)
 {
+	static char	line[LINE_SIZE + 1];
 	t_lst	*link;
-	char	*s;
 	char	*swap;
+	int		count;
 
 	link = get_cursor()->first_l;
-	if (!(s = (char *)malloc(sizeof(char) * (ft_llen(link) + 1))))
-		return (NULL);
-	swap = s;
-	while (link)
+	swap = line;
+	ft_bzero(line, LINE_SIZE);
+	count = 0;
+	while (count < LINE_SIZE && link)
 	{
 		if (*(char *)(link->content) == '\n')
-			*(s++) = ';';
+			*(swap++) = ';';
 		else
-			*(s++) = *(char *)(link->content);
+			*(swap++) = *(char *)(link->content);
 		link = link->next;
+		count++;
 	}
-	*s = 0;
-	return (swap);
+	*swap = 0;
+	return (line);
 }
 
 void			print_line(void)
@@ -56,24 +58,28 @@ void			print_line(void)
 	t_cursor	*c;
 	t_lst		*current;
 	t_lst		*tmp;
-	int			count;
+	size_t		count;
 
 	c = get_cursor();
 	current = c->current_l;
 	move_begin(NULL);
 
-	if (tputs(tgetstr("ce", NULL), 0, tputs_output) == ERR)
-		;//     error(TPUTS, "le");    
+	tputs(tgetstr("ce", NULL), 0, tputs_output);
 
 	count = c->prompt_len;
 	tmp = c->first_l;
 	while (tmp)
 	{
-		write(1, tmp->content, 1);
+		if (ft_isspace(*(char *)tmp->content))
+			write(1, " ", 1);
+		else if (!ft_isascii(*(char *)tmp->content) \
+				|| ft_iscntrl(*(char *)tmp->content))
+			ft_putstr("�");
+		else
+			write(1, tmp->content, 1);
 		if (!(++count % get_term_size()->ws_col))
 		{
-			if (tputs(tgetstr("cd", NULL), 0, tputs_output) == ERR)
-				;//     error(TPUTS, "le");    
+			tputs(tgetstr("cd", NULL), 0, tputs_output);
 			ft_putendl("");
 		}
 		tmp = tmp->next;
