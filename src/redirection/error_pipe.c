@@ -15,7 +15,7 @@
 ** this is also redirecting stdout
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 extern pid_t	g_pid2;
 

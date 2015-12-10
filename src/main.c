@@ -14,7 +14,7 @@
 ** this is the main...
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static void		inc_shlvl(t_env *e)
 {

@@ -14,7 +14,7 @@
 ** exit builtin
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 void	ft_exit(int ac, char **av)
 {

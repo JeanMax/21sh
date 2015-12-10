@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 21:25:14 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/04 18:50:52 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** split line in a tab (space and tab as separators, handle ; " and ')
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 extern pid_t	g_pid1; //TODO: clean these
 extern pid_t	g_pid2; //TODO: clean these
@@ -125,6 +125,7 @@ void			prompt_loop(char **av, t_env *e)
 	char		*line;
 	char		**cmd;
 
+	line = NULL;
 	if (handle_pipe(&line))
 	{
 		if (ft_strindex(line, ';') != -1)

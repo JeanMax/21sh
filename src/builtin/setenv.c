@@ -14,7 +14,7 @@
 ** setenv builtin
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static void		var_exist(t_env *e, char *var, char *val)
 {

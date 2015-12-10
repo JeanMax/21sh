@@ -14,7 +14,7 @@
 ** unsetenv builtin
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static void		del_env(char *del, t_env *e)
 {

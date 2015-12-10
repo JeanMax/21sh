@@ -14,7 +14,7 @@
 ** env builtin
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static char		**check_cmd(char **av)
 {

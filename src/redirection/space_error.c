@@ -17,7 +17,7 @@
 ** also working for any other str than ">" (basically ">>", ">", "|", "<", "<<")
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static int		tab_len(char **c, int len, char *s)
 {

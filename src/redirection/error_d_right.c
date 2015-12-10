@@ -15,7 +15,7 @@
 ** usage : "cmd >>& file"
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static void		check_error(char **cmd, char *pgm)
 {

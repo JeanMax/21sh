@@ -6,13 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 21:21:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 04:27:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "flex_shell.h"
 
-void		clean_cursor(void)
+void			clean_cursor(void)
 {
 	t_cursor *c;
 
@@ -22,14 +22,14 @@ void		clean_cursor(void)
 	c->current_l = NULL;
 }
 
-t_cursor	*get_cursor(void)
+t_cursor		*get_cursor(void)
 {
-	static t_cursor c = {0, 0, 0, 0};
+	static t_cursor c = {0, 0, 0, 0, 0};
 
 	return (&c);
 }
 
-char	*to_string(void)
+char			*to_string(void)
 {
 	t_lst	*link;
 	char	*s;
@@ -51,7 +51,7 @@ char	*to_string(void)
 	return (swap);
 }
 
-void print_line(void)
+void			print_line(void)
 {
 	t_cursor	*c;
 	t_lst		*current;
@@ -60,7 +60,7 @@ void print_line(void)
 
 	c = get_cursor();
 	current = c->current_l;
-	move_begin();
+	move_begin(NULL);
 
 	if (tputs(tgetstr("ce", NULL), 0, tputs_output) == ERR)
 		;//     error(TPUTS, "le");    
@@ -81,6 +81,5 @@ void print_line(void)
 
 	c->current_l = ft_llast(c->first_l);
 	while (c->current_l != current)
-		move_left();
+		move_left(NULL);
 }
-

@@ -14,7 +14,7 @@
 ** launch the appropriate redirection function
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static int		need_space(char **cmd)
 {

@@ -15,7 +15,7 @@
 ** usage "cmd | cmd"
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 extern pid_t	g_pid2;
 

@@ -16,7 +16,7 @@
 ** get the appropriate env entry
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 char	**set_av(char *s1, char *s2, t_env *e, int go)
 {

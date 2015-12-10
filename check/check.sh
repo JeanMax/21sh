@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:20:41 by mcanal            #+#    #+#              #
-#    Updated: 2015/11/27 03:43:11 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/03 22:57:23 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@
 VERBOSE=1
 MAKE=0
 
-SH_DIR=/home/mcanal/quarantedeux/sh3;
-CHECK_DIR=/home/mcanal/quarantedeux/sh3/check;
+SH_DIR=..;
+CHECK_DIR=.;
 
 if	[ "$MAKE" != 0 ]; then
 	make -sC $SH_DIR zclean;
@@ -50,7 +50,7 @@ tsoin tsoin
 bye
 KTHX
 " | $SH_DIR/21sh > $TARGET 2>&1;
-echo "./21sh; exit 42; exit 42" | env -i $SH_DIR/21sh >> $TARGET 2>&1;
+echo "$SH_DIR/21sh; exit 42; exit 42" | env -i $SH_DIR/21sh >> $TARGET 2>&1;
 echo $? >> $TARGET 2>&1;
 if [ -n "$1" ]; then
 	cat $TARGET;

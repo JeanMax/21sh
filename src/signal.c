@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 20:13:58 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 21:34:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 04:24:50 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 ** signal handling and init function (get env and builtin foncions list)
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 pid_t				g_pid1;
 pid_t				g_pid2;
@@ -30,7 +30,7 @@ static void			sig_handl(int sig)
 		error ("fpe", NULL);
 	else if (sig == SIGINT)
 	{
-		move_end();
+		move_end(NULL);
 		clean_cursor();
 		ft_putendl("");
 //		ft_putstr("\b \b\b \b\n");

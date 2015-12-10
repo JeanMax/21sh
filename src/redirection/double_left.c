@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/26 17:53:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 23:05:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 ** here document (<<) handler
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 extern pid_t		g_pid2;
 
@@ -55,7 +55,8 @@ static void			get_text(char **a, char *here)
 
 	*a = ft_strnew(1);
 	ft_putstr("? ");
-	while (get_next_line(0, &tmp) && ft_strcmp(tmp, here))
+	tmp = NULL;
+	while (get_next_line(0, &tmp) && ft_strcmp(tmp, here)) //TODO: cf handle_pipe (read_stdin.c)
 	{
 		swap = ft_strjoin(tmp, "\n");
 		ft_putstr("? ");

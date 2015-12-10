@@ -6,11 +6,11 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:58:39 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 21:42:31 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/10 04:15:33 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "flex_shell.h"
 #include <stdio.h>
 
 /*
@@ -28,71 +28,69 @@ static void	debug_list(t_lst *link)
 }
 */
 
-static void debug_buf(char *buf)
+/*
+static enum e_status debug_buf(char *buf)
 {
 	printf("\\x%lx\\x%lx\\x%lx\\x%lx\\x%lx\\x%lx\n",		 \
 		   (unsigned long)buf[0], (unsigned long)buf[1],	 \
 		   (unsigned long)buf[2], (unsigned long)buf[3],		\
 		   (unsigned long)buf[4], (unsigned long)buf[5]);
 	fflush(stdout);
+	return (KEEP_TRYING);
 }
+*/
  //debug
- 
-static t_bool	read_loop(char *buf)
+
+static void				*get_f_array(void)
+{
+	static enum e_status	(*f[])(char *) = //static?
+		{
+			clear_term,
+			del,
+			backspace,
+			copy,
+			cut_forward,
+			cut_backward,
+			paste,
+			move_left,
+			move_right,
+			move_up,
+			move_down,
+			move_begin,
+			move_end,
+			move_next_word,
+			move_prev_word,
+			set_history,
+			get_history,
+			insert, //need to be last...
+			/* debug_buf,			/\* debug *\/ */
+			NULL
+		};
+	return ((void *)f);
+}
+enum e_status			do_stuff_with_key(char *buf)
+{
+	enum e_status	status;
+	enum e_status	(**f)(char *);
+
+	status = KEEP_TRYING;
+	f = get_f_array();
+	while (*f && status == KEEP_TRYING)
+		status = (*(f++))(buf);
+	return (status);
+
+}
+
+static t_bool	read_loop(char *buf, enum e_status status)
 {
 	ft_bzero(buf, KEY_BUF_SIZE + 1);
-    if ((read(STDIN_FILENO, buf, KEY_BUF_SIZE)) < 0)
+
+	if (status == CMD_DONE)
+		return (TRUE);
+	if (status == STOP_READING || (read(STDIN_FILENO, buf, KEY_BUF_SIZE)) < 0)
 		return (FALSE);
 
-	if (!memcmp(buf, K_RETURN, KEY_BUF_SIZE))
-		return (TRUE);
-	if (!memcmp(buf, K_CTRL_D, KEY_BUF_SIZE))
-	{
-		if (!get_cursor()->first_l)
-			return (FALSE);
-		else
-			del();
-	} 
-	else if (!memcmp(buf, K_CTRL_L, KEY_BUF_SIZE))
-		clear_term();
-	else if (!memcmp(buf, K_DEL, KEY_BUF_SIZE))
-		del();
-	else if (!memcmp(buf, K_BACKSPACE, KEY_BUF_SIZE))
-		backspace();
-	else if (!memcmp(buf, K_F3, KEY_BUF_SIZE))
-		copy();
-	else if (!memcmp(buf, K_F5, KEY_BUF_SIZE))
-		cut_forward();
-	else if (!memcmp(buf, K_F6, KEY_BUF_SIZE))
-		cut_backward();
-	else if (!memcmp(buf, K_F4, KEY_BUF_SIZE))
-		paste();
-	else if (!memcmp(buf, K_LEFT, KEY_BUF_SIZE))
-		move_left();
-	else if (!memcmp(buf, K_RIGHT, KEY_BUF_SIZE))
-		move_right();
-	else if (!memcmp(buf, K_CTRL_DOWN, KEY_BUF_SIZE))
-		move_down();
-	else if (!memcmp(buf, K_CTRL_UP, KEY_BUF_SIZE))
-		move_up();
-	else if (!memcmp(buf, K_CTRL_RIGHT, KEY_BUF_SIZE) \
-			 || !memcmp(buf, K_ALT_F, KEY_BUF_SIZE))
-		move_next_word();
-	else if (!memcmp(buf, K_CTRL_LEFT, KEY_BUF_SIZE) \
-			 || !memcmp(buf, K_ALT_B, KEY_BUF_SIZE))
-		move_prev_word();
-	else if (!memcmp(buf, K_START, KEY_BUF_SIZE) \
-			 || !memcmp(buf, K_CTRL_A, KEY_BUF_SIZE))
-		move_begin();
-	else if (!memcmp(buf, K_END, KEY_BUF_SIZE) \
-			 || !memcmp(buf, K_CTRL_E, KEY_BUF_SIZE))
-		move_end();
-	else if (*buf && !*(buf + 1))
-		insert(buf);
-	else
-		debug_buf(buf); //debug
-
-	return (read_loop(buf));
+	return (read_loop(buf, do_stuff_with_key(buf)));
 }
 
 t_bool	handle_pipe(char **line)
@@ -135,17 +133,18 @@ t_bool		read_stdin(char **line)
 
 	switch_term();
 	c = get_cursor();
-    c->first_l = NULL;
-    c->current_l = NULL;
+	c->first_l = NULL;
+	c->current_l = NULL;
 	c->prompt_len = get_cursor_col() - 1;
 
 	if (*line)
 		ft_memdel((void *)line);
 
-	if (read_loop(buf))
+	if (read_loop(buf, KEEP_READING))
 		*line = to_string();
+	else
+		ft_lclean(&c->first_l);
 
-	ft_lclean(&c->first_l);
 	switch_term();
 	return (*line ? TRUE : FALSE);
 }

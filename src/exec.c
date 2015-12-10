@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 21:32:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/26 16:50:06 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 22:36:44 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 ** handling forks, commands launching, and execve call
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 extern pid_t	g_pid1;
 extern pid_t	g_pid2;
@@ -36,9 +36,7 @@ static void		call_execve(char **cmd, t_env *e)
 			tmp = ft_strjoin((e->path)[i++], "/");
 			join = ft_strjoin(tmp, cmd[0]);
 			ft_memdel((void *)&tmp);
-			execve(join, cmd, e->env) >= 0 ? ft_memdel((void *)&join) : (void)0;
-			if ((execve(join, cmd, e->env)) >= 0)
-				break ;
+			execve(join, cmd, e->env);
 			ft_memdel((void *)&join);
 		}
 		error("cmd", cmd[0]);

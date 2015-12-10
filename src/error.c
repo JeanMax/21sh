@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/26 17:01:36 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 22:53:15 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 **		 P = pipe fail
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
-void		error(char *type, char *msg)
+void		error(char *type, char *msg) //TODO
 {
 	if (type[0] == 'c')
 		fail("21sh: command not found: ");
@@ -44,5 +44,6 @@ void		error(char *type, char *msg)
 		failn("Too many arguments.");
 	else if (type[0] == 'p')
 		failn("$PATH missing from env.");
-	exit((type[0] == 'c' || type[0] == 'e') ? 1 : -1);
+	if (type[0] != 'o')
+		exit((type[0] == 'c' || type[0] == 'e') ? 1 : -1); //wut?
 }

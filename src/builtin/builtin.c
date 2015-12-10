@@ -14,7 +14,7 @@
 ** launch the appropriatte builtin function
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 int			is_builtin(char **cmd, t_env *e)
 {

@@ -14,7 +14,7 @@
 ** cd builtin
 */
 
-#include "header.h"
+#include "flex_shell.h"
 
 static void	go_home(t_env *e)
 {
