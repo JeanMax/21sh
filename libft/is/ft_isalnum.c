@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstheight.c                                     :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 23:40:56 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 23:44:05 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/03 14:23:09 by mcanal            #+#    #+#             */
+/*   Updated: 2015/03/09 01:41:42 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** return the height of the binary tree
+** checks for an alphanumeric character; it is equivalent to
+** (isalpha(c) || isdigit(c)).
 */
 
 #include "libft.h"
 
-size_t	ft_bstheight(t_bst *root)
+int		ft_isalnum(int i)
 {
-	return (root ? 1 + (size_t)ft_max((int)ft_bstheight(root->left), 
-									  (int)ft_bstheight(root->right)) : 0);
+	if (ft_isalpha(i) || ft_isdigit(i))
+		return (TRUE);
+	return (FALSE);
 }

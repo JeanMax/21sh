@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 17:07:11 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 20:55:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 15:56:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 #include "libft.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 static size_t	list_len(t_list *link, size_t len)
 {

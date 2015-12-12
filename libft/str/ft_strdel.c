@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/06 14:41:06 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/09 22:53:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/05 21:51:06 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,5 @@
 
 void	ft_strdel(char **as)
 {
-	if (as)
-		ft_memdel((void**)as);
+	ft_memdel((void *)as);
 }

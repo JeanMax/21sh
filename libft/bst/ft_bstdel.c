@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstdelnode.c                                    :+:      :+:    :+:   */
+/*   ft_bstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 19:38:13 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 20:54:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/11 23:50:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 void			ft_bstdel(t_bst **node)
 {
 	t_bst	*tmp;
+	t_bst	*parent;
 
 	if (!(*node)->left)
 	{
@@ -34,9 +35,12 @@ void			ft_bstdel(t_bst **node)
 	}
 	else
 	{
-		tmp = ft_bstmax((*node)->left);
+		tmp = (*node)->right;
+		parent = NULL;
+		while (tmp->left && (parent = tmp))
+			tmp = tmp->left;
 		ft_swap(&(*node)->content, &tmp->content, sizeof(void *));
 		ft_swap(&(*node)->content_size, &tmp->content_size, sizeof(size_t));
-		ft_bstdel(&tmp);
+		ft_bstdel(parent ? &parent->left : &(*node)->right);
 	}
 }

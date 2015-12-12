@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_intcmp.c                                        :+:      :+:    :+:   */
+/*   ft_ispunct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 16:47:50 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 19:52:12 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/09 04:11:05 by mcanal            #+#    #+#             */
+/*   Updated: 2015/09/11 18:46:54 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** compare two ints
+** checks  for  any  printable character which is not a space or an
+** alphanumeric character.
 */
 
 #include "libft.h"
 
-int		ft_intcmp(const void *i1, const void *i2, size_t n)
+int				ft_ispunct(int c)
 {
-	const int *swap1;
-	const int *swap2;
-
-	if (i1 != i2 && n)
-	{
-		swap1 = (const int *)i1;
-		swap2 = (const int *)i2;
-		n /= sizeof(int); 
-		while (n--)
-		{
-			if (*swap1 != *swap2)
-				return (*swap1 - *swap2);
-			swap1++;
-			swap2++;
-		}
-	}
-	return (0);
+	if (c != ' ' && !ft_isalnum(c) && ft_isprint(c))
+		return (TRUE);
+	return (FALSE);
 }

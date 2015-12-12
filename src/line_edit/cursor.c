@@ -6,18 +6,23 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:35:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/12 22:22:30 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "flex_shell.h"
 
+static int		cmp(const void *a, const void *b)
+{
+	return ((t_lst *)b != (t_lst *)((t_lst *)a)->content);
+}
 void			clean_cursor(void)
 {
 	t_cursor *c;
 
 	c = get_cursor();
-	ft_lclean(&c->first_l);
+	if (!ft_lfind(&c->history, (void *)c->first_l, cmp))
+		ft_lclean(&c->first_l);
 	c->first_l = NULL;
 	c->current_l = NULL;
 }

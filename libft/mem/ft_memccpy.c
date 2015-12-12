@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:38:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:48:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/05 21:38:58 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,16 @@ void			*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	char		*dswap;
 	const char	*sswap;
 
-	if (n && dest && src)
+	dswap = dest;
+	sswap = src;
+	while (n--)
 	{
-		dswap = dest;
-		sswap = src;
-		while (n--)
+		if (*sswap == c)
 		{
-			if (*sswap == c)
-			{
-				*dswap++ = *sswap++;
-				return (dswap);
-			}
 			*dswap++ = *sswap++;
+			return (dswap);
 		}
+		*dswap++ = *sswap++;
 	}
 	return (NULL);
 }

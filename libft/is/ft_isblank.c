@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstrotright.c                                   :+:      :+:    :+:   */
+/*   ft_isblank.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/29 00:22:39 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/29 00:47:26 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/09 04:06:27 by mcanal            #+#    #+#             */
+/*   Updated: 2015/09/11 18:46:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** right rotate tree
-**      y                            x
-**     / \     Right Rotation       / \
-**    x   c   – – – – – – – >      a   y 
-**   / \      < - - - - - - -     /     \
-**  a   b      Left Rotation     b       c
+** checks for a blank character; that is, a space or a tab.
 */
 
 #include "libft.h"
 
-t_bst	*ft_bstrotright(t_bst *y)
+int				ft_isblank(int i)
 {
-	t_bst	*x;
-	t_bst	*b;
-
-	x = y->left;
-	b = x->right;
-	x->right = y;
-	y->left = b;
-	return (x);
+	if (i == ' ' || i == '\t')
+		return (TRUE);
+	return (FALSE);
 }

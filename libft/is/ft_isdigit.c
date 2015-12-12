@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstgetbalance.c                                 :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/29 00:17:42 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/29 00:47:38 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/03 14:29:29 by mcanal            #+#    #+#             */
+/*   Updated: 2015/03/09 01:50:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** check if a tree is balanced (0 if yes)
+** checks for a digit (0 through 9).
 */
 
 #include "libft.h"
 
-int		ft_bstgetbalance(t_bst *node)
-{ 
-	return ((int)ft_bstheight(node->left) - (int)ft_bstheight(node->right));
+int		ft_isdigit(int i)
+{
+	if (i >= '0' && i <= '9')
+		return (TRUE);
+	return (FALSE);
 }

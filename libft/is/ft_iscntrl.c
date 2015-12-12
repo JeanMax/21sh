@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lislast.c                                       :+:      :+:    :+:   */
+/*   ft_iscntrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 04:32:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:28:19 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/09 04:10:56 by mcanal            #+#    #+#             */
+/*   Updated: 2015/09/11 18:47:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Retourne 1 si l'élément courant est le dernier élément de la liste, 0 sinon.
+** checks for a control character.
 */
 
 #include "libft.h"
 
-t_bool	ft_lislast(t_lst *link)
+int				ft_iscntrl(int c)
 {
-	return (link->next ? FALSE: TRUE);
+	if (c < 32 || c == 127)
+		return (TRUE);
+	return (FALSE);
 }

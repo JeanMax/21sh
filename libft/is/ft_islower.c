@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lisfirst.c                                      :+:      :+:    :+:   */
+/*   ft_islower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 04:32:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:27:26 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/05 17:55:45 by mcanal            #+#    #+#             */
+/*   Updated: 2015/03/09 01:45:38 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Retourne 1 si l'élément courant est le premier élément de la liste, 0 sinon.
+** checks for a lower-case character.
 */
 
 #include "libft.h"
 
-t_bool	ft_lisfirst(t_lst *link)
+int		ft_islower(int c)
 {
-	return (link->prev ? FALSE: TRUE);
+	if (c >= 97 && c <= 122)
+		return (TRUE);
+	return (FALSE);
 }

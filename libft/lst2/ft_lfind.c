@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/09 04:58:45 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 19:19:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 18:05:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 #include "libft.h"
 
-t_lst **ft_lfind(t_lst **alst, void *data, \
-				int (*cmp)(const void *a, const void *b, size_t n))
+t_lst	**ft_lfind(t_lst **alst, void *data, \
+					int (*cmp)(const void *a, const void *b))
 {
-	if (!(*alst) || !cmp((*alst)->content, data, (*alst)->content_size))
+	if (!(*alst) || !cmp(*alst, data))
 		return (alst);
 	return (ft_lfind(&(*alst)->next, data, cmp));
 }

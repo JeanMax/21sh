@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 16:58:39 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:40:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 00:28:06 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ enum e_status	do_stuff_with_key(char *buf)
 
 }
 
-static t_bool	read_loop(char *buf, enum e_status status)
+static char		*read_loop(char *buf, enum e_status status)
 {
 	ft_bzero(buf, KEY_BUF_SIZE + 1);
 
 	if (status == CMD_DONE)
-		return (TRUE);
+		return (to_string());
 	if (status == STOP_READING || (read(STDIN_FILENO, buf, KEY_BUF_SIZE)) < 0)
-		return (FALSE);
+		return (NULL);
 
 	return (read_loop(buf, do_stuff_with_key(buf)));
 }
@@ -130,17 +130,12 @@ t_bool			read_stdin(char **line)
 
 	switch_term();
 	c = get_cursor();
-	c->first_l = NULL;
 	c->current_l = NULL;
 	c->prompt_len = (size_t)get_cursor_col() - 1;
 
-	if (read_loop(buf, KEEP_READING))
-		*line = to_string();
-	else
-	{
+	if (!(*line = read_loop(buf, KEEP_READING)))
 		ft_lclean(&c->first_l);
-		*line = NULL;
-	}
+	c->first_l = NULL;
 
 	switch_term();
 	return (*line ? TRUE : FALSE);

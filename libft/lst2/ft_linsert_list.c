@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 00:30:59 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 01:10:59 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 17:44:31 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	ft_linsert_list(t_lst *dst, t_lst *src)
 	src->next = end;
 	end->prev = src;
 }
-

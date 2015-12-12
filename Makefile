@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/10 22:42:05 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/12 22:19:43 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,7 +37,7 @@ DEPS =  $(OBJS:%.o=%.d)
 LIB =		libft/libft.a
 TERMCAPS =	-lncurses
 I_DIR =		-I./libft/inc/ -I./inc/
-MAKE =		make -j
+MAKE =		make
 RM =		rm -rf
 MKDIR =		mkdir -p
 CC =		clang

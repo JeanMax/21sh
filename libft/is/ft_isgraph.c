@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstisleaf.c                                     :+:      :+:    :+:   */
+/*   ft_isgraph.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 15:39:45 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:39:34 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/09 04:10:53 by mcanal            #+#    #+#             */
+/*   Updated: 2015/09/11 18:46:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Return TRUE is the node is a leaf (left and right NULL), otherwise FALSE
+** checks for any printable character except space.
 */
 
 #include "libft.h"
 
-t_bool		ft_bstisleaf(t_bst *node)
+int				ft_isgraph(int c)
 {
-	if (!node)
-		return (FALSE);
-	return (node->right == NULL && node->left == NULL ? TRUE : FALSE);
+	if (c >= 33 && c <= 126)
+		return (TRUE);
+	return (FALSE);
 }

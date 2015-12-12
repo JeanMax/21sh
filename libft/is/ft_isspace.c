@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstrotleft.c                                    :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/29 00:22:36 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/29 00:47:24 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/09 04:11:38 by mcanal            #+#    #+#             */
+/*   Updated: 2015/09/11 18:46:34 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** left rotate tree
-**      y                            x
-**     / \     Right Rotation       / \
-**    x   c   – – – – – – – >      a   y 
-**   / \      < - - - - - - -     /     \
-**  a   b      Left Rotation     b       c
+** checks for white-space  characters.   In  the  "C"  and  "POSIX"
+** locales,  these  are:  space,  form-feed ('\f'), newline ('\n'),
+** carriage return ('\r'), horizontal tab ('\t'), and vertical  tab
+** ('\v').
 */
 
 #include "libft.h"
 
-t_bst	*ft_bstrotleft(t_bst *x)
+int				ft_isspace(int c)
 {
-	t_bst	*y;
-	t_bst	*b;
-
-	y = x->right;
-	b = y->left;
-	y->left = x;
-	x->right = b;
-	return (x);
+	if (c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r'
+			|| c == ' ')
+		return (TRUE);
+	return (FALSE);
 }

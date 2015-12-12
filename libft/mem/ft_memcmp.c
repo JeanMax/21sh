@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:39:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 19:45:28 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/02 23:39:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int				ft_memcmp(const void *s1, const void *s2, size_t n)
 			swap2++;
 		}
 	}
-	return (FALSE);
+	return (0);
 }

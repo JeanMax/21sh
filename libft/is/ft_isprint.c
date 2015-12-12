@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstislast.c                                     :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 04:32:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:28:13 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/03 14:44:12 by mcanal            #+#    #+#             */
+/*   Updated: 2015/03/09 01:45:48 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Retourne 1 si l'élément courant est le dernier élément de la liste, 0 sinon.
+** checks for any printable character including space.
 */
 
 #include "libft.h"
 
-t_bool	ft_lstislast(t_list *link)
+int		ft_isprint(int i)
 {
-	return (link->next ? FALSE: TRUE);
+	if (i >= 32 && i <= 126)
+		return (TRUE);
+	return (FALSE);
 }

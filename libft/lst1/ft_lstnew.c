@@ -6,17 +6,17 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 22:07:36 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 15:29:09 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 17:45:49 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** Alloue (avec malloc(3)) et retourne un maillon “frais”. Les champs content
-** et content_size du nouveau maillon sont initialisés par copie des paramètres
-** de la fonction. Si le paramètre content est nul, le champs content es
-** initialisé à NULL et le champs content_size est initialisé à 0 que
-** la valeur du paramètre content_size. Le champ next est initialisé à NULL.
-** Si l’allocation échoue, la fonction renvoie NULL
+** et content_size du nouveau maillon sont initialisés par copie des
+** paramètres de la fonction. Si le paramètre content est nul, le champs
+** content est initialisé à NULL et le champs content_size est initialisé à
+** 0 que la valeur du paramètre content_size. Le champ next est initialisé
+** à NULL. Si l’allocation échoue, la fonction renvoie NULL
 */
 
 #include "libft.h"

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 17:02:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:36:24 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 17:42:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lswap(t_lst *link1, t_lst *link2)
 	t_lst	*target;
 	t_lst	*swap;
 
-	if (ft_lisfirst(link1))
+	if (!link1->prev)
 	{
 		swap = link2;
 		link2 = link1;

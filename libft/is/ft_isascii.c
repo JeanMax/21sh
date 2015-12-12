@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstisempty.c                                    :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/28 15:46:13 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:39:47 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/03 14:32:51 by mcanal            #+#    #+#             */
+/*   Updated: 2015/07/14 12:57:14 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** renvoie 1 si la liste est vide, 0 si elle contient au moins un élément.
+** checks whether c is a 7-bit unsigned char value that  fits  into
+** the ASCII character set.
 */
 
 #include "libft.h"
 
-t_bool		ft_bstisempty(t_bst *root)
+int		ft_isascii(int i)
 {
-	return (root ? FALSE : TRUE);
+	if (i >= 0 && i <= 127)
+		return (TRUE);
+	return (FALSE);
 }

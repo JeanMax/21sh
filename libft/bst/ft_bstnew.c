@@ -6,13 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 15:23:57 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 15:28:01 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/11 17:06:18 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** Alloue (avec malloc(3)) et retourne un maillon “frais”. Les champs content
-** et content_size du nouveau maillon sont initialisés par copie des paramètres
+** et content_size du nouveau maillon sont initialisés par copie des paramètre
 ** de la fonction. Si le paramètre content est nul, le champs content es
 ** initialisé à NULL et le champs content_size est initialisé à 0 que
 ** la valeur du paramètre content_size. Les champs left/right sont initialisés
@@ -43,5 +43,6 @@ t_bst	*ft_bstnew(void *content, size_t content_size)
 	}
 	new->left = NULL;
 	new->right = NULL;
+	new->height = 1;
 	return (new);
 }

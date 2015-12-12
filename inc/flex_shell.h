@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:34:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/12 22:20:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@
 /*
 ** include
 */
+# include "libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/wait.h>
@@ -60,7 +61,6 @@
 # include <term.h>
 # include <termios.h>
 # include <sys/ioctl.h>
-# include "libft.h"
 
 /*
 ** enum

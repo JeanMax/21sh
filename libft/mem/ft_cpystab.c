@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 18:57:58 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/04 18:44:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/07/12 08:56:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char			**ft_cpystab(char **arr, char *val)
+char			**ft_cpystab(char **tab, char *val)
 {
 	size_t		i;
-	char		**new_arr;
+	char		**new_tab;
 
 	i = 0;
-	while (arr[i])
+	while (tab[i])
 		i++;
-	new_arr = malloc((i + (val ? 2 : 1)) * sizeof(char *));
+	new_tab = malloc((i + (val ? 2 : 1)) * sizeof(char *));
 	i = 0;
-	while (arr[i])
+	while (tab[i])
 	{
-		new_arr[i] = ft_strdup(arr[i]);
+		new_tab[i] = ft_strdup(tab[i]);
 		i++;
 	}
 	if (val)
-		new_arr[i] = ft_strdup(val);
-	new_arr[i + (val ? 1 : 0)] = NULL;
-	return (new_arr);
+		new_tab[i] = ft_strdup(val);
+	new_tab[i + (val ? 1 : 0)] = NULL;
+	return (new_tab);
 }

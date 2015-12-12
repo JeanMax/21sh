@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfind.c                                       :+:      :+:    :+:   */
+/*   ft_bstsearch.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 05:25:28 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/03 18:05:45 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/12 21:07:51 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/12 21:15:28 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** retourne l’adresse du premier élément dont la donnée est
-** "égale" à la donnée de référence
+** return the address of a node found using the cmp function
+** (search from a value)
 */
 
 #include "libft.h"
 
-t_list			**ft_lstfind(t_list **alst, void *data, \
-							int (*cmp)(const void *a, const void *b))
+t_bst	**ft_bstsearch(t_bst **root, void *content, size_t content_size, \
+						int (*cmp)(const void *a, const void *b))
 {
-	if (!(*alst) || !cmp(*alst, data))
-		return (alst);
-	return (ft_lstfind(&(*alst)->next, data, cmp));
+	t_bst	node;
+
+	node.content = content;
+	node.content_size = content_size;
+	node.left = NULL;
+	node.right = NULL;
+	node.height = 1;
+	return (ft_bstfind(root, &node, cmp));
 }

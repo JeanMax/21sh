@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lisempty.c                                      :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
+/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/11 03:24:38 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:25:53 by mcanal           ###   ########.fr       */
+/*   Created: 2014/11/05 17:54:46 by mcanal            #+#    #+#             */
+/*   Updated: 2015/03/09 01:46:32 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** renvoie 1 si la liste est vide, 0 si elle contient au moins un élément.
+** checks for an uppercase letter.
 */
 
 #include "libft.h"
 
-t_bool		ft_lisempty(t_lst *link)
+int	ft_isupper(int c)
 {
-	return (link ? FALSE : TRUE);
+	if (c >= 65 && c <= 90)
+		return (TRUE);
+	return (FALSE);
 }

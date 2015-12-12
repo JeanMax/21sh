@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bstavladd.c                                     :+:      :+:    :+:   */
+/*   ft_bstavldel.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/29 01:57:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 22:19:05 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/11 22:23:30 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/12 00:16:52 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** balance a tree using left/right rotations (AVL)
+** remove and free a node
 */
 
 #include "libft.h"
@@ -25,9 +25,7 @@ static t_bst	*rot_right(t_bst *root, int ret)
 {
 	t_bst	*node;
 
-	if (!ret)
-		return (root);
-	if (ret < 0)
+	if (ret > 0)
 	{
 		node = root->right->left;
 		root->right->left = node->right;
@@ -49,9 +47,7 @@ static t_bst	*rot_left(t_bst *root, int ret)
 {
 	t_bst	*node;
 
-	if (!ret)
-		return (root);
-	if (ret > 0)
+	if (ret < 0)
 	{
 		node = root->left->right;
 		root->left->right = node->left;
@@ -69,38 +65,34 @@ static t_bst	*rot_left(t_bst *root, int ret)
 	return (node);
 }
 
-static t_bst	*add_loop(t_bst *node, t_bst *new, \
+static t_bst	*del_loop(t_bst *node, t_bst *to_del, \
 							int (*cmp)(const void *a, const void *b))
 {
 	int	ret;
 
 	if (!node)
-		return (new);
-	if ((ret = cmp(node, new)) < 0)
-	{
-		node->left = add_loop(node->left, new, cmp);
-		if ((h(node->left) - h(node->right)) == 2)
-			node = rot_left(node, cmp(node->left, new));
-	}
+		return (NULL);
+	if ((ret = cmp(node, to_del)) < 0)
+		node->left = del_loop(node->left, to_del, cmp);
 	else if (ret > 0)
-	{
-		node->right = add_loop(node->right, new, cmp);
-		if ((h(node->left) - h(node->right)) == -2)
-			node = rot_right(node, cmp(node->right, new));
-	}
+		node->right = del_loop(node->right, to_del, cmp);
 	else
-		new->height = 0;
+		ft_bstdel(&node);
+	if (!node)
+		return (NULL);
 	node->height = (size_t)ft_max(h(node->left), h(node->right)) + 1;
+
+	if ((ret = h(node->left) - h(node->right)) > 1)
+		node = rot_left(node, node->right ? \
+							h(node->right->left) - h(node->right->right) : 0);
+	else if (ret < -1)
+		node = rot_right(node, node->left ?\
+							h(node->left->left) - h(node->left->right) : 0);
 	return (node);
 }
 
-void			ft_bstavladd(t_bst **root, void *content, size_t content_size, \
+void			ft_bstavldel(t_bst **root, t_bst **to_del,
 							int (*cmp)(const void *a, const void *b))
 {
-	t_bst *new;
-
-	new = ft_bstnew(content, content_size);
-	*root = add_loop(*root, new, cmp);
-	if (new->height == 0)
-		ft_bstfree(&new);
+	*root = del_loop(*root, *to_del, cmp);
 }

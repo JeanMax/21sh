@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:45:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 19:51:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/05 21:49:50 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ char			*ft_strnstr(const char *s1, const char *s2, size_t n)
 
 	if (!*s2)
 		return ((char *)s1);
-	len = 0;
-	while (s2[len])
-		len++;
-	while (n-- >= len && *s1)
+	len = ft_strlen(s2);
+	while (n-- && *s1)
 	{
 		if (*s1 == *s2 && !ft_memcmp(s1, s2, len))
 			return ((char *)s1);

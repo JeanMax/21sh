@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 18:59:32 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 20:54:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/03 18:10:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 #include "libft.h"
 
-void    ft_bstadd(t_bst **root, void *content, size_t content_size, \
-				  int (*cmp)(const void *a, const void *b, size_t n))
+void	ft_bstadd(t_bst **root, void *content, size_t content_size, \
+					int (*cmp)(const void *a, const void *b))
 {
 	t_bst	**where;
 	t_bst	*new;
 
 	if (!*root)
 		*root = ft_bstnew(content, content_size);
-	else 
+	else
 	{
 		new = ft_bstnew(content, content_size);
 		if (!*(where = ft_bstfind(root, new, cmp)))

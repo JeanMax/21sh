@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 15:40:10 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/11 18:56:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/05 21:24:14 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void			*ft_memcpy(void *dest, const void *src, size_t n)
 
 	dswap = dest;
 	sswap = src;
-	if (n && dest != src)
-	{
+	if (dest != src)
 		while (n--)
 			*dswap++ = *sswap++;
-	}
 	return (dest);
 }
