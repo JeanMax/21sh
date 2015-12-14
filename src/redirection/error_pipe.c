@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/11 23:21:24 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:01:33 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 22:28:55 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern pid_t	g_pid2;
 
-static void		child(int *pipe_fd, char **cmd2, t_env *e)
+static void		child(int *pipe_fd, char **cmd2)
 {
 	int			save_fd0;
 
@@ -27,13 +27,13 @@ static void		child(int *pipe_fd, char **cmd2, t_env *e)
 	close(pipe_fd[1]);
 	dup2(pipe_fd[0], 0);
 	close(pipe_fd[0]);
-	launch_cmd(cmd2, e);
+	launch_cmd(cmd2);
 	dup2(save_fd0, 0);
 	close(save_fd0);
 	exit(0);
 }
 
-static void		father(int *pipe_fd, char **cmd1, t_env *e)
+static void		father(int *pipe_fd, char **cmd1)
 {
 	int			save_fd1;
 	int			save_fd2;
@@ -44,7 +44,7 @@ static void		father(int *pipe_fd, char **cmd1, t_env *e)
 	dup2(pipe_fd[1], 1);
 	dup2(pipe_fd[1], 2);
 	close(pipe_fd[1]);
-	launch_cmd(cmd1, e);
+	launch_cmd(cmd1);
 	dup2(save_fd1, 1);
 	dup2(save_fd2, 2);
 	close(save_fd1);
@@ -52,7 +52,7 @@ static void		father(int *pipe_fd, char **cmd1, t_env *e)
 	wait(NULL);
 }
 
-static void		fork_that(char **cmd1, char **cmd2, t_env *e)
+static void		fork_that(char **cmd1, char **cmd2)
 {
 	int			pipe_fd[2];
 
@@ -61,12 +61,12 @@ static void		fork_that(char **cmd1, char **cmd2, t_env *e)
 	if ((g_pid2 = fork()) < 0)
 		error(E_FORK, NULL);
 	else if (!g_pid2)
-		child(pipe_fd, cmd2, e);
+		child(pipe_fd, cmd2);
 	else
-		father(pipe_fd, cmd1, e);
+		father(pipe_fd, cmd1);
 }
 
-void			error_pipe(char **cmd, t_env *e)
+void			error_pipe(char **cmd)
 {
 	int			i;
 	char		**new_cmd;
@@ -79,9 +79,9 @@ void			error_pipe(char **cmd, t_env *e)
 		failn("Invalid null command.");
 	if (!cmd[i + 1] || !ft_strcmp(cmd[0], "|&"))
 		return ;
-	new_cmd = ft_cpystab(&cmd[i + 1], NULL);
+	new_cmd = ft_arrdup(&cmd[i + 1]);
 	while (cmd[i])
 		ft_memdel((void *)&cmd[i++]);
-	fork_that(cmd, new_cmd, e);
-	ft_freestab(new_cmd);
+	fork_that(cmd, new_cmd);
+	ft_arrdel(&new_cmd);
 }

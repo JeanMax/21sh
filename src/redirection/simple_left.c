@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:20 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:30:45 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 22:28:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern pid_t	g_pid2;
 
-static void		fork_that(char **cmd, t_env *e, int *pipe_fd, char *all)
+static void		fork_that(char **cmd, int *pipe_fd, char *all)
 {
 	int			save_fd0;
 	int			save_fd1;
@@ -31,7 +31,7 @@ static void		fork_that(char **cmd, t_env *e, int *pipe_fd, char *all)
 		close(pipe_fd[1]);
 		dup2(pipe_fd[0], 0);
 		close(pipe_fd[0]);
-		launch_cmd(cmd, e), ft_freestab(cmd);
+		launch_cmd(cmd), ft_arrdel(&cmd);
 		dup2(save_fd0, 0);
 		close(save_fd0);
 		exit(0);
@@ -64,7 +64,7 @@ static void		compress_cmd(char **cmd, int i)
 		ft_memdel((void *)&cmd[i++]);
 }
 
-void			simple_left(char **cmd, t_env *e)
+void			simple_left(char **cmd)
 {
 	int			i;
 	int			file_fd;
@@ -90,6 +90,6 @@ void			simple_left(char **cmd, t_env *e)
 	compress_cmd(cmd, i);
 	close(file_fd);
 	pipe(pipe_fd) < 0 ? error(E_PIPE, NULL) : (void)0;
-	fork_that(cmd, e, pipe_fd, all);
+	fork_that(cmd, pipe_fd, all);
 	ft_memdel((void *)&all);
 }

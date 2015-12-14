@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 21:32:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 21:57:51 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 01:51:50 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,64 +19,55 @@
 extern pid_t	g_pid1;
 extern pid_t	g_pid2;
 
-static void		call_execve(char **cmd, t_env *e)
+static void		fork_it(char **cmd)
 {
-	int			i;
-	char		*join;
-	char		*tmp;
+	char	**envp;
+	char	*bin;
+	char	*tmp;
 
-	ft_freestab(e->path);
-	get_path(e);
-	if ((execve(cmd[0], cmd, e->env)) < 0)
-	{
-		if (cmd[0][0] == '.' && cmd[0][1] == '/')
-			error(E_NOSUCHFILE, cmd[0]);
-		i = 0;
-		while ((e->path)[i])
-		{
-			tmp = ft_strjoin((e->path)[i++], "/");
-			join = ft_strjoin(tmp, cmd[0]);
-			ft_memdel((void *)&tmp);
-			execve(join, cmd, e->env);
-			ft_memdel((void *)&join);
-		}
-		error(E_CMDNOTFOUND, cmd[0]);
-	}
-}
-
-static void		fork_it(char **cmd, t_env *e)
-{
+	bin = ft_strchr(*cmd, '/') ? *cmd : get_full_bin(*cmd);
+	tmp = ft_strjoin("_=", bin);
+	set_env(tmp);
+	ft_memdel((void *)&tmp);
 	if ((g_pid2 = fork()) < 0)
 		error(E_FORK, NULL);
 	else if (!g_pid2)
-		call_execve(cmd, e);
+	{
+		envp = get_env_struct()->envp;
+		if (bin && !access(bin, F_OK | X_OK) && execve(bin, cmd, envp))
+			error(E_NOSUCHFILE, cmd[0]);
+		error(E_CMDNOTFOUND, cmd[0]);
+	}
 	else
 		wait(NULL);
 }
 
-void			launch_cmd(char **cmd, t_env *e)
+void			launch_cmd(char **cmd)
 {
 	int		i;
-	char	*tmp;
+	/* char	*tmp; */
 
-	if (!cmd[0])
+	if (!cmd || !*cmd)
 		return ;
+/*
 	i = -1;
 	while (cmd[++i])
-		if (cmd[i][0] == '$' || cmd[i][0] == '~')
+		if (cmd[i][0] == '$' || cmd[i][0] == '~') //?? TODO...
 		{
 			tmp = cmd[i];
-			cmd[i] = cmd[i][0] == '~' ?\
-			ft_strjoin(get_env("HOME", e), cmd[i] + 1) : get_env(cmd[i] + 1, e);
+			cmd[i] = cmd[i][0] == '~' ? \
+				ft_strjoin(get_env("HOME"), cmd[i] + 1) : get_env(cmd[i] + 1);
 			ft_memdel((void *)&tmp);
 		}
+*/
 	i = 0;
 	while (cmd[i])
 		if (ft_strchr(cmd[i], '>') || ft_strchr(cmd[i], '<')\
 			|| ft_strchr(cmd[i++], '|'))
 		{
-			redirect(cmd, e, -1);
+			redirect(cmd, -1);
 			return ;
 		}
-	is_builtin(cmd, e) ? launch_builtin(cmd, e) : fork_it(cmd, e);
+	if (!launch_builtin(cmd))
+		fork_it(cmd);
 }

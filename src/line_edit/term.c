@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:17:50 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:25:08 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 01:21:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void			switch_term(void)
 	struct termios			term;
 	static struct termios	*old_term = NULL;
 
-	if (!isatty(STDIN_FILENO))
+	if (!isatty(STDIN_FILENO)) //TODO: if this is not, read from get_next_line
 		error(E_TTY, NULL);
 	if (tcgetattr(STDIN_FILENO, &term))
 		error(E_GETATTR, NULL);
@@ -111,6 +111,6 @@ void			switch_term(void)
 	if (tcsetattr(STDIN_FILENO, TCSADRAIN, &term))
 		error(E_SETATTR, NULL);
 	if (tgetent(term_buf, getenv("TERM")) == ERR)
-		error(E_TERM, NULL);
+		error(E_TERM, NULL); //TODO: launch none interactive mod?
 	tputs(tgetstr("im", NULL), 0, tputs_output);
 }

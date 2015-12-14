@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 21:56:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 03:26:55 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "flex_shell.h"
 
-static t_bool		got_mismatch(t_lst *link)
+static t_bool		got_mismatch(t_lst *link) //TODO: check the to_string instead
 {
 	int	quote; //TODO: array for norm?
 	int	d_quote;

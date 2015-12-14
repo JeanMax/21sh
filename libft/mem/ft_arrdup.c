@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cpystab.c                                       :+:      :+:    :+:   */
+/*   ft_arrdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/05 18:57:58 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/12 08:56:24 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/13 22:11:05 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/13 22:18:33 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** Return a copy of a string array.
-** If "val" isn't set to NULL, the function will add a string to the array
-** with the "val" value.
 */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char			**ft_cpystab(char **tab, char *val)
+char			**ft_arrdup(char **arr)
 {
+	char		**cpy;
 	size_t		i;
-	char		**new_tab;
 
 	i = 0;
-	while (tab[i])
+	while (arr[i])
 		i++;
-	new_tab = malloc((i + (val ? 2 : 1)) * sizeof(char *));
+	cpy = (char **)malloc(sizeof(char *) * (i + 1));
 	i = 0;
-	while (tab[i])
+	while (arr[i])
 	{
-		new_tab[i] = ft_strdup(tab[i]);
+		cpy[i] = ft_strdup(arr[i]);
 		i++;
 	}
-	if (val)
-		new_tab[i] = ft_strdup(val);
-	new_tab[i + (val ? 1 : 0)] = NULL;
-	return (new_tab);
+	cpy[i] = NULL;
+	return (cpy);
 }

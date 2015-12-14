@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 20:59:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/09/15 01:19:36 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 22:27:37 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char		**check_cmd(char **c)
 	return (spaces_error(c));
 }
 
-void			redirect(char **c, t_env *e, int i)
+void			redirect(char **c, int i)
 {
 	char		free;
 
@@ -54,20 +54,20 @@ void			redirect(char **c, t_env *e, int i)
 	while (c[++i])
 		if (ft_strchr(c[i], '>'))
 		{
-			(!ft_strcmp(c[i], ">>&")) ? error_d_right(c, e) : (void)0;
-			(!ft_strcmp(c[i], ">&")) ? error_s_right(c, e) : (void)0;
-			(!ft_strcmp(c[i], ">>")) ? doble_right(c, e) : simple_right(c, e);
+			(!ft_strcmp(c[i], ">>&")) ? error_d_right(c) : (void)0;
+			(!ft_strcmp(c[i], ">&")) ? error_s_right(c) : (void)0;
+			(!ft_strcmp(c[i], ">>")) ? doble_right(c) : simple_right(c);
 			break ;
 		}
 		else if (ft_strchr(c[i], '<'))
 		{
-			ft_strstr(c[i], "<<") ? doble_left(c, e) : simple_left(c, e);
+			ft_strstr(c[i], "<<") ? doble_left(c) : simple_left(c);
 			break ;
 		}
 		else if (ft_strchr(c[i], '|'))
 		{
-			ft_strstr(c[i], "|&") ? error_pipe(c, e) : simple_pipe(c, e);
+			ft_strstr(c[i], "|&") ? error_pipe(c) : simple_pipe(c);
 			break ;
 		}
-	free ? ft_freestab(c) : (void)0;
+	free ? ft_arrdel(&c) : (void)0;
 }

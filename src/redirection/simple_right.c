@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:09 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:30:28 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 01:56:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int	is_ambiguous(char **cmd)
 	return (0);
 }
 
-void		simple_right(char **cmd, t_env *e)
+void		simple_right(char **cmd)
 {
 	int		file_fd;
 	int		base_fd;
@@ -111,7 +111,7 @@ void		simple_right(char **cmd, t_env *e)
 		ft_memdel((void *)&cmd[i++]);
 	base_fd = dup(1);
 	dup2(file_fd, 1);
-	launch_cmd(cmd, e);
+	launch_cmd(cmd);
 	dup2(base_fd, 1);
 	close(file_fd);
 	close(base_fd);

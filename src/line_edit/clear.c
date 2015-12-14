@@ -6,13 +6,11 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:44:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:35:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 02:39:51 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "flex_shell.h"
-
-extern t_env	*g_env; //TODO: clean these
 
 void				clear_line(void)
 {
@@ -40,13 +38,13 @@ enum e_status		clear_term(char *buf)
 {
 	t_cursor		*c;
 
-	if (memcmp(buf, K_CTRL_L, KEY_BUF_SIZE))
+	if (buf && memcmp(buf, K_CTRL_L, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 
 	c = get_cursor();
 	move_begin(NULL);
 	tputs(tgetstr("cl", NULL), 0, tputs_output);
-	prompt(g_env);
+	prompt();
 	print_line();
 	move_end(NULL);
 	return (KEEP_READING);

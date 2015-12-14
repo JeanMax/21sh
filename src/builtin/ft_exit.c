@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:30 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/02 21:18:38 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 20:31:58 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,33 @@
 
 #include "flex_shell.h"
 
-void	ft_exit(int ac, char **av)
+static int		do_exit(int status)
 {
+	ft_putendl("exit");
+	exit(status);
+}
+
+void			ft_exit(char **av)
+{
+	int	ac;
+
+	ac = 0;
 	while (av[ac])
 		ac++;
-	ac > 2 ? ft_putendl("exit: Expression Syntax.") : (void)0;
-	if (ac > 2)
-		return ;
+	if (ac == 1)
+		do_exit(EXIT_SUCCESS);
 	else if (ac == 2)
 	{
 		ac = 0;
-		while (av[1][ac] && ft_isdigit(av[1][ac]))
+		av++;
+		while ((*av)[ac] && ft_isdigit((*av)[ac]))
 			ac++;
-		if (av[1][ac] && ft_isdigit(av[1][0]))
-			ft_putendl("exit: Badly formed number.");
-		else if (av[1][ac])
-			ft_putendl("exit: Expression Syntax.");
+		if ((*av)[ac])
+			failn(ft_isdigit(**av) ? \
+					"exit: Badly formed number." : "exit: Expression Syntax.");
 		else
-		{
-			ft_putendl("exit");
-			exit(ft_atoi(av[1]));
-		}
+			do_exit(ft_atoi(*av));
 	}
-	else if (ac == 1)
-	{
-		ft_putendl("exit");
-		exit(0);
-	}
+	else
+		failn("exit: Expression Syntax.");
 }

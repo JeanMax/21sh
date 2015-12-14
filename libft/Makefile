@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/12 21:12:26 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/13 22:10:13 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -62,7 +62,7 @@ C_LST2 =	ft_ladd.c			ft_laddlast.c		ft_lat.c			\
 C_MEM =		ft_bzero.c			ft_memccpy.c		ft_memchr.c			\
 			ft_memcmp.c			ft_memcpy.c			ft_memmove.c		\
 			ft_memset.c			ft_memalloc.c		ft_memdel.c			\
-			ft_realloc.c		ft_freestab.c		ft_cpystab.c		\
+			ft_realloc.c		ft_arrdel.c			ft_arrdup.c			\
 			ft_swap.c			ft_shellsort.c
 C_STR =		ft_strindex.c		ft_strrindex.c		ft_strcpy.c			\
 			ft_atoi.c			ft_strcat.c			ft_strcmp.c			\

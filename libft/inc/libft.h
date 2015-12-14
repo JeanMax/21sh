@@ -6,30 +6,42 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 21:15:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 00:46:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
-# define BUFF_SIZE	127
+
+# define BUFF_SIZE		127
 
 # ifndef TRUE
-#	define TRUE		1
-#	define FALSE	0
+#  define TRUE			1
+#  define FALSE			0
+# endif
+
+# ifndef EXIT_SUCCESS
+#  define EXIT_SUCCESS	0
+#  define EXIT_FAILURE	1
+# endif
+
+# ifndef STDIN_FILENO
+#  define STDIN_FILENO	0
+#  define STDOUT_FILENO	1
+#  define STDERR_FILENO	2
 # endif
 
 # ifndef INT_MAX
-#	define SHRT_MAX		32767
-#	define SHRT_MIN		(-SHRT_MAX - 1)
-#	define USHRT_MAX	(2 * SHRT_MAX + 1)
-#	define INT_MAX		2147483647
-#	define INT_MIN		(-INT_MAX - 1)
-#	define UINT_MAX		(2 * INT_MAX + 1)
-#	define LONG_MAX		9223372036854775807
-#	define LONG_MIN		(-LONG_MAX - 1)
-#	define ULONG_MAX	(2 * LONG_MAX + 1)
+#  define SHRT_MAX		32767
+#  define SHRT_MIN		(-SHRT_MAX - 1)
+#  define USHRT_MAX		(2 * SHRT_MAX + 1)
+#  define INT_MAX		2147483647
+#  define INT_MIN		(-INT_MAX - 1)
+#  define UINT_MAX		(2 * INT_MAX + 1)
+#  define LONG_MAX		9223372036854775807
+#  define LONG_MIN		(-LONG_MAX - 1)
+#  define ULONG_MAX		(2 * LONG_MAX + 1)
 # endif
 
 # include <string.h>
@@ -92,7 +104,7 @@ void	ft_bstadd(t_bst **root, void *content, size_t content_size, \
 t_bst	**ft_bstfind(t_bst **root, t_bst *node, \
 					int (*cmp)(const void *a, const void *b));
 t_bst	**ft_bstsearch(t_bst **root, void *content, size_t content_size, \
-					int (*cmp)(const void *a, const void *b));
+						int (*cmp)(const void *a, const void *b));
 void	ft_bstavladd(t_bst **root, void *content, size_t content_size, \
 					int (*cmp)(const void *a, const void *b));
 void	ft_bstavldel(t_bst **root, t_bst **to_del,
@@ -199,8 +211,8 @@ t_lst	**ft_lfind(t_lst **alst, void *data, \
 void	ft_shellsort(void *arr, size_t length, size_t sizeof_element, \
 					int (*cmp)(const void *a, const void *b));
 void	ft_bzero(void *s, size_t n);
-char	**ft_cpystab(char **tab, char *val);
-void	ft_freestab(char **tab);
+char	**ft_arrdup(char **arr);
+void	ft_arrdel(char ***arr);
 void	ft_memdel(void **ap);
 void	*ft_memalloc(size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/04 18:50:52 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 03:13:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,36 @@
 extern pid_t	g_pid1; //TODO: clean these
 extern pid_t	g_pid2; //TODO: clean these
 
-void			prompt(t_env *e)
+void			prompt(void)
 {
-	char		*user;
-	char		*pwd;
-	char		*home;
-	int			i;
+	char		*env1;
+	char		*env2;
 
-	i = 0;
-	user = get_env("USER", e);
-	pwd = get_env("PWD", e);
-	home = get_env("HOME", e);
-	i += ft_strnstr(pwd, "/private/", 9) ? 8 : 0;
-	i += ft_strnstr(pwd, "/Volumes/Data/", 14) ? 13 : 0;
-	if (ft_strnstr(pwd, home, ft_strlen(home)))
-	{
-		i += ft_strlen(home) - 1;
-		pwd[ft_strlen(home) - 1] = '~';
-	}
-	ft_putstr_clr(user, "red");
+
+	env1 = get_env("USER");
+	ft_putstr_clr(env1 ? env1 + 5 : "marvin", "red");
 	ft_putstr_clr("@21sh", "yellow");
 	ft_putchar_clr(':', "white");
-	ft_putendl_clr(pwd + i, "green");
+
+	if (!(env1 = get_env("PWD"))) //berk
+		ft_putendl_clr("TheVoid", "green");
+	else if (!(env2 = get_env("HOME")))
+		ft_putendl_clr(env1 + 4, "green");
+	else if (ft_strstr(env1 + 4, env2 + 5))
+	{
+		ft_putchar_clr('~', "green");
+		ft_putendl_clr(env1 + 4 + ft_strlen(env2 + 5), "green");
+	}
+	else
+		ft_putendl_clr(env1 + 4, "green");
+
 	ft_putstr_clr("> ", "green");
-	*user ? ft_memdel((void *)&user) : (void)0;
-	*pwd ? ft_memdel((void *)&pwd) : (void)0;
-	*home ? ft_memdel((void *)&home) : (void)0;
+
+	/* i += ft_strnstr(pwd, "/private/", 9) ? 8 : 0; */
+	/* i += ft_strnstr(pwd, "/Volumes/Data/", 14) ? 13 : 0; */
 }
 
+/*
 static char		**split_that(char *s)
 {
 	int			i;
@@ -77,7 +79,8 @@ static char		**split_that(char *s)
 	}
 	return (ft_strsplit(s, -42));
 }
-
+*/
+/*
 static char		**split_sc(char *s)
 {
 	int			i;
@@ -102,25 +105,28 @@ static char		**split_sc(char *s)
 	}
 	return (ft_strsplit(s, -42));
 }
-
-static void		semicolon(char *line, t_env *e)
+*/
+static void		multi_lines(char *line)
 {
 	char		**sc_tab;
 	char		**cmd;
 	int			i;
 
-	sc_tab = split_sc(line);
+	sc_tab = ft_strsplit(line, S_LINE);
 	i = 0;
 	while (sc_tab[i])
 	{
-		if ((cmd = split_that(sc_tab[i])))
-			launch_cmd(cmd, e), ft_freestab(cmd);
+		if ((cmd = ft_strsplit(sc_tab[i], S_WORD)))
+		{
+			launch_cmd(cmd);
+			ft_arrdel(&cmd);
+		}
 		i++;
 	}
-	ft_freestab(sc_tab);
+	ft_arrdel(&sc_tab);
 }
 
-void			prompt_loop(char **av, t_env *e)
+void			prompt_loop(void)
 {
 	char		*line;
 	char		**cmd;
@@ -128,23 +134,22 @@ void			prompt_loop(char **av, t_env *e)
 	line = NULL;
 	if (handle_pipe(&line))
 	{
-		if (ft_strindex(line, ';') != -1)
-			semicolon(line, e);
-		else if ((cmd = split_that(line)))
-			launch_cmd(cmd, e), ft_freestab(cmd);
+		if (ft_strchr(line, S_LINE))
+			multi_lines(line);
+		else if ((cmd = ft_strsplit(line, S_WORD)))
+			launch_cmd(cmd), ft_arrdel(&cmd);
 		exit(0);
 	}
-	prompt(e);
+	prompt();
 	while (read_stdin(&line))
 	{
 		ft_putendl("");
 		g_pid1 = g_pid2;
-		if (ft_strindex(line, ';') != -1)
-				semicolon(line, e);
-		else if ((cmd = split_that(line)))
-			launch_cmd(cmd, e), ft_freestab(cmd);
-		prompt(e);
+		if (ft_strchr(line, S_LINE))
+			multi_lines(line);
+		else if ((cmd = ft_strsplit(line, S_WORD)))
+			launch_cmd(cmd), ft_arrdel(&cmd);
+		prompt();
 	}
 	ft_memdel((void *)&line);
-	ft_exit(0, av);
 }

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 22:22:30 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 03:20:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,38 @@ t_cursor		*get_cursor(void)
 	return (&c);
 }
 
+static char		assign(char to_add, t_bool skip)
+{
+	if (!skip)
+	{
+		if (to_add == '\n' || to_add == ';')
+			return (S_LINE);
+		if (ft_isspace((int)to_add) || to_add == '\'' || to_add == '"')
+			return (S_WORD);
+	}
+	return (to_add);
+}
+
 char			*to_string(void)
 {
 	static char	line[LINE_SIZE + 1];
-	t_lst	*link;
-	char	*swap;
-	int		count;
+	t_lst		*link;
+	char		*swap;
+	int			count;
+	char		skip;
 
 	link = get_cursor()->first_l;
 	swap = line;
 	ft_bzero(line, LINE_SIZE);
 	count = 0;
+	skip = FALSE;
 	while (count < LINE_SIZE && link)
 	{
-		if (*(char *)(link->content) == '\n')
-			*(swap++) = ';';
-		else
-			*(swap++) = *(char *)(link->content);
+		if (skip == *(char *)(link->content))
+			skip = FALSE;
+		*(swap++) = assign(*(char *)(link->content), skip);
+		if (*(char *)(link->content) == '\'' || *(char *)(link->content) == '"')
+			skip = *(char *)(link->content);
 		link = link->next;
 		count++;
 	}

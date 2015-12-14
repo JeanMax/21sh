@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:32:44 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/13 01:58:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static int		is_ambiguous(char **cmd)
 	return (0);
 }
 
-static void		handle_fd(int file_fd, char **cmd, t_env *e)
+static void		handle_fd(int file_fd, char **cmd)
 {
 	int		err_fd;
 	int		in_fd;
@@ -95,7 +95,7 @@ static void		handle_fd(int file_fd, char **cmd, t_env *e)
 	err_fd = dup(2);
 	dup2(file_fd, 1);
 	dup2(file_fd, 2);
-	launch_cmd(cmd, e);
+	launch_cmd(cmd);
 	dup2(in_fd, 1);
 	dup2(err_fd, 2);
 	close(file_fd);
@@ -103,7 +103,7 @@ static void		handle_fd(int file_fd, char **cmd, t_env *e)
 	close(in_fd);
 }
 
-void			error_d_right(char **c, t_env *e)
+void			error_d_right(char **c)
 {
 	int		file_fd;
 	int		i;
@@ -125,5 +125,5 @@ void			error_d_right(char **c, t_env *e)
 	}
 	while (c[i])
 		ft_memdel((void *)&c[i++]);
-	handle_fd(file_fd, c, e);
+	handle_fd(file_fd, c);
 }

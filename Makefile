@@ -6,16 +6,16 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/12 22:19:43 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/13 22:30:44 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME =	21sh
 
-C_SRC =	main.c				error.c				handle_env.c		\
-		prompt.c			exec.c				signal.c
-C_BUI =	builtin.c			exit.c				env.c				\
-		unsetenv.c			cd.c				setenv.c
+C_SRC =	main.c				error.c				prompt.c			\
+		exec.c
+C_BUI =	builtin.c			ft_exit.c			ft_env.c			\
+		ft_unsetenv.c		ft_cd.c				ft_setenv.c
 C_RED =	redirection.c		space_error.c		simple_right.c		\
 		simple_left.c		double_right.c		double_left.c		\
 		simple_pipe.c		error_s_right.c		error_pipe.c		\
@@ -23,15 +23,19 @@ C_RED =	redirection.c		space_error.c		simple_right.c		\
 C_LIN = clear.c				cursor.c			insert.c			\
 		move_cursor.c		read_stdin.c		term.c				\
 		history.c
+C_ENV = bin.c				env.c				setenv.c			\
+		unsetenv.c
 
 O_DIR = obj
 C_DIR = src
-VPATH =	src:src/builtin:src/redirection:src/line_edit
+VPATH =	src:src/builtin:src/redirection:src/line_edit:src/env
 
 SRCC = 	$(C_SRC:%.c=src/%.c)		$(C_BUI:%.c=src/builtin/%.c)	\
-		$(C_RED:%.c=src/redirection/%.c) $(C_LIN:%.c=src/line_edit/%.c)
+		$(C_ENV:%.c=src/env/%.c)	$(C_LIN:%.c=src/line_edit/%.c)	\
+		$(C_RED:%.c=src/redirection/%.c) 
 OBJS =	$(C_SRC:%.c=$(O_DIR)/%.o)	$(C_BUI:%.c=$(O_DIR)/%.o)		\
-		$(C_RED:%.c=$(O_DIR)/%.o)	$(C_LIN:%.c=$(O_DIR)/%.o)	
+		$(C_ENV:%.c=$(O_DIR)/%.o)	$(C_LIN:%.c=$(O_DIR)/%.o)		\
+		$(C_RED:%.c=$(O_DIR)/%.o)
 DEPS =  $(OBJS:%.o=%.d)
 
 LIB =		libft/libft.a
@@ -67,11 +71,11 @@ sanitize:
 me_cry:
 	@$(MAKE) -C libft
 	@$(MAKE) $(NAME) \
-		"CFLAGS = -Wpedantic -Wshadow -Wcast-qual -Wconversion -Wcast-align \
+		"CFLAGS = -Wpedantic -Wshadow -Wconversion -Wcast-align \
 -Wstrict-prototypes -Wmissing-prototypes -Wunreachable-code -Winit-self \
 -Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
 -Waggregate-return -Wstrict-overflow=5 -Wold-style-definition -Wpadded \
--Wredundant-decls -Wall -Werror -Wextra -O2"
+-Wredundant-decls -Wall -Werror -Wextra -O2" #-Wcast-qual
 
 -include $(DEPS)
 

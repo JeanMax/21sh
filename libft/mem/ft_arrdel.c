@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freestab.c                                      :+:      :+:    :+:   */
+/*   ft_arrdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/01/15 03:58:41 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/30 02:20:07 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/13 22:13:22 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/13 22:50:02 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** Free a char * tab
+** assume a NULL pointer has been allocated at the end
 */
 
 #include "libft.h"
 
-void	ft_freestab(char **tab)
+static void	del_loop(char **arr)
 {
-	char	**swap;
+	if (*arr)
+		del_loop(arr + 1);
+	ft_memdel((void *)arr);
+}
 
-	swap = tab;
-	while (*tab)
-		ft_memdel((void *)(tab++));
-	ft_memdel((void *)(tab));
-	ft_memdel((void *)&swap);
+void	ft_arrdel(char ***arr)
+{
+	if (*arr)
+		del_loop(*arr);
+	ft_memdel((void *)arr);
 }
