@@ -6,7 +6,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:20:41 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/03 22:57:23 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/15 10:20:27 by mcanal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ else
 fi;
 echo " 
 cd $SH_DIR; cd ..; cd -
-setenv toto; env | grep toto
-setenv toto 42; env | grep toto
-setenv toto 42=23; env | grep toto
-setenv to to; setenv tototo to; unsetenv toto
+setenv toto=; env | grep toto
+setenv toto=42; env | grep toto
+setenv toto=42=23; env | grep toto
+setenv to=to; setenv tototo=to; unsetenv toto
 setenv | grep toto
 env PATH=toto ls
 env -i ls

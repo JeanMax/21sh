@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/10 22:29:17 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 18:33:03 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 */
 
 #include "flex_shell.h"
+#include <stdlib.h>
 
 //I'm pretty sure there is another way...
 static int  get_index(t_int flag)

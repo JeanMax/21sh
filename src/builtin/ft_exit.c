@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:30 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/13 20:31:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 18:33:20 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 ** exit builtin
 */
 
-#include "flex_shell.h"
+#include "builtin.h"
+#include <stdlib.h>
 
 static int		do_exit(int status)
 {

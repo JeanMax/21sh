@@ -6,15 +6,15 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:00:25 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 01:07:48 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/15 00:21:23 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** launch the appropriatte builtin function
+** exec the appropriatte builtin function
 */
 
-#include "flex_shell.h"
+#include "builtin.h"
 
 //return 0 if it's not, otherwise return the index + 1
 static int		is_builtin(char *cmd)
@@ -29,20 +29,20 @@ static int		is_builtin(char *cmd)
 	return (built_name[i] && cmd ? i + 1 : FALSE);
 }
 
-//return true and launch builtin if it was a builtin, otherwise return false
-t_bool			launch_builtin(char **av)
+//return true and exec builtin if it was a builtin, otherwise return false
+t_bool			exec_builtin(char **cmd)
 {
 	int			built_index;
 	char		*tmp;
 	void		(*builtin[])(char **) = \
 		{ ft_exit, ft_env, ft_setenv, ft_unsetenv, ft_cd };
 
-	if (!(built_index = is_builtin(*av)))
+	if (!(built_index = is_builtin(*cmd)))
 		return (FALSE);
 
-	tmp = ft_strjoin("_=builtin/", *av);
+	tmp = ft_strjoin("_=builtin/", *cmd);
 	set_env(tmp);
 	ft_memdel((void *)&tmp);
-	builtin[built_index - 1](av);
+	builtin[built_index - 1](cmd);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 14:13:23 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 00:46:00 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/15 02:27:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void	ft_shellsort(void *arr, size_t length, size_t sizeof_element, \
 void	ft_bzero(void *s, size_t n);
 char	**ft_arrdup(char **arr);
 void	ft_arrdel(char ***arr);
+void	ft_arrdelone(char **arr, char *to_del);
 void	ft_memdel(void **ap);
 void	*ft_memalloc(size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t n);

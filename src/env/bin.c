@@ -6,11 +6,11 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 00:38:20 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 04:05:06 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flex_shell.h"
+#include "env.h"
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h> //works without...

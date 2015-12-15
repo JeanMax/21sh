@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/13 00:10:45 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 02:26:35 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/14 17:58:07 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/14 18:00:23 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#ifndef ENV_H
 
-//alias unsetenv... accept a non existing pointer
-//should be used with to_del = *arr_find(arr, KEY)
+/*
+** define
+*/
+# define ENV_H
 
-void			unset_env(char *to_unset)
-{
-	t_env		*e;
+/*
+** include
+*/
+# include "flex_shell.h"
 
-	e = get_env_struct();
-	ft_arrdelone(e->envp, *arr_find(e->envp, to_unset));
-	if (!ft_strncmp("PATH", to_unset, 4))
-		update_bin(TRUE);
-}
+/*
+** env.c
+*/
+char			**arr_find(char **arr, char *to_find);
+
+#endif

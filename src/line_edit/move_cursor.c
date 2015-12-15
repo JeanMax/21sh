@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flex_shell.h"
+#include "line_edit.h"
 
 enum e_status		move_up(char *buf)
 {

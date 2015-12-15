@@ -6,11 +6,11 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 03:20:20 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/15 11:44:08 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flex_shell.h"
+#include "line_edit.h"
 
 static int		cmp(const void *a, const void *b)
 {
@@ -34,21 +34,67 @@ t_cursor		*get_cursor(void)
 	return (&c);
 }
 
-static char		assign(char to_add, t_bool skip)
+// < << <& > >> >& |
+static void		assign_redirection(char **swap, t_lst **link)
 {
-	if (!skip)
+	if (*(char *)((*link)->content) == '>')
 	{
-		if (to_add == '\n' || to_add == ';')
-			return (S_LINE);
-		if (ft_isspace((int)to_add) || to_add == '\'' || to_add == '"')
-			return (S_WORD);
+		if ((*link)->next && *(char *)((*link)->next->content) == '>' \
+			&& (*link = (*link)->next))
+			*((*swap)++) = R_OUTPUT_APPEND;
+		else if ((*link)->next && *(char *)((*link)->next->content) == '&' \
+				&& (*link = (*link)->next))
+			*((*swap)++) = R_DUP_OUTPUT;
+		else
+			*((*swap)++) = R_OUTPUT;
 	}
-	return (to_add);
+	else if (*(char *)((*link)->content) == '<')
+	{
+		if ((*link)->next && *(char *)((*link)->next->content) == '<' \
+			&& (*link = (*link)->next))
+			*((*swap)++) = R_HERE_DOC;
+		else if ((*link)->next && *(char *)((*link)->next->content) == '&' \
+				&& (*link = (*link)->next))
+			*((*swap)++) = R_DUP_INPUT;
+		else
+			*((*swap)++) = R_INPUT;
+	}
+	else //if (*(char *)((*link)->content) == '|')
+		*((*swap)++) = R_PIPELINE;
+}
+
+static void		assign(char **swap, t_lst **link, t_bool skip)
+{
+	if (skip)
+	{
+		*((*swap)++) = *(char *)((*link)->content);
+		return ;
+	}
+	if (*(char *)((*link)->content) == '\n' || \
+			*(char *)((*link)->content) == ';')
+		*((*swap)++) = S_LINE;
+	else if (ft_isspace(*(char *)((*link)->content)) || \
+			*(char *)((*link)->content) == '\'' || \
+			*(char *)((*link)->content) == '"')
+		*((*swap)++) = S_WORD;
+	else if (*(char *)((*link)->content) == '<' || \
+			*(char *)((*link)->content) == '>' || \
+			*(char *)((*link)->content) == '|')
+	{
+		//if it's a digit, you'll have to handle something like "3>"
+		if (*(char *)((*link)->content) == '|' || ((*link)->prev && \
+								!ft_isdigit(*(char *)((*link)->prev->content))))
+			*((*swap)++) = S_WORD;
+		assign_redirection(swap, link);
+		*((*swap)++) = S_WORD;
+	}
+	else
+		*((*swap)++) = *(char *)((*link)->content);
 }
 
 char			*to_string(void)
 {
-	static char	line[LINE_SIZE + 1];
+	static char	line[LINE_SIZE * 3 + 1];
 	t_lst		*link;
 	char		*swap;
 	int			count;
@@ -56,16 +102,22 @@ char			*to_string(void)
 
 	link = get_cursor()->first_l;
 	swap = line;
-	ft_bzero(line, LINE_SIZE);
+	ft_bzero(line, LINE_SIZE * 3 + 1);
 	count = 0;
 	skip = FALSE;
 	while (count < LINE_SIZE && link)
 	{
 		if (skip == *(char *)(link->content))
+		{
 			skip = FALSE;
-		*(swap++) = assign(*(char *)(link->content), skip);
-		if (*(char *)(link->content) == '\'' || *(char *)(link->content) == '"')
-			skip = *(char *)(link->content);
+			assign(&swap, &link, skip);
+		}
+		else
+		{
+			assign(&swap, &link, skip);
+			if (*(char *)(link->content) == '\'' || *(char *)(link->content) == '"')
+				skip = *(char *)(link->content);
+		}
 		link = link->next;
 		count++;
 	}
@@ -91,12 +143,12 @@ void			print_line(void)
 	while (tmp)
 	{
 		if (ft_isspace(*(char *)tmp->content))
-			write(1, " ", 1);
+			ft_putchar(' ');
 		else if (!ft_isascii(*(char *)tmp->content) \
 				|| ft_iscntrl(*(char *)tmp->content))
 			ft_putstr("�");
 		else
-			write(1, tmp->content, 1);
+			ft_putchar(*(char *)tmp->content);
 		if (!(++count % get_term_size()->ws_col))
 		{
 			tputs(tgetstr("cd", NULL), 0, tputs_output);

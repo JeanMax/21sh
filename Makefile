@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/13 22:30:44 by mcanal           ###   ########.fr        #
+#    Updated: 2015/12/15 07:20:52 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,10 +16,8 @@ C_SRC =	main.c				error.c				prompt.c			\
 		exec.c
 C_BUI =	builtin.c			ft_exit.c			ft_env.c			\
 		ft_unsetenv.c		ft_cd.c				ft_setenv.c
-C_RED =	redirection.c		space_error.c		simple_right.c		\
-		simple_left.c		double_right.c		double_left.c		\
-		simple_pipe.c		error_s_right.c		error_pipe.c		\
-		error_d_right.c
+C_RED =	redirection.c		output_redirect.c	dup_fd.c			\
+		pipeline.c			input_redirect.c	here_doc.c
 C_LIN = clear.c				cursor.c			insert.c			\
 		move_cursor.c		read_stdin.c		term.c				\
 		history.c

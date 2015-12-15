@@ -14,7 +14,7 @@
 ** env builtin
 */
 
-#include "flex_shell.h"
+#include "builtin.h"
 
 void			print_env(char **envp)
 {
@@ -48,7 +48,7 @@ static void		do_stuff(char **av, t_env *e)
 	if (*av)
 	{
 		update_bin(TRUE);
-		launch_cmd(av);
+		exec_cmd(av);
 	}
 	else
 		print_env(e->envp);

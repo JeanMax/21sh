@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flex_shell.h"
+#include "env.h"
 
 //alias setenv... won't check if to_add is well formated
 //should be used with to_add = "SMURF=ETTE"

@@ -6,17 +6,19 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 03:13:21 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/15 20:14:53 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** handle prompt loop
 ** print a pretty prompt
-** split line in a tab (space and tab as separators, handle ; " and ')
+** split line in a tab (space and tab as separators, handle; " and ')
 */
 
 #include "flex_shell.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 extern pid_t	g_pid1; //TODO: clean these
 extern pid_t	g_pid2; //TODO: clean these
@@ -25,7 +27,6 @@ void			prompt(void)
 {
 	char		*env1;
 	char		*env2;
-
 
 	env1 = get_env("USER");
 	ft_putstr_clr(env1 ? env1 + 5 : "marvin", "red");
@@ -50,106 +51,46 @@ void			prompt(void)
 	/* i += ft_strnstr(pwd, "/Volumes/Data/", 14) ? 13 : 0; */
 }
 
-/*
-static char		**split_that(char *s)
+static void	do_something_with_line(char *line)
 {
-	int			i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\'')
-		{
-			s[i] = -42;
-			while (s[++i] != '\'')
-				if (!s[i])
-					return (failn("Unmatched \'."));
-			s[i] = -42;
-		}
-		else if (s[i] == '\"')
-		{
-			s[i] = -42;
-			while (s[++i] != '\"')
-				if (!s[i])
-					return (failn("Unmatched \"."));
-			s[i] = -42;
-		}
-		else if (s[i] == ' ' || s[i] == '\t')
-			s[i] = -42;
-	}
-	return (ft_strsplit(s, -42));
-}
-*/
-/*
-static char		**split_sc(char *s)
-{
-	int			i;
-
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '\'')
-		{
-			while (s[++i] != '\'')
-				if (!s[i])
-					return (NULL);
-		}
-		else if (s[i] == '\"')
-		{
-			while (s[++i] != '\"')
-				if (!s[i])
-					return (NULL);
-		}
-		else if (s[i] == ';')
-			s[i] = -42;
-	}
-	return (ft_strsplit(s, -42));
-}
-*/
-static void		multi_lines(char *line)
-{
-	char		**sc_tab;
+	char		**swap;
+	char		**cmd_arr;
 	char		**cmd;
-	int			i;
 
-	sc_tab = ft_strsplit(line, S_LINE);
-	i = 0;
-	while (sc_tab[i])
-	{
-		if ((cmd = ft_strsplit(sc_tab[i], S_WORD)))
+	if (!line || !(cmd_arr = ft_strsplit(line, S_LINE)))
+		return ;
+	swap = cmd_arr;
+	while (*swap)
+		if ((cmd = ft_strsplit(*(swap++), S_WORD)))
 		{
-			launch_cmd(cmd);
+			/* debug_arr(cmd);		/\* debug *\/ */
+			exec_cmd(cmd);
 			ft_arrdel(&cmd);
 		}
-		i++;
-	}
-	ft_arrdel(&sc_tab);
+	ft_arrdel(&cmd_arr);
 }
 
 void			prompt_loop(void)
 {
 	char		*line;
-	char		**cmd;
+	t_bool		(*read_it)(char **);
 
 	line = NULL;
-	if (handle_pipe(&line))
+	read_it = (!isatty(STDIN_FILENO) || !get_env("TERM") || \
+	ft_strcmp("xterm-256color", get_env("TERM") + 5)) ? read_notty : read_tty;
+	if (!isatty(STDIN_FILENO))
 	{
-		if (ft_strchr(line, S_LINE))
-			multi_lines(line);
-		else if ((cmd = ft_strsplit(line, S_WORD)))
-			launch_cmd(cmd), ft_arrdel(&cmd);
-		exit(0);
+		while (read_it(&line))
+			do_something_with_line(line);
+		exit(EXIT_SUCCESS);
 	}
+
 	prompt();
-	while (read_stdin(&line))
+	while (read_it(&line))
 	{
 		ft_putendl("");
 		g_pid1 = g_pid2;
-		if (ft_strchr(line, S_LINE))
-			multi_lines(line);
-		else if ((cmd = ft_strsplit(line, S_WORD)))
-			launch_cmd(cmd), ft_arrdel(&cmd);
+		do_something_with_line(line);
 		prompt();
 	}
-	ft_memdel((void *)&line);
 }

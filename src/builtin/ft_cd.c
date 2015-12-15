@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:40:00 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 02:18:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 18:36:08 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 ** cd builtin
 */
 
-#include "flex_shell.h"
+#include "builtin.h"
+#include <unistd.h>
 
 static void	chdir_it(char *to)
 {

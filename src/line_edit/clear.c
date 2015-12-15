@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "flex_shell.h"
+#include "line_edit.h"
 
 void				clear_line(void)
 {

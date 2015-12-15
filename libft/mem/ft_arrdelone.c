@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unsetenv.c                                         :+:      :+:    :+:   */
+/*   ft_arrdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/13 00:10:45 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 02:26:35 by mcanal           ###   ########.fr       */
+/*   Created: 2015/12/15 02:25:42 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/15 02:29:09 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+/*
+** free a string from a string array
+** the right side of the array will be moved consequently
+*/
 
-//alias unsetenv... accept a non existing pointer
-//should be used with to_del = *arr_find(arr, KEY)
+#include "libft.h"
 
-void			unset_env(char *to_unset)
+void		ft_arrdelone(char **arr, char *to_del)
 {
-	t_env		*e;
-
-	e = get_env_struct();
-	ft_arrdelone(e->envp, *arr_find(e->envp, to_unset));
-	if (!ft_strncmp("PATH", to_unset, 4))
-		update_bin(TRUE);
+	while (*arr && *arr != to_del)
+		arr++;
+	if (!*arr)
+		return ;
+	ft_memdel((void *)&to_del);
+	while ((*arr = *(arr + 1)))
+		arr++;
 }

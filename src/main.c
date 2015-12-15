@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 02:39:41 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/15 12:14:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 ** this is the main...
 */
 
-#include "flex_shell.h"
+/* #include "flex_shell.h" */
+#include "line_edit.h"
 #include <signal.h> //works without...
 
 pid_t				g_pid1; //TODO: move to header / delete
@@ -24,7 +25,6 @@ static void		inc_shlvl(void)
 {
 	char		*shlvl1;
 	char		*shlvl2;
-	char		**av;
 
 	if (!(shlvl1 = get_env("SHLVL")))
 	{
@@ -76,10 +76,11 @@ static void			init(void)
 
 int				main(int ac, char **av)
 {
+	(void)av;
 	if (ac > 1)
-		error(E_ARG, NULL);
+		error(E_ARG | E_NOEXIT, NULL); /* debug */
 	init();
 	prompt_loop();
-	ft_exit(av); //??
-	return (EXIT_FAILURE); //? :p
+	ft_putendl("exit");
+	return (EXIT_SUCCESS);
 }

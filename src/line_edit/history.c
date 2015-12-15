@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 03:26:55 by mcanal           ###   ########.fr       */
+/*   Updated: 2015/12/14 18:39:30 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 ** command line history handling (mostly triggered with up/down keys)
 */
 
-#include "flex_shell.h"
+#include "line_edit.h"
+#include <unistd.h>
 
 static t_bool		got_mismatch(t_lst *link) //TODO: check the to_string instead
 {
