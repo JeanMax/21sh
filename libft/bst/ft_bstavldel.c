@@ -81,7 +81,6 @@ static t_bst	*del_loop(t_bst *node, t_bst *to_del, \
 	if (!node)
 		return (NULL);
 	node->height = (size_t)ft_max(h(node->left), h(node->right)) + 1;
-
 	if ((ret = h(node->left) - h(node->right)) > 1)
 		node = rot_left(node, node->right ? \
 							h(node->right->left) - h(node->right->right) : 0);

@@ -109,4 +109,3 @@ char			*get_full_bin(char *bin)
 	else
 		return (NULL); //yay
 }
-

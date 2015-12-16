@@ -33,25 +33,22 @@ char			*ft_itoa(int n)
 {
 	size_t	len;
 	char	*str;
-	int		sign;
 
-	if (n == -2147483647 - 1)
-		return ("-2147483648");
+	if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
 	len = length(n);
-	sign = 0;
 	if (n < 0)
 	{
 		n = -n;
-		sign = 42;
 		len++;
+		if (!(str = ft_strnew(len)))
+			return (NULL);
+		*str = '-';
 	}
-	str = ft_strnew(len);
-	if (!str)
+	else if (!(str = ft_strnew(len)))
 		return (NULL);
 	str[--len] = n % 10 + '0';
 	while (n /= 10)
 		str[--len] = n % 10 + '0';
-	if (sign)
-		str[0] = '-';
 	return (str);
 }

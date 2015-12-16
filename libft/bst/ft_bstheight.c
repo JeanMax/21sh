@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_bstheight.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 16:56:38 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/14 13:07:48 by mcanal           ###   ########.fr       */
+/*   Created: 2015/11/28 23:40:56 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/03 17:51:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Print a string on the specified file descriptor.
+** return the height of the binary tree
 */
 
 #include "libft.h"
-#include <unistd.h>
 
-void	ft_putstr_fd(char const *s, int fd)
+size_t	ft_bstheight(t_bst *root)
 {
-	if (s)
-		write(fd, s, ft_strlen(s));
+	return (root ? 1 + (size_t)ft_max((int)ft_bstheight(root->left),
+										(int)ft_bstheight(root->right)) : 0);
 }

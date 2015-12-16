@@ -26,7 +26,6 @@ void				clear_line(void)
 		if (!(++count % get_term_size()->ws_col))
 		{
 			tputs(tgetstr("cd", NULL), 0, tputs_output);
-				;
 			break ;
 		}
 		tmp = tmp->next;
@@ -40,7 +39,6 @@ enum e_status		clear_term(char *buf)
 
 	if (buf && memcmp(buf, K_CTRL_L, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	move_begin(NULL);
 	tputs(tgetstr("cl", NULL), 0, tputs_output);

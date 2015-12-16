@@ -34,12 +34,12 @@ t_bool			exec_builtin(char **cmd)
 {
 	int			built_index;
 	char		*tmp;
-	void		(*builtin[])(char **) = \
-		{ ft_exit, ft_env, ft_setenv, ft_unsetenv, ft_cd };
+	void		(*builtin[])(char **) = {
+		ft_exit, ft_env, ft_setenv, ft_unsetenv, ft_cd
+	}; //not norm-friendly
 
 	if (!(built_index = is_builtin(*cmd)))
 		return (FALSE);
-
 	tmp = ft_strjoin("_=builtin/", *cmd);
 	set_env(tmp);
 	ft_memdel((void *)&tmp);

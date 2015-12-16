@@ -38,7 +38,7 @@ static void		inc_shlvl(void)
 	ft_memdel((void *)&shlvl2);
 }
 
-static void			sig_handl(int sig)
+static void		sig_handl(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -59,7 +59,7 @@ static void			sig_handl(int sig)
 		prompt();
 }
 
-static void			init(void)
+static void		init(void)
 {
 	extern char	**environ;
 

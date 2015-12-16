@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_bstisperfect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/06 16:56:38 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/14 13:07:48 by mcanal           ###   ########.fr       */
+/*   Created: 2015/11/29 00:14:09 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/03 17:48:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Print a string on the specified file descriptor.
+** check if a tree is balanced
 */
 
 #include "libft.h"
-#include <unistd.h>
 
-void	ft_putstr_fd(char const *s, int fd)
+t_bool	ft_bstisperfect(t_bst *root)
 {
-	if (s)
-		write(fd, s, ft_strlen(s));
+	return (root ? ft_bstheight(root->left) == ft_bstheight(root->right) && \
+			ft_bstisperfect(root->left) && ft_bstisperfect(root->right) : TRUE);
 }

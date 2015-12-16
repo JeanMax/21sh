@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "env.h"
+#include <stdlib.h>
 
 //alias setenv... won't check if to_add is well formated
 //should be used with to_add = "SMURF=ETTE"
@@ -51,4 +52,3 @@ void			set_env(char *to_set)
 	if (!ft_strncmp("PATH", to_set, 4))
 		update_bin(TRUE);
 }
-

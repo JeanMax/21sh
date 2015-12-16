@@ -20,9 +20,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-extern pid_t		g_pid2;
+extern pid_t	g_pid2;
 
-static void			get_text(char **text, char *here, t_bool(*read_it)(char **))
+static void		get_text(char **text, char *here, t_bool (*read_it)(char **))
 {
 	char			*buf;
 	char			*tmp;
@@ -77,7 +77,7 @@ static void		fork_that(char **cmd, char *here)
 		write_to_pipe(here, pipe_fd);
 }
 
-void				here_doc(char **cmd)
+void			here_doc(char **cmd)
 {
 	char	**swap;
 	char	**new_cmd;

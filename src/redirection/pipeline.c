@@ -17,6 +17,7 @@
 
 #include "redirection.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 extern pid_t	g_pid2;
 

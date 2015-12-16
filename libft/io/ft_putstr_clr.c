@@ -20,6 +20,8 @@
 
 void			ft_putstr_clr(char *s, char *clr)
 {
+	if (!s)
+		return ;
 	if (*clr == 'r')
 		write(1, "\033[31;01m", 8);
 	else if (*clr == 'g')

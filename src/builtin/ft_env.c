@@ -15,6 +15,7 @@
 */
 
 #include "builtin.h"
+#include <stdlib.h>
 
 void			print_env(char **envp)
 {

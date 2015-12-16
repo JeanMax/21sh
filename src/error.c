@@ -20,20 +20,19 @@
 #include <stdlib.h>
 
 //I'm pretty sure there is another way...
-static int  get_index(t_int flag)
+static int		get_index(t_int flag)
 {
-    int index;
+	int		index;
 
-    index = 0;
-    while ((flag /= 2))
-        index++;
-    return (index - 1);
+	index = 0;
+	while ((flag /= 2))
+		index++;
+	return (index - 1);
 }
 
-void		error(t_int flag, char *msg)
+void			error(t_int flag, char *msg)
 {
-	const char	*error[] =
-	{
+	const char	*error[] = {
 		"21sh: command not found: ",
 		"21sh: no such file or directory: ",
 		"21sh: can't make file: ",

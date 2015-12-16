@@ -32,7 +32,6 @@ void			prompt(void)
 	ft_putstr_clr(env1 ? env1 + 5 : "marvin", "red");
 	ft_putstr_clr("@21sh", "yellow");
 	ft_putchar_clr(':', "white");
-
 	if (!(env1 = get_env("PWD"))) //berk
 		ft_putendl_clr("TheVoid", "green");
 	else if (!(env2 = get_env("HOME")))
@@ -44,14 +43,10 @@ void			prompt(void)
 	}
 	else
 		ft_putendl_clr(env1 + 4, "green");
-
 	ft_putstr_clr("> ", "green");
-
-	/* i += ft_strnstr(pwd, "/private/", 9) ? 8 : 0; */
-	/* i += ft_strnstr(pwd, "/Volumes/Data/", 14) ? 13 : 0; */
 }
 
-static void	do_something_with_line(char *line)
+static void		do_something_with_line(char *line)
 {
 	char		**swap;
 	char		**cmd_arr;
@@ -72,8 +67,8 @@ static void	do_something_with_line(char *line)
 
 void			prompt_loop(void)
 {
-	char		*line;
 	t_bool		(*read_it)(char **);
+	char		*line;
 
 	line = NULL;
 	read_it = (!isatty(STDIN_FILENO) || !get_env("TERM") || \
@@ -84,7 +79,6 @@ void			prompt_loop(void)
 			do_something_with_line(line);
 		exit(EXIT_SUCCESS);
 	}
-
 	prompt();
 	while (read_it(&line))
 	{

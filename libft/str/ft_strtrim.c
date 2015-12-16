@@ -33,12 +33,11 @@ char	*ft_strtrim(char const *s)
 	if (!*s)
 		return (ft_strnew(1));
 	len = ft_strlen(s) - 1;
-	while (*s && (ft_isblank(s[len]) || s[len] == '\n'))
+	while (*s != s[len] && (ft_isblank(s[len]) || s[len] == '\n'))
 		len--;
-	swap = ft_strnew(len);
-	if (!swap)
+	if (!(swap = ft_strnew(len + 1)))
 		return (NULL);
-	swap = ft_strncpy(swap, s, len + 1);
+	swap = ft_memcpy(swap, s, len + 1);
 	swap[len + 1] = '\0';
 	return (swap);
 }

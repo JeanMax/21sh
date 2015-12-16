@@ -15,7 +15,7 @@
 */
 
 #include "redirection.h"
-#include <wait.h>
+#include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
 

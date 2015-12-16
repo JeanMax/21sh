@@ -13,45 +13,30 @@
 /*
 ** The atoi() function converts the initial portion of the string  pointed
 ** to by nptr to int.
+** If the string cannot be converted into a number, atoi returns 0.
+** If the string represents a numeric value greater/lower than INT_MAX/MIN,
+** INT_MAX/MIN will be returned
 */
 
 #include "libft.h"
 
-static int		count_digit(char *str)
-{
-	char	*tmp;
-
-	if (!str)
-		return (FALSE);
-	tmp = str;
-	while (*tmp && ft_isdigit(*tmp))
-		tmp++;
-	return (int)(tmp - str);
-}
-
 int				ft_atoi(char *str)
 {
-	int		sign;
-	int		num;
+	t_bool	negative;
+	long	ret;
 
-	sign = -1;
 	while (ft_isspace(*str))
 		str++;
-	if (*str == '-')
-		sign = 0;
+	negative = *str == '-' ? TRUE : FALSE;
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str && *str == '0')
 		str++;
-	if (count_digit(str) > 10)
-		return (sign);
-	num = 0;
-	while (*str && ft_isdigit(*str))
-	{
-		num = num * 10 + *str - '0';
-		str++;
-	}
-	if (!sign)
-		num = -num;
-	return (num);
+	ret = 0;
+	while (*str && ft_isdigit(*str) && ret < INT_MAX)
+		ret = ret * 10 + *(str++) - '0';
+	if (negative)
+		return (ret > INT_MAX ? INT_MIN : (int)-ret);
+	else
+		return (ret > INT_MAX ? INT_MAX : (int)ret);
 }

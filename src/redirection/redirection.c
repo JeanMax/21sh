@@ -16,65 +16,8 @@
 
 #include "redirection.h"
 
-/*
-	static int		need_space(char **cmd)
-	{
-	char		*s;
-
-	while (*cmd)
-	{
-	s = *cmd;
-	while (*(s + 1))
-	{
-	if (((*s == '>' || *s == '<' || *s == '|' || *s == '&')\
-	&& (*(s + 1) != '>' && *(s + 1) != '<' && *(s + 1) != '|' \
-	&& *(s + 1) != '&')) || ((*s != '>' && *s != '<' && *s != '|'\
-	&& *s != '&') && (*(s + 1) == '>' || *(s + 1) == '<'\
-	|| *(s + 1) == '|' || *(s + 1) == '&')))
-	return (1);
-	s++;
-	}
-	cmd++;
-	}
-	return (0);
-	}
-
-	static char		**check_cmd(char **c)
-	{
-	if (!need_space(c))
-	return (c);
-	return (spaces_error(c));
-	}
-	void			redirect(char **c, int i)
-	{
-	char		free;
-
-	free = need_space(c) ? 1 : 0;
-	c = check_cmd(c);
-	while (c[++i])
-	if (ft_strchr(c[i], '>'))
-	{
-	(!ft_strcmp(c[i], ">>&")) ? error_d_right(c) : (void)0;
-	(!ft_strcmp(c[i], ">&")) ? error_s_right(c) : (void)0;
-	(!ft_strcmp(c[i], ">>")) ? doble_right(c) : simple_right(c);
-	break ;
-	}
-	else if (ft_strchr(c[i], '<'))
-	{
-	ft_strstr(c[i], "<<") ? doble_left(c) : simple_left(c);
-	break ;
-	}
-	else if (ft_strchr(c[i], '|'))
-	{
-	ft_strstr(c[i], "|&") ? error_pipe(c) : simple_pipe(c);
-	break ;
-	}
-	free ? ft_arrdel(&c) : (void)0;
-	}
-*/
-
 /* debug */
-void	debug_arr(char **cmd)
+void			debug_arr(char **cmd)
 {
 	char	*s;
 
@@ -114,7 +57,7 @@ void	debug_arr(char **cmd)
 
 /*
 ** get fd from a string
-** will try atoi and check if fd valid, otherwise will open s as a filename
+** will try atoi and check if fd valid
 */
 static int		get_fd(char *s)//, int open_flag)
 {
@@ -128,15 +71,10 @@ static int		get_fd(char *s)//, int open_flag)
 		return (-1);
 	fd = ft_atoi(s);
 	return (fcntl(fd, F_GETFD) ? -1 : fd);
-/*
-	if (!open_flag)
-	return (-1);
-	return (open(s, open_flag, 0664));
-*/
 }
 
  //TODO:rename
-void		do_redirect(char **cmd, enum e_replacement c, int o_flag,	\
+void			do_redirect(char **cmd, enum e_replacement c, int o_flag, \
 						void (*do_stuff_with_cmd_and_fd_now)(char **, int, int))
 {
 	int		fd_left;
@@ -215,8 +153,7 @@ static int		got_redirection(char **cmd)
 t_bool			exec_redirection(char **cmd)
 {
 	int		redirection_index;
-	void	(*f[])(char **) =
-		{
+	void	(*f[])(char **) = {  //not norm-friendly...
 			output_redirect,
 			output_append_redirect,
 			input_redirect,
@@ -224,7 +161,7 @@ t_bool			exec_redirection(char **cmd)
 			here_doc,
 			dup_input,
 			dup_output
-		};
+	};
 
 	if ((redirection_index = got_redirection(cmd)))
 	{

@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_arrdel.c                                        :+:      :+:    :+:   */
+/*   ft_bstrotright.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/13 22:13:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/13 22:50:02 by mcanal           ###   ########.fr       */
+/*   Created: 2015/11/29 00:22:39 by mcanal            #+#    #+#             */
+/*   Updated: 2015/12/03 17:48:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Free a char * tab
-** assume a NULL pointer has been allocated at the end
+** right rotate tree
+**      y                            x
+**     / \     Right Rotation       / \
+**    x   c   – – – – – – – >      a   y
+**   / \      < - - - - - - -     /     \
+**  a   b      Left Rotation     b       c
 */
 
 #include "libft.h"
 
-static void	del_loop(char **arr)
+t_bst	*ft_bstrotright(t_bst *y)
 {
-	if (*arr)
-		del_loop(arr + 1);
-	ft_memdel((void *)arr);
-}
+	t_bst	*x;
+	t_bst	*b;
 
-void		ft_arrdel(char ***arr)
-{
-	if (*arr)
-		del_loop(*arr);
-	ft_memdel((void *)arr);
+	x = y->left;
+	b = x->right;
+	x->right = y;
+	y->left = b;
+	return (x);
 }
