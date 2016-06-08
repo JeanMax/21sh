@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/01 10:52:21 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:28:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int				main(int ac, char **av)
 {
 	(void)av;
 	if (ac > 1)
-		error(E_ARG | E_NOEXIT, NULL); /* debug */
+		error(E_ARG, NULL);
 	init();
 	prompt_loop();
 	ft_putendl("exit");

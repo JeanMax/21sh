@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 18:33:03 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:38:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ void			error(t_int flag, char *msg)
 	else
 		failn(error[get_index(flag & (t_int)~E_NOEXIT)]);
 	if (!(flag & E_NOEXIT))
-		exit(EXIT_FAILURE); //TODO: restore term?
+		exit(EXIT_FAILURE);
 }

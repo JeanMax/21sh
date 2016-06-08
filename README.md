@@ -9,11 +9,12 @@ FISH inside!
 ### TODO: ###
 
 * clean the global var
-* handle 'real' copy/paste
 * rename env builtin and/or env utils
+* prevent crash if too many pipes given (or any other redirects?)
 
 ### BONUS: ###
 
+* handle 'real' copy/paste
 * historic search
 * completion
 * .21shrc

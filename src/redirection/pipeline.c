@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 05:38:56 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 14:27:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:13:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void		fork_that(char **cmd1, char **cmd2)
 {
 	int			pipe_fd[2];
 
-	/* debug_arr(cmd1);				/\* debug *\/ */
-	/* debug_arr(cmd2);				/\* debug *\/ */
 	if (pipe(pipe_fd) < 0)
 		error(E_PIPE, NULL);
 	if ((g_pid = fork()) < 0)

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/01 10:48:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:27:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void			prompt(void)
 	ft_putstr_clr(env1 ? env1 + 5 : "marvin", "red");
 	ft_putstr_clr("@21sh", "yellow");
 	ft_putchar_clr(':', "white");
-	if (!(env1 = get_env("PWD"))) //berk
+	if (!(env1 = get_env("PWD")))
 		ft_putendl_clr("TheVoid", "green");
 	else if (!(env2 = get_env("HOME")))
 		ft_putendl_clr(env1 + 4, "green");
@@ -57,7 +57,6 @@ static void		do_something_with_line(char *line)
 	while (*swap)
 		if ((cmd = ft_strsplit(*(swap++), S_WORD)))
 		{
-			/* debug_arr(cmd);		/\* debug *\/ */
 			exec_cmd(cmd);
 			ft_arrdel(&cmd);
 		}

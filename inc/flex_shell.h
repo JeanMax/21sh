@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 10:46:26 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:33:47 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,15 @@ t_bool					exec_builtin(char **cmd);
 
 /*
 ** LINE EDIT
-** read_stdin.c
+** read_tty.c
 */
 t_bool					read_tty(char **line);
-t_bool					read_notty(char **line);
 t_bool					read_tty_brute(char **line);
+
+/*
+** read_notty.c
+*/
+t_bool					read_notty(char **line);
 t_bool					read_notty_brute(char **line);
 
 /*

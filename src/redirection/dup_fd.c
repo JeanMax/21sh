@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 02:05:09 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 15:13:37 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 16:21:11 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,25 @@ void			dup_exec(char **cmd, int *pipe_fd, int fd_left)
 	exec_cmd(cmd);
 	dup2(save_fd, fd_left);
 	close(save_fd);
-	/* debug_arr(cmd);				/\* debug *\/ */
-	/* ft_debugnbr("pid", g_pid);	/\* debug *\/ */
-	/* ft_debugnbr("fd", fd_left);	/\* debug *\/ */
 	fd_left == STDOUT_FILENO ? (void)wait(NULL) : exit(EXIT_SUCCESS);
 }
 
-static void		just_dup_it(char **cmd, int default_left_fd)
+static void		just_dup_it(char **cmd, int fd_left, int fd_right)
+{
+	int		fd_save;
+
+	fd_save = dup(fd_left);
+	fd_right == -42 ? close(fd_left) : dup2(fd_right, fd_left);
+	exec_cmd(cmd);
+	dup2(fd_save, fd_left);
+	close(fd_save);
+}
+
+static void		dup_it(char **cmd, int default_left_fd)
 {
 	char	**swap;
 	int		fd_left;
 	int		fd_right;
-	int		fd_save;
 
 	fd_left = -1;
 	fd_right = -1;
@@ -59,26 +66,19 @@ static void		just_dup_it(char **cmd, int default_left_fd)
 			fd_right = -42;
 		ft_arrdelone(cmd, *swap);
 	}
-	if (fd_left == -1 || fd_right == -1 || fd_left == fd_right)
-	{
+	if (fd_left != -1 && fd_right != -1 && fd_left != fd_right)
+		just_dup_it(cmd, fd_left, fd_right);
+	else
 		failn("21sh: Invalid file descriptor.");
-		ft_arrdel(&cmd);
-		return ;
-	}
-	fd_save = dup(fd_left);
-	fd_right == -42 ? close(fd_left) : dup2(fd_right, fd_left);
-	exec_cmd(cmd);
-	dup2(fd_save, fd_left);
-	close(fd_save);
 	ft_arrdel(&cmd);
 }
 
 void			dup_input(char **cmd)
 {
-	just_dup_it(ft_arrdup(cmd), STDIN_FILENO);
+	dup_it(ft_arrdup(cmd), STDIN_FILENO);
 }
 
 void			dup_output(char **cmd)
 {
-	just_dup_it(ft_arrdup(cmd), STDOUT_FILENO);
+	dup_it(ft_arrdup(cmd), STDOUT_FILENO);
 }

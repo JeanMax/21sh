@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 18:41:55 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 17:29:12 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,30 @@ struct					s_cursor
 
 /*
 ** LINE EDIT
-** read_stdin.c
+** read.c
 */
 enum e_status			do_stuff_with_key(char *buf);
+char					*read_loop(char *buf, enum e_status status);
+
+/*
+** print_line.c
+*/
+enum e_status			print_line(void);
+
+/*
+** to_string.c
+*/
+char					*to_string(void);
 
 /*
 ** cursor.c
 */
-void					print_line(void);
+t_lst					*cp(t_lst *link);
 t_cursor				*get_cursor(void);
 void					clean_cursor(void);
-char					*to_string(void);
 
 /*
 ** term.c
-*/
-/*
-	struct termios	*get_old_term(void);
-	void			default_term(void);
-	void			raw_term(void);
 */
 int						get_cursor_col(void);
 void					switch_term(void);
@@ -112,6 +117,10 @@ enum e_status			move_left(char *buf);
 enum e_status			move_right(char *buf);
 enum e_status			move_down(char *buf);
 enum e_status			move_up(char *buf);
+
+/*
+** move_cursor_far.c
+*/
 enum e_status			move_begin(char *buf);
 enum e_status			move_end(char *buf);
 enum e_status			move_next_word(char *buf);
@@ -126,10 +135,13 @@ void					clear_line(void);
 /*
 ** insert.c
 */
-t_lst					*cp(t_lst *link); //TODO: move
 enum e_status			insert(char *s);
 enum e_status			backspace(char *buf);
 enum e_status			del(char *buf);
+
+/*
+** copy_paste.c
+*/
 enum e_status			copy(char *buf);
 enum e_status			cut_forward(char *buf);
 enum e_status			cut_backward(char *buf);
