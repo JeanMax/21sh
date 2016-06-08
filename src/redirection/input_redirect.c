@@ -6,12 +6,12 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 06:13:54 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 20:13:30 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 11:00:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** input redirection (<) handler
+** input redirection ([n]<) handler
 ** usage : "cmd < file"
 */
 
@@ -20,7 +20,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-extern pid_t	g_pid2;
+extern pid_t	g_pid;
 
 static void		write_to_pipe(int *pipe_fd, int fd_right)
 {
@@ -45,9 +45,9 @@ static void		fork_that(char **cmd, int fd_left, int fd_right)
 
 	if (pipe(pipe_fd) < 0)
 		error(E_PIPE, NULL);
-	if ((g_pid2 = fork()) < 0)
+	if ((g_pid = fork()) < 0)
 		error(E_FORK, NULL);
-	else if (!g_pid2)
+	else if (!g_pid)
 		dup_exec(cmd, pipe_fd, fd_left);
 	else
 		write_to_pipe(pipe_fd, fd_right);

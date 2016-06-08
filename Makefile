@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/15 07:20:52 by mcanal           ###   ########.fr        #
+#    Updated: 2016/06/08 14:21:06 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -39,7 +39,7 @@ DEPS =  $(OBJS:%.o=%.d)
 LIB =		libft/libft.a
 TERMCAPS =	-lncurses
 I_DIR =		-I./libft/inc/ -I./inc/
-MAKE =		make
+MAKE =		make -j
 RM =		rm -rf
 MKDIR =		mkdir -p
 CC =		clang
@@ -59,7 +59,7 @@ all:
 
 debug:
 	@$(MAKE) -C libft debug
-	@$(MAKE) $(NAME) "CFLAGS = -g -ggdb -O2"
+	@$(MAKE) $(NAME) "CFLAGS = -g -ggdb"
 
 sanitize:
 	@$(MAKE) -C libft sanitize

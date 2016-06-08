@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:21:04 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 08:26:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/07 11:48:26 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,11 @@ void				pipeline(char **cmd);
 ** here_doc.c
 */
 void				here_doc(char **cmd);
+
+/*
+** redirection.c
+*/
+int					get_fd(char *s);
+int					is_redirection(char *s);
 
 #endif

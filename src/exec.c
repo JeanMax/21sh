@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 21:32:33 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 20:09:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 14:13:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-extern pid_t	g_pid1;
-extern pid_t	g_pid2;
+extern pid_t	g_pid;
 
 static void		fork_it(char **cmd)
 {
@@ -31,9 +30,9 @@ static void		fork_it(char **cmd)
 	tmp = ft_strjoin("_=", bin);
 	set_env(tmp);
 	ft_memdel((void *)&tmp);
-	if ((g_pid2 = fork()) < 0)
+	if ((g_pid = fork()) < 0)
 		error(E_FORK, NULL);
-	else if (!g_pid2)
+	else if (!g_pid)
 	{
 		envp = get_env_struct()->envp;
 		if (bin && !access(bin, X_OK) && execve(bin, cmd, envp))
@@ -42,6 +41,7 @@ static void		fork_it(char **cmd)
 	}
 	else
 		wait(NULL);
+	g_pid = 0;
 }
 
 void			exec_cmd(char **cmd)

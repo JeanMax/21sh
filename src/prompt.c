@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 20:14:53 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/01 10:48:16 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-extern pid_t	g_pid1; //TODO: clean these
-extern pid_t	g_pid2; //TODO: clean these
+extern pid_t	g_pid;
 
 void			prompt(void)
 {
@@ -83,7 +82,6 @@ void			prompt_loop(void)
 	while (read_it(&line))
 	{
 		ft_putendl("");
-		g_pid1 = g_pid2;
 		do_something_with_line(line);
 		prompt();
 	}

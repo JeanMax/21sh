@@ -9,12 +9,11 @@ FISH inside!
 ### TODO: ###
 
 * clean the global var
-* prompt not printed after SIGINT if... well that happens sometimes
+* handle 'real' copy/paste
 * rename env builtin and/or env utils
 
 ### BONUS: ###
 
-* handle 'real' copy/paste
 * historic search
 * completion
 * .21shrc

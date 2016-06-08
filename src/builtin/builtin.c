@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:00:25 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 00:21:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/03 14:10:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@
 static int		is_builtin(char *cmd)
 {
 	int			i;
-	const char	*built_name[] = \
-		{ "exit", "env", "setenv", "unsetenv", "cd", NULL };
+	const char		*built_name[] = {
+		"exit",
+		"env",
+		"setenv",
+		"unsetenv",
+		"cd",
+		NULL
+	};
 
 	i = 0;
 	while (built_name[i] && cmd && ft_strcmp(built_name[i], cmd))
@@ -34,9 +40,13 @@ t_bool			exec_builtin(char **cmd)
 {
 	int			built_index;
 	char		*tmp;
-	void		(*builtin[])(char **) = {
-		ft_exit, ft_env, ft_setenv, ft_unsetenv, ft_cd
-	}; //not norm-friendly
+	void		(* const builtin[])(char **) = {
+		ft_exit,
+		ft_env,
+		ft_setenv,
+		ft_unsetenv,
+		ft_cd
+	};
 
 	if (!(built_index = is_builtin(*cmd)))
 		return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 12:14:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/01 10:52:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 #include "line_edit.h"
 #include <signal.h> //works without...
 
-pid_t				g_pid1; //TODO: move to header / delete
-pid_t				g_pid2;
+pid_t				g_pid;
 
 static void		inc_shlvl(void)
 {
@@ -45,10 +44,9 @@ static void		sig_handl(int sig)
 		move_end(NULL);
 		clean_cursor();
 		ft_putendl("");
-//		ft_putstr("\b \b\b \b\n");
-		if (g_pid1 == g_pid2 || (!g_pid1 && !g_pid2)) //TODO...
+		/* ft_putstr("\b \b\b \b\n"); */
+		if (!g_pid)
 			prompt();
-		g_pid1 = g_pid2; //TODO...
 	}
 	else if (sig == SIGWINCH)
 	{

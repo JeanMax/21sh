@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 11:01:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/01 10:16:56 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-extern pid_t	g_pid2;
+extern pid_t	g_pid;
 
 static void		get_text(char **text, char *here, t_bool (*read_it)(char **))
 {
@@ -42,6 +42,7 @@ static void		get_text(char **text, char *here, t_bool (*read_it)(char **))
 		ft_strcat(*text, tmp);
 		ft_memdel((void *)&tmp);
 	}
+	ft_memdel((void *)&buf);
 	if (isatty(STDIN_FILENO))
 		ft_putchar('\n');
 }
@@ -69,9 +70,9 @@ static void		fork_that(char **cmd, char *here)
 
 	if (pipe(pipe_fd) < 0)
 		error(E_PIPE, NULL);
-	if ((g_pid2 = fork()) < 0)
+	if ((g_pid = fork()) < 0)
 		error(E_FORK, NULL);
-	else if (!g_pid2)
+	else if (!g_pid)
 		dup_exec(cmd, pipe_fd, STDIN_FILENO);
 	else
 		write_to_pipe(here, pipe_fd);

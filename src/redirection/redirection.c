@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 20:59:31 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 07:28:57 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 14:17:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void			debug_arr(char **cmd)
 				ft_putchar(*s);
 			s++;
 		}
-		ft_putchar_clr('|', "red");
+		/* ft_putchar_clr('|', "red"); */
+		ft_putchar('|');
 		cmd++;
 	}
 	ft_putchar('\n');
@@ -59,13 +60,13 @@ void			debug_arr(char **cmd)
 ** get fd from a string
 ** will try atoi and check if fd valid
 */
-static int		get_fd(char *s)//, int open_flag)
+int				get_fd(char *s)//, int open_flag)
 {
 	int		fd;
 
 	if (!s)
 		return (-1);
-	while (*s && (!ft_isdigit(*s) || *s != '-'))
+	while (*s && !ft_isdigit(*s) && *s != '-')
 		s++;
 	if (!*s)
 		return (-1);
@@ -103,7 +104,7 @@ void			do_redirect(char **cmd, enum e_replacement c, int o_flag, \
 	do_stuff_with_cmd_and_fd_now(cmd, fd_left, fd_right);
 }
 
-static int		is_redirection(char *s)
+int				is_redirection(char *s)
 {
 	char	*ret;
 
@@ -118,6 +119,28 @@ static int		is_redirection(char *s)
 	return (FALSE);
 }
 
+static int		got_pipe_after_dup(char **cmd)
+{
+	t_bool	got_dup;
+
+	got_dup = FALSE;
+	while (*cmd)
+	{
+		if (ft_strchr(*cmd, R_PIPELINE))
+		{
+			if (got_dup)
+				return (TRUE);
+		}
+		else if ((ft_strchr(*cmd, R_DUP_INPUT) \
+				|| ft_strchr(*cmd, R_DUP_OUTPUT)))
+			got_dup = TRUE;
+		else if (is_redirection(*cmd))
+			return (FALSE);
+		cmd++;
+	}
+	return (FALSE);
+}
+
 static int		got_redirection(char **cmd)
 {
 	int	ret;
@@ -127,6 +150,8 @@ static int		got_redirection(char **cmd)
 		failn("21sh: Invalid null command.");
 		return (-1);
 	}
+	if (got_pipe_after_dup(cmd))
+		return (R_PIPELINE);
 	while (*(++cmd))
 		if ((ret = is_redirection(*cmd)))
 		{
@@ -153,7 +178,7 @@ static int		got_redirection(char **cmd)
 t_bool			exec_redirection(char **cmd)
 {
 	int		redirection_index;
-	void	(*f[])(char **) = {  //not norm-friendly...
+	void	(* const f[])(char **) = {
 			output_redirect,
 			output_append_redirect,
 			input_redirect,

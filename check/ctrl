@@ -10,6 +10,7 @@ tototo=to
 auteur
 check
 .git
+.gitignore
 inc
 libft
 Makefile
@@ -41,5 +42,31 @@ mcanal$
 hey youpla boum
 tsoin tsoin
 bye
+ls: cannot access erlmgk: No such file or directory$
+.:$
+21sh$
+auteur$
+check$
+inc$
+libft$
+Makefile$
+obj$
+README.md$
+src$
+ls: cannot access erlmgk: No such file or directory
+.:
+21sh
+auteur
+check
+inc
+libft
+Makefile
+obj
+README.md
+src
+ls: cannot access ezgge: No such file or directory
+ls: cannot access ezgge: No such file or directory
+ls: cannot access ezgge: No such file or directory
+mcanal$
 exit
 42

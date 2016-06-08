@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 05:38:56 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/15 08:36:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/08 14:27:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-extern pid_t	g_pid2;
+extern pid_t	g_pid;
 
 static void		fork_that(char **cmd1, char **cmd2)
 {
 	int			pipe_fd[2];
 
+	/* debug_arr(cmd1);				/\* debug *\/ */
+	/* debug_arr(cmd2);				/\* debug *\/ */
 	if (pipe(pipe_fd) < 0)
 		error(E_PIPE, NULL);
-	if ((g_pid2 = fork()) < 0)
+	if ((g_pid = fork()) < 0)
 		error(E_FORK, NULL);
-	else if (!g_pid2)
+	else if (!g_pid)
 		dup_exec(cmd2, pipe_fd, STDIN_FILENO);
 	else
 		dup_exec(cmd1, pipe_fd, STDOUT_FILENO);
