@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 16:41:47 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/13 22:12:22 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:18:29 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ t_env			*get_env_struct(void)
 	return (&e);
 }
 
-//alias getenv... return the adress of the pointer to the begin of the smurf
-// to_find = "SMURF"		->	"SMURF=ETTE"
-// to_find = "SMURF=ETTE"	->	"SMURF=ETTE"
+/*
+** alias getenv... return the adress of the pointer to the begin of the smurf
+** to_find = "SMURF"		->	"SMURF=ETTE"
+** to_find = "SMURF=ETTE"	->	"SMURF=ETTE"
+*/
 char			**arr_find(char **arr, char *to_find)
 {
 	char	*s1;

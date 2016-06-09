@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   get_history.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 18:09:23 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 10:02:24 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,94 +16,6 @@
 
 #include "line_edit.h"
 #include <unistd.h>
-
-//TODO: norme
-static t_bool			got_mismatch(t_lst *link) //TODO: check the to_string instead
-{
-	int	quote; //TODO: array for norm?
-	int	d_quote;
-	int	b_quote;
-	int	bracket;
-	int	c_bracket;
-	int	r_bracket;
-
-	quote = 0;
-	d_quote = 0;
-	b_quote = 0;
-	bracket = 0;
-	c_bracket = 0;
-	r_bracket = 0;
-	while (link)
-	{
-		if (*(char *)link->content == '\'')
-			quote++;
-		else if (*(char *)link->content == '"')
-			d_quote++;
-		else if (*(char *)link->content == '`')
-			b_quote++;
-		else if (*(char *)link->content == '[')
-			bracket++;
-		else if (*(char *)link->content == '{')
-			c_bracket++;
-		else if (*(char *)link->content == '(')
-			r_bracket++;
-		else if (*(char *)link->content == ']')
-			bracket--;
-		else if (*(char *)link->content == '}')
-			c_bracket--;
-		else if (*(char *)link->content == ')')
-			r_bracket--;
-
-		if (bracket < 0 || c_bracket < 0 || r_bracket < 0) //can't be solved...
-			return (TRUE);
-		link = link->next;
-	}
-
-	if (bracket || c_bracket || r_bracket \
-		|| quote % 2 || d_quote % 2 || b_quote % 2)
-	{
-		move_end(NULL);
-		ft_putendl("");
-		if (bracket)
-			ft_putendl_clr(bracket > 0 ? "\tUnclosed [." : "\tUnclosed ].", "r");
-		if (c_bracket)
-			ft_putendl_clr(c_bracket > 0 ? "\tUnclosed {." : "\tUnclosed }.", "r");
-		if (r_bracket)
-			ft_putendl_clr(c_bracket > 0 ? "\tUnclosed (." : "\tUnclosed ).", "r");
-
-		if (quote % 2)
-			ft_putendl_clr("\tMismatched '.", "r");
-		if (d_quote % 2)
-			ft_putendl_clr("\tMismatched \".", "r");
-		if (b_quote % 2)
-			ft_putendl_clr("\tMismatched `.", "r");
-
-		return (TRUE);
-	}
-
-	return (FALSE);
-}
-
-enum e_status			set_history(char *buf)
-{
-	t_cursor	*c;
-
-	if (memcmp(buf, K_RETURN, KEY_BUF_SIZE))
-		return (KEEP_TRYING);
-
-	c = get_cursor();
-	if (got_mismatch(c->first_l))
-	{
-		c->current_l = NULL;
-		c->prompt_len = 0;
-		print_line();
-		move_end(NULL);
-		return (KEEP_READING);
-	}
-	if (c->first_l)
-		ft_ladd(&c->history, ft_lnew((void *)c->first_l, sizeof(t_lst)));
-	return (CMD_DONE);
-}
 
 static t_lst			*get_history_up(t_cursor *c, \
 										t_lst *history, t_lst *line_save)

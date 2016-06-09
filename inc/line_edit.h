@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 17:29:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:14:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 /*
 ** include
 */
-# include <termios.h>//(works without...)
+# include <termios.h>
 # include <term.h>
 # include <curses.h>
 # include <sys/ioctl.h>
@@ -57,7 +57,7 @@
 /*
 ** enum
 */
-enum					e_status //TODO: rename
+enum					e_status
 {
 	KEEP_TRYING,
 	KEEP_READING,
@@ -68,7 +68,7 @@ enum					e_status //TODO: rename
 /*
 ** struct def
 */
-typedef struct s_cursor	t_cursor; //TODO: rename
+typedef struct s_cursor	t_cursor;
 struct					s_cursor
 {
 	size_t	prompt_len;
@@ -148,9 +148,13 @@ enum e_status			cut_backward(char *buf);
 enum e_status			paste(char *buf);
 
 /*
-** history.c
+** get_history.c
+*/
+enum e_status			get_history(char *buf);
+
+/*
+** set_history.c
 */
 enum e_status			set_history(char *buf);
-enum e_status			get_history(char *buf);
 
 #endif

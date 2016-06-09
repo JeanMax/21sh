@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:00:25 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/03 14:10:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:16:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 #include "builtin.h"
 
-//return 0 if it's not, otherwise return the index + 1
+/*
+** return 0 if it's not, otherwise return the index + 1
+*/
 static int		is_builtin(char *cmd)
 {
 	int			i;
@@ -35,7 +37,9 @@ static int		is_builtin(char *cmd)
 	return (built_name[i] && cmd ? i + 1 : FALSE);
 }
 
-//return true and exec builtin if it was a builtin, otherwise return false
+/*
+** return true and exec builtin if it was a builtin, otherwise return false
+*/
 t_bool			exec_builtin(char **cmd)
 {
 	int			built_index;

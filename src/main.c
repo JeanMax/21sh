@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:28:10 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:15:58 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 ** this is the main...
 */
 
-/* #include "flex_shell.h" */
 #include "line_edit.h"
-#include <signal.h> //works without...
+#include <signal.h>
 
 pid_t				g_pid;
 
@@ -44,7 +43,6 @@ static void		sig_handl(int sig)
 		move_end(NULL);
 		clean_cursor();
 		ft_putendl("");
-		/* ft_putstr("\b \b\b \b\n"); */
 		if (!g_pid)
 			prompt();
 	}

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:25:22 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:25:56 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:14:02 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			do_redirect(char **cmd, enum e_replacement c, int o_flag, \
 		*tmp = 0;
 	}
 	if ((fd_right = open(*(++swap), o_flag, 0664)) == -1)
-		error(E_OPEN | E_NOEXIT, *swap); //TODO
+		error(E_OPEN | E_NOEXIT, *swap);
 	if (*tmp || tmp == *(swap - 1))
 	{
 		tmp = *swap;

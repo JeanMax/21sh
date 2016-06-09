@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:33:47 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:15:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /*
 ** include
 */
-# include <time.h> //t_env + bin.c
+# include <time.h>
 # include "libft.h"
 
 /*
@@ -32,7 +32,7 @@
 */
 enum					e_error
 {
-	E_NOERROR = 0, //wtf...
+	E_NOERROR = 0,
 	E_NOEXIT = (1 << 0),
 	E_CMDNOTFOUND = (1 << 1),
 	E_NOSUCHFILE = (1 << 2),

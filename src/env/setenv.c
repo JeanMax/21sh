@@ -6,16 +6,18 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:14:10 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/13 21:20:56 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 11:17:42 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include <stdlib.h>
 
-//alias setenv... won't check if to_add is well formated
-//should be used with to_add = "SMURF=ETTE"
-//to_add will be strdup'ed
+/*
+** alias setenv... won't check if to_add is well formated
+** should be used with to_add = "SMURF=ETTE"
+** to_add will be strdup'ed
+*/
 static char		**arr_add(char **arr, char *to_add)
 {
 	char		**cpy;
