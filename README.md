@@ -10,7 +10,6 @@ FISH inside!
 
 * clean the global var
 * rename env builtin and/or env utils
-* prevent crash if too many pipes given (or any other redirects?)
 
 ### BONUS: ###
 

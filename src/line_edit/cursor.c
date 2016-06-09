@@ -6,13 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 17:02:17 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 12:02:43 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edit.h"
 
-t_lst				*cp(t_lst *link)
+t_lst			*cp(t_lst *link)
 {
 	return (link);
 }

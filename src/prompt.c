@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:27:40 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 12:00:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** split line in a tab (space and tab as separators, handle; " and ')
 */
 
-#include "flex_shell.h"
+#include "line_edit.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -51,7 +51,8 @@ static void		do_something_with_line(char *line)
 	char		**cmd_arr;
 	char		**cmd;
 
-	if (!line || !(cmd_arr = ft_strsplit(line, S_LINE)))
+	if (!line || ft_strlen(line) > LINE_SIZE \
+			|| !(cmd_arr = ft_strsplit(line, S_LINE)))
 		return ;
 	swap = cmd_arr;
 	while (*swap)

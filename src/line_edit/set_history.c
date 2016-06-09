@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 10:02:01 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:16:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/06/09 12:05:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ enum e_status			set_history(char *buf)
 	}
 	if (c->first_l)
 		ft_ladd(&c->history, ft_lnew((void *)c->first_l, sizeof(t_lst)));
+	move_end(NULL);
 	return (CMD_DONE);
 }
