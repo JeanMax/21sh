@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2016/06/09 10:03:41 by mcanal           ###   ########.fr        #
+#    Updated: 2016/06/10 18:22:28 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -45,7 +45,7 @@ I_DIR =		-I./libft/inc/ -I./inc/
 MAKE =		make -j
 RM =		rm -rf
 MKDIR =		mkdir -p
-CC =		clang
+CC =		$(shell clang --version >/dev/null 2>&1 && echo clang || echo gcc)
 CFLAGS =	-Wall -Wextra -Werror -O2
 
 WHITE =	\033[37;01m

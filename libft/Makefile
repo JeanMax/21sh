@@ -6,16 +6,17 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2015/12/15 02:27:24 by mcanal           ###   ########.fr        #
+#    Updated: 2016/06/10 11:10:35 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME =	libft.a
+NAME =		libft.a
 
-CC =	clang
-AR =	ar -rcs
-RM =	rm -rf
-MKDIR =	mkdir -p
+CC =		$(shell clang --version >/dev/null 2>&1 && echo clang || echo gcc)
+AR =		ar
+ARFLAGS =	-rcs
+RM =		rm -rf
+MKDIR =		mkdir -p
 
 I_DIR =	-I inc/
 O_DIR =	obj
@@ -27,6 +28,31 @@ CFLAGS =	-Wall -Wextra -Werror -Wpedantic -Wshadow -Wcast-align \
 			-Wstrict-overflow=5 -Waggregate-return -Wunreachable-code \
 			-Winit-self -Wold-style-definition -Wpadded -Wredundant-decls -O2 
 #-Wcast-qual
+
+ifeq ($(OS), Windows_NT)
+  CCFLAGS += -D WIN32
+  ifeq ($(PROCESSOR_ARCHITECTURE), AMD64)
+    CCFLAGS += -D AMD64
+  else ifeq ($(PROCESSOR_ARCHITECTURE), x86)
+    CCFLAGS += -D IA32
+  endif
+else
+  UNAME_S = $(shell uname -s)
+  ifeq ($(UNAME_S), Linux)
+    CCFLAGS += -D LINUX
+  else ifeq ($(UNAME_S), Darwin)
+    CCFLAGS += -D OSX
+  endif
+  UNAME_P = $(shell uname -p)
+  ifeq ($(UNAME_P), x86_64)
+    CCFLAGS += -D AMD64
+  else ifneq ($(filter %86, $(UNAME_P)), )
+    CCFLAGS += -D IA32
+  else ifneq ($(filter arm%, $(UNAME_P)), )
+    CCFLAGS += -D ARM
+  endif
+endif
+
 C_BST =		ft_bstnew.c			ft_bstfree.c		ft_bstclean.c		\
 			ft_bstfind.c		ft_bstadd.c			ft_bstdel.c			\
 			ft_bstmax.c			ft_bstmin.c			ft_bstinorder.c		\
@@ -105,15 +131,15 @@ sanitize: $(NAME)
 -include $(DEPS)
 
 $(NAME): $(OBJS)
-	@$(AR) $(NAME) $(OBJS)
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@$(BASIC)"
-	@echo "$(WHITE)ar:$(BASIC) $(AR)"
-	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
+	@echo "$(WHITE)arflags:$(BASIC) $(ARFLAGS)"
+	@echo "$(WHITE)cflags:$(BASIC) $(CFLAGS) $(CCFLAGS)"
 	@echo "$(WHITE)compi:$(BASIC) $(CC)"
 
 $(O_DIR)/%.o: %.c
 	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
-	@$(CC) $(CFLAGS) $(I_DIR) -MMD -c $< -o $@
+	@$(CC) $(CFLAGS) $(CCFLAGS) $(I_DIR) -MMD -c $< -o $@
 
 $(OBJS): | $(O_DIR)
 
