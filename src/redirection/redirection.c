@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 20:59:31 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:26:53 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:22:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ static int		got_redirection(char **cmd)
 ** return true if the exec process is handled,
 ** return false if the cmd does not include a redirection. exec still needed
 */
+
 t_bool			exec_redirection(char **cmd)
 {
 	int		redirection_index;
-	void	(* const f[])(char **) = {
+	void	(*const f[])(char **) = {
 			output_redirect,
 			output_append_redirect,
 			input_redirect,

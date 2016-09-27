@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:45:33 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 17:26:50 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:31:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ enum e_status		insert(char *buf)
 
 	if (!*buf || *(buf + 1))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (ft_llen(c->first_l) + 1 >= LINE_SIZE)
 		return (KEEP_READING);
@@ -43,13 +42,11 @@ enum e_status		del(char *buf)
 	}
 	else if (buf && memcmp(buf, K_DEL, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (!c->current_l && !c->first_l)
 		return (KEEP_READING);
 	if (!(to_free = c->current_l ? c->current_l->next : c->first_l))
 		return (KEEP_READING);
-
 	if (to_free == c->first_l)
 		c->first_l = c->first_l->next;
 	ft_ldellink(to_free);
@@ -62,7 +59,6 @@ enum e_status		backspace(char *buf)
 {
 	if (memcmp(buf, K_BACKSPACE, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	if (!get_cursor()->current_l)
 		return (KEEP_READING);
 	move_left(NULL);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:19:41 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 17:39:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:28:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,9 @@ enum e_status		move_left(char *buf)
 
 	if (buf && memcmp(buf, K_LEFT, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (!c->current_l || !c->first_l)
 		return (KEEP_READING);
-
 	line_len = get_term_size()->ws_col;
 	if (c->current_l != c->first_l && \
 		!((ft_lisn(c->first_l, c->current_l) + c->prompt_len) % line_len))
@@ -99,7 +97,6 @@ enum e_status		move_right(char *buf)
 
 	if (buf && memcmp(buf, K_RIGHT, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (!c->current_l && c->first_l)
 		c->current_l = c->first_l;
@@ -107,7 +104,6 @@ enum e_status		move_right(char *buf)
 		c->current_l = c->current_l->next;
 	else
 		return (KEEP_READING);
-
 	if (!((ft_lisn(c->first_l, c->current_l) + c->prompt_len) \
 			% get_term_size()->ws_col))
 	{

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:15:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:33:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void					exec_cmd(char **cmd);
 ** REDIRECTION
 ** redirection.c
 */
-void					debug_arr(char **cmd);/* debug */
 t_bool					exec_redirection(char **cmd);
 
 /*

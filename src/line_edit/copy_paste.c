@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 17:24:57 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 17:25:16 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:31:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ enum e_status		cut_backward(char *buf)
 	if (memcmp(buf, K_CTRL_U, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
 	c = get_cursor();
-
 	if (!c->current_l || !c->first_l)
 		return (KEEP_READING);
 	if (c->save)
 		ft_lclean(&c->save);
-
 	current = c->current_l;
 	move_begin(NULL);
 	clear_line();
@@ -76,7 +74,6 @@ enum e_status		cut_backward(char *buf)
 		c->first_l->prev = NULL;
 	c->current_l = NULL;
 	current->next = NULL;
-
 	print_line();
 	return (KEEP_READING);
 }

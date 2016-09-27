@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:14:10 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:17:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:32:27 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 ** should be used with to_add = "SMURF=ETTE"
 ** to_add will be strdup'ed
 */
+
 static char		**arr_add(char **arr, char *to_add)
 {
 	char		**cpy;

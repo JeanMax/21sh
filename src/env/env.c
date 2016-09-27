@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/12 16:41:47 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:18:29 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:32:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_env			*get_env_struct(void)
 ** to_find = "SMURF"		->	"SMURF=ETTE"
 ** to_find = "SMURF=ETTE"	->	"SMURF=ETTE"
 */
+
 char			**arr_find(char **arr, char *to_find)
 {
 	char	*s1;

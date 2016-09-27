@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 12:00:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:47:31 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ static void		do_something_with_line(char *line)
 	ft_arrdel(&cmd_arr);
 }
 
+/*
+** read_it actually returns a t_bool, but norme blabla fuck it blabla
+*/
+
 void			prompt_loop(void)
 {
-	t_bool		(*read_it)(char **);
 	char		*line;
+	int			(*read_it)(char **);
 
 	line = NULL;
 	read_it = (!isatty(STDIN_FILENO) || !get_env("TERM") || \

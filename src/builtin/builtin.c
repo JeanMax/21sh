@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:00:25 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:16:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:34:38 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 /*
 ** return 0 if it's not, otherwise return the index + 1
 */
+
 static int		is_builtin(char *cmd)
 {
-	int			i;
+	int				i;
 	const char		*built_name[] = {
 		"exit",
 		"env",
@@ -40,11 +41,12 @@ static int		is_builtin(char *cmd)
 /*
 ** return true and exec builtin if it was a builtin, otherwise return false
 */
+
 t_bool			exec_builtin(char **cmd)
 {
 	int			built_index;
 	char		*tmp;
-	void		(* const builtin[])(char **) = {
+	void		(*const builtin[])(char **) = {
 		ft_exit,
 		ft_env,
 		ft_setenv,

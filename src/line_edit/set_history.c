@@ -6,22 +6,11 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 10:02:01 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 12:05:07 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 23:06:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edit.h"
-
-enum		e_mismatch
-{
-	QUOTE = 0,
-	D_QUOTE = 1,
-	B_QUOTE = 2,
-	BRACKET = 3,
-	C_BRACKET = 4,
-	R_BRACKET = 5,
-	MIS_SIZE = 6
-};
 
 static t_bool			count_match(t_lst *link, int *mis)
 {
@@ -71,11 +60,11 @@ static void				print_error(int *mis)
 		ft_putendl_clr("\tMismatched `.", "r");
 }
 
-//TODO: check the to_string instead
 static t_bool			got_mismatch(t_lst *link)
 {
-	int	mis[MIS_SIZE] = {0, 0, 0, 0, 0, 0};
+	int	mis[MIS_SIZE];
 
+	ft_bzero(mis, MIS_SIZE * sizeof(int));
 	if (!count_match(link, mis))
 		return (TRUE);
 	if (mis[BRACKET] || mis[C_BRACKET] || mis[R_BRACKET] \
@@ -93,7 +82,6 @@ enum e_status			set_history(char *buf)
 
 	if (memcmp(buf, K_RETURN, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (got_mismatch(c->first_l))
 	{

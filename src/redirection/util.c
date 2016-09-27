@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:25:22 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:14:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:24:33 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ void			do_redirect(char **cmd, enum e_replacement c, int o_flag, \
 		ft_arrdelone(cmd, *swap);
 	do_stuff_with_cmd_and_fd_now(cmd, fd_left, fd_right);
 }
-

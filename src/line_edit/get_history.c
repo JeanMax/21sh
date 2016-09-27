@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 10:02:24 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 21:31:51 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ enum e_status			get_history(char *buf)
 
 	if (memcmp(buf, K_UP, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
-
 	c = get_cursor();
 	if (!(history = c->history))
 		return (KEEP_READING);
