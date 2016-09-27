@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 23:43:25 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/27 23:47:02 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@
 /*
 ** there is actually an extra \xa on these... meh
 */
-#  define K_CTRL_UP		"\x1b\x5b\x31\x3b\x35\x41"
-#  define K_CTRL_DOWN	"\x1b\x5b\x31\x3b\x35\x42"
-#  define K_CTRL_RIGHT	"\x1b\x5b\x31\x3b\x35\x43"
-#  define K_CTRL_LEFT	"\x1b\x5b\x31\x3b\x35\x44"
+# define K_CTRL_UP		"\x1b\x5b\x31\x3b\x35\x41"
+# define K_CTRL_DOWN	"\x1b\x5b\x31\x3b\x35\x42"
+# define K_CTRL_RIGHT	"\x1b\x5b\x31\x3b\x35\x43"
+# define K_CTRL_LEFT	"\x1b\x5b\x31\x3b\x35\x44"
 
 # ifdef LINUX
 #  define K_START		"\x1b\x4f\x48\x0\x0\x0"
