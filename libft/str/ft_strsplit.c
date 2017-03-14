@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/14 15:10:14 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/13 22:19:12 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/05/21 19:02:01 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,19 @@ static size_t	ft_word_len(char const *s, char c)
 	return (word_len);
 }
 
+static void		ft_freetab(char **arr)
+{
+	if (*arr)
+		ft_freetab(arr + 1);
+	ft_memdel((void *)arr);
+}
+
 char			**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	if (!(tab = malloc((ft_word_nb(s, c) + 1) * sizeof(char *))))
+	if (!s || !(tab = malloc((ft_word_nb(s, c) + 1) * sizeof(char *))))
 		return (NULL);
 	i = 0;
 	while (*s)
@@ -67,7 +72,8 @@ char			**ft_strsplit(char const *s, char c)
 		{
 			if (!(tab[i] = ft_strsub(s, 0, ft_word_len(s, c))))
 			{
-				ft_arrdel(&tab);
+				ft_freetab(tab);
+				ft_memdel((void *)&tab);
 				return (NULL);
 			}
 			s += ft_word_len(s, c);

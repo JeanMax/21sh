@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 08:00:25 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:34:38 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/10/22 22:36:13 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int		is_builtin(char *cmd)
 		"setenv",
 		"unsetenv",
 		"cd",
+		"echo",
 		NULL
 	};
 
@@ -51,7 +52,8 @@ t_bool			exec_builtin(char **cmd)
 		ft_env,
 		ft_setenv,
 		ft_unsetenv,
-		ft_cd
+		ft_cd,
+		ft_echo
 	};
 
 	if (!(built_index = is_builtin(*cmd)))

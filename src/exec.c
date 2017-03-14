@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 21:32:33 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 14:13:27 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/03/01 15:25:09 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		fork_it(char **cmd)
 	char	*bin;
 	char	*tmp;
 
+	update_bin(FALSE);
 	bin = ft_strchr(*cmd, '/') ? *cmd : get_full_bin(*cmd);
 	tmp = ft_strjoin("_=", bin);
 	set_env(tmp);
@@ -36,8 +37,8 @@ static void		fork_it(char **cmd)
 	{
 		envp = get_env_struct()->envp;
 		if (bin && !access(bin, X_OK) && execve(bin, cmd, envp))
-			error(E_NOSUCHFILE, cmd[0]);
-		error(E_CMDNOTFOUND, cmd[0]);
+			error(E_NOSUCHFILE, *cmd);
+		error(E_CMDNOTFOUND, *cmd);
 	}
 	else
 		wait(NULL);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/01 10:16:56 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/10/22 23:12:41 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		get_text(char **text, char *here, t_bool (*read_it)(char **))
 		ft_strcat(*text, tmp);
 		ft_memdel((void *)&tmp);
 	}
-	ft_memdel((void *)&buf);
+	/* ft_memdel((void *)&buf); */
 	if (isatty(STDIN_FILENO))
 		ft_putchar('\n');
 }

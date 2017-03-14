@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:17:20 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/10/22 13:09:46 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,14 +88,12 @@ void			update_bin(t_bool force_update)
 	path_arr = NULL;
 	if ((path = get_env("PATH")))
 		path_arr = ft_strsplit(path + 5, ':');
-	if (!force_update && is_up_to_date(path_arr, e->last_update))
+	if (force_update || !is_up_to_date(path_arr, e->last_update))
 	{
-		ft_arrdel(&path_arr);
-		return ;
+		if (e->bin_root)
+			ft_bstclean(&e->bin_root);
+		check_dir(path_arr, e);
 	}
-	if (e->bin_root)
-		ft_bstclean(&e->bin_root);
-	check_dir(path_arr, e);
 	ft_arrdel(&path_arr);
 }
 

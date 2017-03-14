@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/09/09 21:26:32 by mcanal            #+#    #+#              #
-#    Updated: 2016/06/10 11:10:35 by mcanal           ###   ########.fr        #
+#    Updated: 2017/03/01 15:05:41 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,6 +17,7 @@ AR =		ar
 ARFLAGS =	-rcs
 RM =		rm -rf
 MKDIR =		mkdir -p
+ECHO =      echo -e
 
 I_DIR =	-I inc/
 O_DIR =	obj
@@ -26,7 +27,7 @@ CFLAGS =	-Wall -Wextra -Werror -Wpedantic -Wshadow -Wcast-align \
 			-Wconversion -Wstrict-prototypes -Wmissing-prototypes \
 			-Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
 			-Wstrict-overflow=5 -Waggregate-return -Wunreachable-code \
-			-Winit-self -Wold-style-definition -Wpadded -Wredundant-decls -O2 
+			-Winit-self -Wold-style-definition -Wpadded -Wredundant-decls -O2
 #-Wcast-qual
 
 ifeq ($(OS), Windows_NT)
@@ -84,7 +85,7 @@ C_LST2 =	ft_ladd.c			ft_laddlast.c		ft_lat.c			\
 			ft_lisn.c			ft_liter.c			ft_llast.c			\
 			ft_llen.c			ft_lrplc.c			ft_lnew.c			\
 			ft_lfree.c 			ft_lfind.c			ft_lswap.c			\
-			ft_lmap.c			ft_linsert_list.c	ft_ldellink.c		
+			ft_lmap.c			ft_linsert_list.c	ft_ldellink.c
 C_MEM =		ft_bzero.c			ft_memccpy.c		ft_memchr.c			\
 			ft_memcmp.c			ft_memcpy.c			ft_memmove.c		\
 			ft_memset.c			ft_memalloc.c		ft_memdel.c			\
@@ -100,11 +101,11 @@ C_STR =		ft_strindex.c		ft_strrindex.c		ft_strcpy.c			\
 			ft_striter.c		ft_strmapi.c		ft_strsub.c			\
 			ft_strclr.c			ft_striteri.c		ft_strnequ.c		\
 			ft_strtrim.c		ft_strndup.c		ft_istoobig.c		\
-			ft_strstr.c			
+			ft_strstr.c
 SRCC =	$(C_BST:%.c=bst/%.c)				$(C_INT:%.c=io/%.c)			\
 		$(C_IO:%.c=is/%.c)					$(C_LST1:%.c=lst1/%.c)		\
 		$(C_LST2:%.c=lst2/%.c)				$(C_MEM:%.c=mem/%.c)		\
-		$(C_STR:%.c=str/%.c)		
+		$(C_STR:%.c=str/%.c)
 OBJS =	$(C_BST:%.c=$(O_DIR)/%.o)			$(C_INT:%.c=$(O_DIR)/%.o)	\
 		$(C_IO:%.c=$(O_DIR)/%.o)			$(C_LST1:%.c=$(O_DIR)/%.o)	\
 		$(C_LST2:%.c=$(O_DIR)/%.o)			$(C_MEM:%.c=$(O_DIR)/%.o)	\
@@ -132,13 +133,13 @@ sanitize: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@$(BASIC)"
-	@echo "$(WHITE)arflags:$(BASIC) $(ARFLAGS)"
-	@echo "$(WHITE)cflags:$(BASIC) $(CFLAGS) $(CCFLAGS)"
-	@echo "$(WHITE)compi:$(BASIC) $(CC)"
+	@$(ECHO) "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@$(BASIC)"
+	@$(ECHO) "$(WHITE)arflags:$(BASIC) $(ARFLAGS)"
+	@$(ECHO) "$(WHITE)cflags:$(BASIC) $(CFLAGS) $(CCFLAGS)"
+	@$(ECHO) "$(WHITE)compi:$(BASIC) $(CC)"
 
 $(O_DIR)/%.o: %.c
-	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
+	@$(ECHO) "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
 	@$(CC) $(CFLAGS) $(CCFLAGS) $(I_DIR) -MMD -c $< -o $@
 
 $(OBJS): | $(O_DIR)

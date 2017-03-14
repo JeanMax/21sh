@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 17:50:10 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 18:17:13 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/10/22 22:37:03 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,16 @@ void				ft_cd(char **av);
 /*
 ** ft_setenv.c
 */
-void				ft_setenv(char **ac);
+void				ft_setenv(char **av);
 
 /*
 ** ft_unsetenv.c
 */
-void				ft_unsetenv(char **ac);
+void				ft_unsetenv(char **av);
+
+/*
+** ft_echo.c
+*/
+void				ft_echo(char **av);
 
 #endif

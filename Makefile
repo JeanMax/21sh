@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2016/06/10 18:22:28 by mcanal           ###   ########.fr        #
+#    Updated: 2017/03/01 15:05:35 by mcanal           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -15,7 +15,8 @@ NAME =	21sh
 C_SRC =	main.c				error.c				prompt.c			\
 		exec.c
 C_BUI =	builtin.c			ft_exit.c			ft_env.c			\
-		ft_unsetenv.c		ft_cd.c				ft_setenv.c
+		ft_unsetenv.c		ft_cd.c				ft_setenv.c			\
+		ft_echo.c
 C_RED =	redirection.c		output_redirect.c	dup_fd.c			\
 		pipeline.c			input_redirect.c	here_doc.c			\
 		util.c
@@ -33,7 +34,7 @@ VPATH =	src:src/builtin:src/redirection:src/line_edit:src/env
 
 SRCC = 	$(C_SRC:%.c=src/%.c)		$(C_BUI:%.c=src/builtin/%.c)	\
 		$(C_ENV:%.c=src/env/%.c)	$(C_LIN:%.c=src/line_edit/%.c)	\
-		$(C_RED:%.c=src/redirection/%.c) 
+		$(C_RED:%.c=src/redirection/%.c)
 OBJS =	$(C_SRC:%.c=$(O_DIR)/%.o)	$(C_BUI:%.c=$(O_DIR)/%.o)		\
 		$(C_ENV:%.c=$(O_DIR)/%.o)	$(C_LIN:%.c=$(O_DIR)/%.o)		\
 		$(C_RED:%.c=$(O_DIR)/%.o)
@@ -45,6 +46,7 @@ I_DIR =		-I./libft/inc/ -I./inc/
 MAKE =		make -j
 RM =		rm -rf
 MKDIR =		mkdir -p
+ECHO =      echo -e
 CC =		$(shell clang --version >/dev/null 2>&1 && echo clang || echo gcc)
 CFLAGS =	-Wall -Wextra -Werror -O2
 
@@ -82,13 +84,13 @@ me_cry:
 
 $(NAME): $(OBJS) $(LIB)
 	@$(CC) $(CFLAGS) $(I_DIR) $(OBJS) $(LIB) -o $@ $(TERMCAPS)
-	@echo "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
-	@echo "$(WHITE)flags:$(BASIC) $(CFLAGS)"
-	@echo "$(WHITE)compi:$(BASIC) $(CC)"
+	@$(ECHO) "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
+	@$(ECHO) "$(WHITE)flags:$(BASIC) $(CFLAGS)"
+	@$(ECHO) "$(WHITE)compi:$(BASIC) $(CC)"
 
 $(O_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(I_DIR) -MMD -c $< -o $@
-	@echo "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
+	@$(ECHO) "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
 
 $(OBJS): | $(O_DIR)
 
