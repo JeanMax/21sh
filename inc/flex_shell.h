@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 13:49:38 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/22 14:19:29 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,7 @@ void					update_bin(t_bool force_update);
 
 void					free_string(void *s, size_t n);
 void					free_char(void *c, size_t n);
+t_bool					fail(const char *s);
+t_bool					failn(const char *s);
 
 #endif

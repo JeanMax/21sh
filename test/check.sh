@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:20:41 by mcanal            #+#    #+#              #
-#    Updated: 2016/06/08 15:18:38 by mcanal           ###   ########.fr        #
+#    Updated: 2017/04/22 16:20:50 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,30 +36,7 @@ if [ -n "$1" ]; then
 else
 	TARGET=$CHECK_DIR/test;
 fi;
-echo -e " 
-cd $SH_DIR; cd ..; cd -; cd; cd -
-setenv toto=; env | grep toto
-setenv toto=42; env | grep toto
-setenv toto=42=23; env | grep toto
-setenv to=to; setenv tototo=to; unsetenv toto
-setenv | grep toto
-env PATH=toto ls
-env -i ls
-\tls\t -a	\t 
-ls; ls eglk
-ls > 1; echo 'yo' >> 1; cat 1; rm 1
-cat -e < auteur
-cat << KTHX
-hey youpla boum
-tsoin tsoin
-bye
-KTHX
-ls erlmgk . 2>&1 | cat -e
-ls erlmgk . 1>&2 | cat -e
-ls ezgge 2> toto; cat toto
-ls ezgge 2>> toto; cat toto; rm toto
-cat -e 0< auteur
-" | $SH_DIR/21sh > $TARGET 2>&1;
+$SH_DIR/21sh < $CHECK_DIR/input.sh > $TARGET 2>&1;
 echo "$SH_DIR/21sh; exit 42; exit 42" | env -i $SH_DIR/21sh >> $TARGET 2>&1;
 echo $? >> $TARGET 2>&1;
 if [ -n "$1" ]; then

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 12:37:23 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/22 14:19:22 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 
 #include "flex_shell.h"
 #include <stdlib.h>
+
+t_bool fail(const char *s)
+{
+	ft_putstr_fd(s, STDERR_FILENO);
+	return (FALSE);
+}
+
+t_bool failn(const char *s)
+{
+	ft_putendl_fd(s, STDERR_FILENO);
+	return (FALSE);
+}
 
 /*
 ** I'm pretty sure there is another way...

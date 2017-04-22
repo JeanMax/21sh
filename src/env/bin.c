@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 13:46:14 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/22 16:13:51 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
+//TODO: use an hash table instead
 
 static int		cmp(const void *a, const void *b)
 {
@@ -51,8 +53,8 @@ static void		check_dir(char **path, t_env *e)
 			f_name = ft_strjoin(tmp, s_dir->d_name);
 			if ((!stat(f_name, &s_stat) && S_ISREG(s_stat.st_mode)) \
 				&& (s_stat.st_mode & S_IXUSR))
-				ft_bstavladd(&e->bin_root, f_name, ft_strlen(f_name) + 1, cmp);
-			ft_memdel((void *)&f_name);
+				ft_bstavladd(&e->bin_root, f_name, sizeof(char *), cmp);
+			/* ft_memdel((void *)&f_name); */
 			ft_memdel((void *)&tmp);
 		}
 		closedir(dir);
