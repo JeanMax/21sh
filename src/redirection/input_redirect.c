@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 06:13:54 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 11:00:00 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:52:28 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#define BUFF_SIZE 0xff
 
 extern pid_t	g_pid;
 

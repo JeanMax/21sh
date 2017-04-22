@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:47:31 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:37:57 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static void		do_something_with_line(char *line)
 		if ((cmd = ft_strsplit(*(swap++), S_WORD)))
 		{
 			exec_cmd(cmd);
-			ft_arrdel(&cmd);
+			ft_arr_del(&cmd);
 		}
-	ft_arrdel(&cmd_arr);
+	ft_arr_del(&cmd_arr);
 }
 
 /*

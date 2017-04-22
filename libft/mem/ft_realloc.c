@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/13 11:08:55 by mcanal            #+#    #+#             */
-/*   Updated: 2014/11/13 17:50:30 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/03/15 21:54:07 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	*ft_realloc(void *old, size_t old_size, size_t new_size)
 {
 	void	*new;
 
-	if (!(new = (void *)ft_memalloc(new_size ? sizeof(old) * new_size : 1)))
+	if (!(new = (void *)ft_memalloc(new_size ? new_size : 1)))
 		return (NULL);
 	if (old)
 	{
-		ft_memcpy(new, old, (old_size > new_size) ? (new_size) : (old_size));
+		ft_memcpy(new, old, (old_size > new_size) ? new_size : old_size);
 		ft_memdel((void *)&old);
 	}
 	return (new);

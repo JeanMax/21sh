@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:31:51 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:50:26 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static enum e_status	get_history_loop(char *buf, t_cursor *c, \
 	{
 		if (c->first_l != line_save)
 		{
-			ft_lclean(&line_save);
+			ft_ldel(&line_save, free_char);
 			c->first_l = ft_lmap(c->first_l, cp);
 		}
 		print_line();

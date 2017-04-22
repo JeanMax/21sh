@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:10:45 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:17:54 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:37:58 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			unset_env(char *to_unset)
 	t_env		*e;
 
 	e = get_env_struct();
-	ft_arrdelone(e->envp, *arr_find(e->envp, to_unset));
+	ft_arr_delone(e->envp, *arr_find(e->envp, to_unset));
 	if (!ft_strncmp("PATH", to_unset, 4))
 		update_bin(TRUE);
 }

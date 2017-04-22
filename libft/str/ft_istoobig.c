@@ -18,8 +18,8 @@
 
 int				ft_istoobig(char *s)
 {
-	t_char		i;
-	t_char		neg;
+	t_uchar		i;
+	t_uchar		neg;
 
 	neg = *s == '-' ? 1 : 0;
 	s += *s == '-' ? 1 : 0;

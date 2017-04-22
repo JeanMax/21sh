@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 02:05:09 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:21:11 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:37:52 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,25 @@ static void		dup_it(char **cmd, int default_left_fd)
 	{
 		if ((fd_left = get_fd(*swap)) == -1)
 			fd_left = default_left_fd;
-		ft_arrdelone(cmd, *swap);
+		ft_arr_delone(cmd, *swap);
 		fd_right = get_fd(*swap);
 		if (fd_right == -1 && !ft_strcmp(*swap, "-") && fd_left != -1)
 			fd_right = -42;
-		ft_arrdelone(cmd, *swap);
+		ft_arr_delone(cmd, *swap);
 	}
 	if (fd_left != -1 && fd_right != -1 && fd_left != fd_right)
 		just_dup_it(cmd, fd_left, fd_right);
 	else
 		failn("21sh: Invalid file descriptor.");
-	ft_arrdel(&cmd);
+	ft_arr_del(&cmd);
 }
 
 void			dup_input(char **cmd)
 {
-	dup_it(ft_arrdup(cmd), STDIN_FILENO);
+	dup_it(ft_arr_dup(cmd), STDIN_FILENO);
 }
 
 void			dup_output(char **cmd)
 {
-	dup_it(ft_arrdup(cmd), STDOUT_FILENO);
+	dup_it(ft_arr_dup(cmd), STDOUT_FILENO);
 }

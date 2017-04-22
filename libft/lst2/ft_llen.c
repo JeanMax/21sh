@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** retourne la taille de la liste
+** return the length of the list
 */
 
 #include "libft.h"

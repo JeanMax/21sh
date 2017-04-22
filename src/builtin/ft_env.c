@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:03 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 00:32:42 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:45:25 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		do_stuff(char **av, t_env *e)
 		av++;
 	}
 	else
-		e->envp = ft_arrdup(e->envp);
+		e->envp = ft_arr_dup(e->envp);
 	while (*av && !syntax_error(*av))
 		set_env(*(av++));
 	if (*av)
@@ -53,6 +53,13 @@ static void		do_stuff(char **av, t_env *e)
 	}
 	else
 		print_env(e->envp);
+}
+
+//TODO: move?
+void		free_string(void *s, size_t n)
+{
+	(void)n;
+	ft_memdel(s);
 }
 
 void			ft_env(char **av)
@@ -70,8 +77,8 @@ void			ft_env(char **av)
 		return ;
 	}
 	do_stuff(av, e);
-	ft_arrdel(&e->envp);
-	ft_bstclean(&e->bin_root);
+	ft_arr_del(&e->envp);
+	ft_bstdel(&e->bin_root, free_string);
 	e->envp = old_env;
 	e->bin_root = old_bin;
 }

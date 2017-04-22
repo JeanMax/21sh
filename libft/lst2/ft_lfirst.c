@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** retourne un pointeur sur le premier élément de la liste
+** return a pointer to the first link of the list
 */
 
 #include "libft.h"

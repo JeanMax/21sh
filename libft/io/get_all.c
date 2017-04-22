@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 03:51:51 by mcanal            #+#    #+#             */
-/*   Updated: 2015/07/21 01:53:17 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/09/25 17:58:18 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include "libft.h"
 #include <unistd.h>
+
+#define BUFF_SIZE		127
 
 int		get_all(int const fd, char **a)
 {

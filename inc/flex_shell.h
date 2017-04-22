@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:33:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:49:38 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 */
 # include <time.h>
 # include "libft.h"
+# include "arr.h"
 
 /*
 ** enum
@@ -81,7 +82,7 @@ void					prompt_loop(void);
 /*
 ** error.c
 */
-void					error(t_int flag, char *msg);
+void					error(t_uint flag, char *msg);
 
 /*
 ** exec.c
@@ -135,5 +136,9 @@ void					unset_env(char *to_unset);
 */
 char					*get_full_bin(char *bin);
 void					update_bin(t_bool force_update);
+
+
+void					free_string(void *s, size_t n);
+void					free_char(void *c, size_t n);
 
 #endif

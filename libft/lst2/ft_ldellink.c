@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 /*
-** retire un élément 'n' de la liste, mais ne le supprime pas!
-** l'élément 'n-1' pointera sur l'élément 'n+1'
+** remove a link 'n' from the list, but does not delete it!
+** the element n-1 will be linked with the element n+1
 */
 
 #include "libft.h"

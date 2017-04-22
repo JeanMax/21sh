@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2017/03/01 15:05:35 by mcanal           ###   ########.fr        #
+#    Updated: 2017/04/22 13:37:41 by mc               ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,17 +27,18 @@ C_LIN = clear.c				cursor.c			insert.c			\
 		move_cursor_far.c	set_history.c
 C_ENV = bin.c				env.c				setenv.c			\
 		unsetenv.c
+C_ARR = ft_arrdel.c			ft_arrdelone.c		ft_arrdup.c
 
 O_DIR = obj
 C_DIR = src
-VPATH =	src:src/builtin:src/redirection:src/line_edit:src/env
+VPATH =	src:src/builtin:src/redirection:src/line_edit:src/env:src/arr
 
 SRCC = 	$(C_SRC:%.c=src/%.c)		$(C_BUI:%.c=src/builtin/%.c)	\
 		$(C_ENV:%.c=src/env/%.c)	$(C_LIN:%.c=src/line_edit/%.c)	\
-		$(C_RED:%.c=src/redirection/%.c)
+		$(C_RED:%.c=src/redirection/%.c) $(C_ARR:%.c=src/arr/%.c)
 OBJS =	$(C_SRC:%.c=$(O_DIR)/%.o)	$(C_BUI:%.c=$(O_DIR)/%.o)		\
 		$(C_ENV:%.c=$(O_DIR)/%.o)	$(C_LIN:%.c=$(O_DIR)/%.o)		\
-		$(C_RED:%.c=$(O_DIR)/%.o)
+		$(C_RED:%.c=$(O_DIR)/%.o)	$(C_ARR:%.c=$(O_DIR)/%.o)
 DEPS =  $(OBJS:%.o=%.d)
 
 LIB =		libft/libft.a

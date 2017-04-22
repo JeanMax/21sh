@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:45:33 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:31:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:50:12 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ enum e_status		del(char *buf)
 	if (to_free == c->first_l)
 		c->first_l = c->first_l->next;
 	ft_ldellink(to_free);
-	ft_lfree(&to_free);
+	ft_ldelone(&to_free, free_char);
 	print_line();
 	return (KEEP_READING);
 }

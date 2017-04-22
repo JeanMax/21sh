@@ -6,14 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 02:31:48 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/05 21:44:00 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/03/18 15:12:22 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** Parcourt la liste lst en appliquant à chaque maillon la fonction f
-** et crée une nouvelle liste “fraiche” avec malloc(3) résultant des
-** applications successives. Si une allocation échoue, la fonction renvoie NULL.
+** Apply the function f to each link of the list and create a new list
+** with malloc(3). If an allocation fails, NULL is returned.
 */
 
 #include "libft.h"
@@ -30,7 +29,7 @@ t_list			*ft_lstmap(t_list *alst, t_list *(*f)(t_list *elem))
 	if (!(new_list = ft_lstnew(tmp->content, tmp->content_size)))
 		return (NULL);
 	new_alst = new_list;
-	while (alst->next != NULL)
+	while (alst->next)
 	{
 		tmp = f(alst->next);
 		if (!(new_list->next = ft_lstnew(tmp->content, tmp->content_size)))

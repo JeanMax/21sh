@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 /*
-** remplace l'élément old par new
-** l'élément old n'est pas supprimé, mais retiré de la liste
+** replace the link 'old' with 'new'
+** 'old' won't be deleted, but removed of the list
 */
 
 #include "libft.h"

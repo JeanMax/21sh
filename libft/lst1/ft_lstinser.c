@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** insère un élément (new) après l'élément courant (alst).
+** insert the link (new) after the link (alst).
 */
 
 #include "libft.h"

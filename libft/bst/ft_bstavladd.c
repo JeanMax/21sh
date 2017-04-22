@@ -6,12 +6,14 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/29 01:57:44 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 22:19:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/03/19 00:37:14 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** balance a tree using left/right rotations (AVL)
+** return NULL if a node was actually added, if a node has been replaced
+** his content will be returned (free...? it's up to you!)
 */
 
 #include "libft.h"
@@ -69,8 +71,7 @@ static t_bst	*rot_left(t_bst *root, int ret)
 	return (node);
 }
 
-static t_bst	*add_loop(t_bst *node, t_bst *new, \
-							int (*cmp)(const void *a, const void *b))
+static t_bst	*add_loop(t_bst *node, t_bst *new, t_cmp *cmp)
 {
 	int	ret;
 
@@ -89,18 +90,29 @@ static t_bst	*add_loop(t_bst *node, t_bst *new, \
 			node = rot_right(node, cmp(node->right, new));
 	}
 	else
+	{
+		ft_swap(&node->content, &new->content, sizeof(void *));
+		ft_swap((void *)&node->content_size, (void *)&new->content_size, \
+				sizeof(size_t));
 		new->height = 0;
+	}
 	node->height = (size_t)ft_max(h(node->left), h(node->right)) + 1;
 	return (node);
 }
 
-void			ft_bstavladd(t_bst **root, void *content, size_t content_size, \
-							int (*cmp)(const void *a, const void *b))
+void			*ft_bstavladd(t_bst **root, void *content, \
+			size_t content_size, int (*cmp)(const void *a, const void *b))
 {
-	t_bst *new;
+	t_bst	*new;
+	void	*ret;
 
 	new = ft_bstnew(content, content_size);
 	*root = add_loop(*root, new, cmp);
 	if (new->height == 0)
-		ft_bstfree(&new);
+	{
+		ret = new->content;
+		ft_memdel((void *)&new);
+		return (ret);
+	}
+	return (NULL);
 }

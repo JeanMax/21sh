@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** Parcourt la liste lst en appliquant à chaque maillon la fonction f.
+** apply the function f to each link of the list
 */
 
 #include "libft.h"

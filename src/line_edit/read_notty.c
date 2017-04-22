@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/08 16:34:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:51:16 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ t_bool			read_notty(char **line)
 			ft_laddlast(&c->first_l, ft_lnew((void *)swap++, 1));
 	ft_memdel((void *)line);
 	*line = to_string();
-	ft_lclean(&c->first_l);
+	ft_ldel(&c->first_l, free_char);
 	return (*line ? TRUE : FALSE);
 }

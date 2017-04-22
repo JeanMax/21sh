@@ -6,13 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/12 23:55:52 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 18:23:05 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/05/21 16:47:59 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
-** retire un élément 'n' de la liste, mais ne le supprime pas!
-** l'élément 'n-1' pointera sur l'élément 'n+1'
+** remove a link 'n' from the list, but does not delete it!
+** the element n-1 will be linked with the element n+1
 */
 
 #include "libft.h"

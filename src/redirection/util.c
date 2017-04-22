@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:25:22 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:24:33 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:36:55 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ void			do_redirect(char **cmd, enum e_replacement c, int o_flag, \
 	if (*tmp || tmp == *(swap - 1))
 	{
 		tmp = *swap;
-		ft_arrdelone(cmd, *(swap - 1));
-		ft_arrdelone(cmd, tmp);
+		ft_arr_delone(cmd, *(swap - 1));
+		ft_arr_delone(cmd, tmp);
 	}
 	else
-		ft_arrdelone(cmd, *swap);
+		ft_arr_delone(cmd, *swap);
 	do_stuff_with_cmd_and_fd_now(cmd, fd_left, fd_right);
 }

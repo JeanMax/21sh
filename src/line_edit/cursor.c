@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 12:02:43 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:49:49 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 t_lst			*cp(t_lst *link)
 {
 	return (link);
+}
+
+void			free_char(void *c, size_t n)
+{
+	(void)c;
+	(void)n;
 }
 
 static int		cmp(const void *a, const void *b)
@@ -28,7 +34,7 @@ void			clean_cursor(void)
 
 	c = get_cursor();
 	if (!ft_lfind(&c->history, (void *)c->first_l, cmp))
-		ft_lclean(&c->first_l);
+		ft_ldel(&c->first_l, free_char);
 	c->first_l = NULL;
 	c->current_l = NULL;
 }

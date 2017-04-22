@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2016/06/09 11:15:58 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:37:57 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void		init(void)
 {
 	extern char	**environ;
 
-	get_env_struct()->envp = ft_arrdup(environ);
+	get_env_struct()->envp = ft_arr_dup(environ);
 	inc_shlvl();
 	update_bin(TRUE);
 	ioctl(0, TIOCGWINSZ, get_term_size());

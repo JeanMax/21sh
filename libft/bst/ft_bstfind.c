@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 22:22:22 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/12 21:08:45 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/03/12 19:26:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 
 #include "libft.h"
 
-t_bst	**ft_bstfind(t_bst **root, t_bst *node, \
-						int (*cmp)(const void *a, const void *b))
+t_bst	**ft_bstfind(t_bst **root, t_bst *node, t_cmp *cmp)
 {
 	int		ret;
 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** retourne un pointeur sur le dernier élément de la liste
+** return a pointer to the last link of the list
 */
 
 #include "libft.h"

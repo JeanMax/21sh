@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2016/10/22 13:09:46 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:46:14 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void			update_bin(t_bool force_update)
 	if (force_update || !is_up_to_date(path_arr, e->last_update))
 	{
 		if (e->bin_root)
-			ft_bstclean(&e->bin_root);
+			ft_bstdel(&e->bin_root, free_string);
 		check_dir(path_arr, e);
 	}
-	ft_arrdel(&path_arr);
+	ft_arr_del(&path_arr);
 }
 
 char			*get_full_bin(char *bin)

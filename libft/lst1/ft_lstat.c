@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 /*
-** Retourne un pointeur sur l'élément à l'indice n, ou NULL si la liste
-** contient moins de n élément(s).     (le premier élément a pour indice 0)
-** **alst doit contenir l'adresse d’un pointeur sur le premier élément.
+** Return a pointer to the link at index n, otherwise NULL if the list
+** contains less than n links. (The first element's index is one)
+** alst must be a pointer to the first link of the list.
 */
 
 #include "libft.h"

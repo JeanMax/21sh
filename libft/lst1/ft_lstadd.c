@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** Ajoute l’élément new en tête de la liste.
+** add a link at the head of the list
 */
 
 #include "libft.h"

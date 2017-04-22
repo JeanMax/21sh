@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 /*
-** Echange la position de deux élements dans la liste
+** swap 2 links of a list
 */
 
 #include "libft.h"

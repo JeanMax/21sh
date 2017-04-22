@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 17:24:57 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 21:31:00 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/22 13:51:58 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ enum e_status		copy(char *buf)
 		return (KEEP_TRYING);
 	c = get_cursor();
 	if (c->save)
-		ft_lclean(&c->save);
+		ft_ldel(&c->save, free_char);
 	c->save = ft_lmap(c->current_l ? c->current_l->next : c->first_l, cp);
 	return (KEEP_READING);
 }
@@ -36,7 +36,7 @@ enum e_status		cut_forward(char *buf)
 		return (KEEP_READING);
 	clear_line();
 	if (c->save)
-		ft_lclean(&c->save);
+		ft_ldel(&c->save, free_char);
 	if (c->current_l)
 	{
 		c->save = c->current_l->next;
@@ -65,7 +65,7 @@ enum e_status		cut_backward(char *buf)
 	if (!c->current_l || !c->first_l)
 		return (KEEP_READING);
 	if (c->save)
-		ft_lclean(&c->save);
+		ft_ldel(&c->save, free_char);
 	current = c->current_l;
 	move_begin(NULL);
 	clear_line();

@@ -11,7 +11,9 @@
 /* ************************************************************************** */
 
 /*
-** Ajoute l’élément new en fin de la liste.
+** add a 'new' link at the tail of the list
+** alst is a random element of the list
+** the function assumes there is at least one element in the list
 */
 
 #include "libft.h"

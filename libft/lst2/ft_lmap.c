@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 /*
-** Parcourt la liste lst en appliquant à chaque maillon la fonction f
-** et crée une nouvelle liste “fraiche” avec malloc(3) résultant des
-** applications successives. Si une allocation échoue, la fonction renvoie NULL.
+** Apply the function f to each link of the list and create a new list
+** with malloc(3). If an allocation fails, NULL is returned.
 */
 
 #include "libft.h"

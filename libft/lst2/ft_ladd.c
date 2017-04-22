@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 /*
-** Ajoute l’élément new en tête de la liste. **alst pointe vers le premier
-** élément de la liste. La fonction assume que liste possède au moins un
-** élément.
+** add a link at the head of the list
+** alst is the first element of the list
+** the function assumes there is at least one element in the list
 */
 
 #include "libft.h"

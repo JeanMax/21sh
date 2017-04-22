@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 20:39:57 by mcanal            #+#    #+#             */
-/*   Updated: 2015/11/28 20:51:39 by mcanal           ###   ########.fr       */
+/*   Updated: 2016/03/16 01:36:10 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 void	ft_swap(void *a, void *b, size_t n)
 {
-	char	tmp[n];
+	t_uchar	tmp[n];
 
-	ft_memcpy(tmp, b, n);
+	ft_memcpy(&tmp, b, n);
 	ft_memcpy(b, a, n);
-	ft_memcpy(a, tmp, n);
+	ft_memcpy(a, &tmp, n);
 }
