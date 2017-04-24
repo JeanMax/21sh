@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2017/04/22 13:37:41 by mc               ###   ########.fr        #
+#    Updated: 2017/04/24 16:21:15 by mc               ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -50,6 +50,34 @@ MKDIR =		mkdir -p
 ECHO =      echo -e
 CC =		$(shell clang --version >/dev/null 2>&1 && echo clang || echo gcc)
 CFLAGS =	-Wall -Wextra -Werror -O2
+ifeq ($(OS), Windows_NT)
+  CCFLAGS += -D WIN32
+  ifeq ($(PROCESSOR_ARCHITECTURE), AMD64)
+    CCFLAGS += -D AMD64
+  else ifeq ($(PROCESSOR_ARCHITECTURE), x86)
+    CCFLAGS += -D IA32
+  endif
+else
+  UNAME_S = $(shell uname -s)
+  ifeq ($(UNAME_S), Linux)
+	ECHO = echo -e
+    CCFLAGS += -D LINUX
+  else ifeq ($(UNAME_S), Darwin)
+	ECHO = echo
+    CCFLAGS += -D OSX
+  endif
+  UNAME_P = $(shell uname -p)
+  ifeq ($(UNAME_P), unknown)
+    UNAME_P = $(shell uname -m)
+  endif
+  ifeq ($(UNAME_P), x86_64)
+    CCFLAGS += -D AMD64
+  else ifneq ($(filter %86, $(UNAME_P)), )
+    CCFLAGS += -D IA32
+  else ifneq ($(filter arm%, $(UNAME_P)), )
+    CCFLAGS += -D ARM
+  endif
+endif
 
 WHITE =	\033[37;01m
 RED =	\033[31;01m
@@ -84,13 +112,14 @@ me_cry:
 -include $(DEPS)
 
 $(NAME): $(OBJS) $(LIB)
-	@$(CC) $(CFLAGS) $(I_DIR) $(OBJS) $(LIB) -o $@ $(TERMCAPS)
+	@$(CC) $(CFLAGS) $(CCFLAGS) $(I_DIR) $(OBJS) $(LIB) -o $@ $(TERMCAPS)
 	@$(ECHO) "$(BLUE)$(OBJS) $(WHITE)->$(RED) $@ $(BASIC)"
-	@$(ECHO) "$(WHITE)flags:$(BASIC) $(CFLAGS)"
+	@$(ECHO) "$(WHITE)cflags:$(BASIC) $(CFLAGS)"
+	@$(ECHO) "$(WHITE)ccflags:$(BASIC) $(CCFLAGS)"
 	@$(ECHO) "$(WHITE)compi:$(BASIC) $(CC)"
 
 $(O_DIR)/%.o: %.c
-	@$(CC) $(CFLAGS) $(I_DIR) -MMD -c $< -o $@
+	@$(CC) $(CFLAGS) $(CCFLAGS) $(I_DIR) -MMD -c $< -o $@
 	@$(ECHO) "$(WHITE)$<\t->$(BLUE) $@ $(BASIC)"
 
 $(OBJS): | $(O_DIR)

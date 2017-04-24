@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 13:37:57 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/23 17:17:11 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void			prompt(void)
 	char		*env2;
 
 	env1 = get_env("USER");
-	ft_putstr_clr(env1 ? env1 + 5 : "marvin", "red");
-	ft_putstr_clr("@21sh", "yellow");
-	ft_putchar_clr(':', "white");
+	ft_putstr_clr(env1 ? env1 + 5 : "marvin", CLR_RED);
+	ft_putstr_clr("@21sh", CLR_YELLOW);
+	ft_putchar_clr(':', CLR_WHITE);
 	if (!(env1 = get_env("PWD")))
-		ft_putendl_clr("TheVoid", "green");
+		ft_putendl_clr("TheVoid", CLR_GREEN);
 	else if (!(env2 = get_env("HOME")))
-		ft_putendl_clr(env1 + 4, "green");
+		ft_putendl_clr(env1 + 4, CLR_GREEN);
 	else if (ft_strstr(env1 + 4, env2 + 5))
 	{
-		ft_putchar_clr('~', "green");
-		ft_putendl_clr(env1 + 4 + ft_strlen(env2 + 5), "green");
+		ft_putchar_clr('~', CLR_GREEN);
+		ft_putendl_clr(env1 + 4 + ft_strlen(env2 + 5), CLR_GREEN);
 	}
 	else
-		ft_putendl_clr(env1 + 4, "green");
-	ft_putstr_clr("> ", "green");
+		ft_putendl_clr(env1 + 4, CLR_GREEN);
+	ft_putstr_clr("> ", CLR_GREEN);
 }
 
 static void		do_something_with_line(char *line)

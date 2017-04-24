@@ -6,17 +6,25 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2016/09/27 23:47:02 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/24 16:12:28 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LINE_EDIT_H
+# define LINE_EDIT_H
+
+/*
+** include
+*/
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
+# include <sys/ioctl.h>
+# include "flex_shell.h"
 
 /*
 ** define
 */
-# define LINE_EDIT_H
-
 # define LINE_SIZE		1024
 # define KEY_BUF_SIZE	6
 
@@ -60,14 +68,6 @@
 #  define K_CTRL_Y		"\x8\x0\x0\x0\x0\x0"
 # endif
 
-/*
-** include
-*/
-# include <termios.h>
-# include <term.h>
-# include <curses.h>
-# include <sys/ioctl.h>
-# include "flex_shell.h"
 
 /*
 ** enum
@@ -98,10 +98,10 @@ typedef struct s_cursor	t_cursor;
 struct					s_cursor
 {
 	size_t	prompt_len;
-	t_lst	*first_l;
-	t_lst	*current_l;
-	t_lst	*save;
-	t_lst	*history;
+	t_arr	*line; //char line[]
+	size_t	current_length; //TODO: rename
+	t_arr	*save; //char save[]
+	t_arr	*history; //t_arr *history[] -> char history[][]
 };
 
 /*

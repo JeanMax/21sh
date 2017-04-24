@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 16:13:51 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/23 17:35:30 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void		check_dir(char **path, t_env *e)
 			if ((!stat(f_name, &s_stat) && S_ISREG(s_stat.st_mode)) \
 				&& (s_stat.st_mode & S_IXUSR))
 				ft_bstavladd(&e->bin_root, f_name, sizeof(char *), cmp);
-			/* ft_memdel((void *)&f_name); */
+			else
+				ft_memdel((void *)&f_name);
 			ft_memdel((void *)&tmp);
 		}
 		closedir(dir);

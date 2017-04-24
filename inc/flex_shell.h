@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 14:19:29 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/22 17:11:23 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,13 @@ t_bool					read_tty_brute(char **line);
 */
 t_bool					read_notty(char **line);
 t_bool					read_notty_brute(char **line);
+
+/*
+** cursor.c
+*/
+void					init_cursor(void);
+void					finit_cursor(void);
+
 
 /*
 ** ENV

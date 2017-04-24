@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 13:37:57 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/23 17:44:23 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void		init(void)
 
 	get_env_struct()->envp = ft_arr_dup(environ);
 	inc_shlvl();
+	init_cursor();
 	update_bin(TRUE);
 	ioctl(0, TIOCGWINSZ, get_term_size());
 	signal(SIGINT, sig_handl);
@@ -70,6 +71,11 @@ static void		init(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+static void		finit(void)
+{
+	finit_cursor();
+}
+
 int				main(int ac, char **av)
 {
 	(void)av;
@@ -77,6 +83,7 @@ int				main(int ac, char **av)
 		error(E_ARG, NULL);
 	init();
 	prompt_loop();
+	finit();
 	ft_putendl("exit");
 	return (EXIT_SUCCESS);
 }
