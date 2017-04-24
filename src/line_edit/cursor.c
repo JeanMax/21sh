@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/23 17:59:42 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/24 19:39:57 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void			clean_cursor(void)
 static void		free_arr(void *arr, size_t n)
 {
 	(void)n;
-	/* ft_debugstr("zob", (char *)(*(t_arr **)arr)->ptr); */
 	ft_arrdel(arr);
 }
 

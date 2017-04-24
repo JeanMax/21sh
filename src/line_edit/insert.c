@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:45:33 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 15:04:14 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/24 18:08:55 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ enum e_status		insert(char *buf)
 	c = get_cursor();
 	if (c->line->length + 1 >= LINE_SIZE)
 		return (KEEP_READING);
-	ft_arrpush(c->line, (void *)(long)*buf, c->current_length); //TODO: len++?
+	ft_arrpush(c->line, (void *)(long)*buf, (int)c->current_length);
 	print_line();
 	move_right(NULL);
 	return (KEEP_READING);
@@ -41,7 +41,7 @@ enum e_status		del(char *buf)
 	c = get_cursor();
 	if (!c->line->length || c->current_length == c->line->length)
 		return (KEEP_READING);
-	ft_arrpop(c->line, c->current_length);
+	ft_arrpop(c->line, (int)c->current_length);
 	print_line();
 	return (KEEP_READING);
 }

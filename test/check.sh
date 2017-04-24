@@ -7,7 +7,7 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/26 14:20:41 by mcanal            #+#    #+#              #
-#    Updated: 2017/04/22 16:20:50 by mc               ###   ########.fr        #
+#    Updated: 2017/04/24 18:11:12 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@
 VERBOSE=1
 MAKE=0
 
-if [ $0 == ./check/check.sh ]; then
+if [ $0 == ./test/check.sh ]; then
 	SH_DIR=.;
-	CHECK_DIR=check;
+	CHECK_DIR=test;
 else
 	SH_DIR=..;
 	CHECK_DIR=.;

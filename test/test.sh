@@ -7,13 +7,13 @@
 #    By: mcanal <zboub@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/08 15:00:49 by mcanal            #+#    #+#              #
-#    Updated: 2016/06/08 15:03:19 by mcanal           ###   ########.fr        #
+#    Updated: 2017/04/24 18:11:28 by mc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-if [ $0 == ./check/test.sh ]; then
+if [ $0 == ./test/test.sh ]; then
 	SH_DIR=.;
-	CHECK_DIR=check;
+	CHECK_DIR=test;
 else
 	SH_DIR=..;
 	CHECK_DIR=.;

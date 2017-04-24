@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 17:24:57 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 17:18:17 by mc               ###   ########.fr       */
+/*   Updated: 2017/04/24 18:09:34 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ enum e_status		cut_forward(char *buf)
 	c->save = ft_arrdup(c->line);
 	if (c->current_length)
 	{
-		ft_arrslice(c->save, c->current_length, -1, -1);
-		ft_arrslice(c->line, 0, c->current_length - 1, 1);
+		ft_arrslice(c->save, (int)c->current_length, -1, -1);
+		ft_arrslice(c->line, 0, (int)c->current_length - 1, 1);
 	}
 	else
 	{
@@ -68,8 +68,8 @@ enum e_status		cut_backward(char *buf)
 	c->save = ft_arrdup(c->line);
 	if (c->current_length != c->line->length)
 	{
-		ft_arrslice(c->save, 0, c->current_length - 1, -1);
-		ft_arrslice(c->line, c->current_length, -1, 1);
+		ft_arrslice(c->save, 0, (int)c->current_length - 1, -1);
+		ft_arrslice(c->line, (int)c->current_length, -1, 1);
 	}
 	else
 	{
@@ -95,7 +95,7 @@ enum e_status		paste(char *buf)
 		return (KEEP_READING);
 	swap = (char *)c->save->ptr;
 	while (*swap)
-		ft_arrpush(c->line, (void *)(long)*swap++, c->current_length);
+		ft_arrpush(c->line, (void *)(long)*swap++, (int)c->current_length);
 	len = c->save->length;
 	while (len--)
 		move_right(NULL);

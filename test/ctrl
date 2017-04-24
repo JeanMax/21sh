@@ -1,72 +1,50 @@
+/tmp
+/
+/
+/
 toto=
 toto=42
 toto=42=23
 tototo=to
 21sh: command not found: ls
 21sh: command not found: ls
+mkdir: created directory '/tmp/toto'
 .
 ..
-21sh
-auteur
-check
-.git
-.gitignore
-inc
-libft
-Makefile
-obj
-README.md
-src
-21sh
-auteur
-check
-inc
-libft
-Makefile
-obj
-README.md
-src
-ls: cannot access eglk: No such file or directory
+tata
+titi
+tutu
+tata
+titi
+tutu
+ls: cannot access 'eglk': No such file or directory
 1
-21sh
-auteur
-check
-inc
-libft
-Makefile
-obj
-README.md
-src
+tata
+titi
+tutu
 yo
-mcanal$
+bob$
 hey youpla boum
 tsoin tsoin
 bye
-ls: cannot access erlmgk: No such file or directory$
+ls: cannot access 'erlmgk': No such file or directory$
 .:$
-21sh$
 auteur$
-check$
-inc$
-libft$
-Makefile$
-obj$
-README.md$
-src$
-ls: cannot access erlmgk: No such file or directory
+tata$
+titi$
+tutu$
+ls: cannot access 'erlmgk': No such file or directory
 .:
-21sh
 auteur
-check
-inc
-libft
-Makefile
-obj
-README.md
-src
-ls: cannot access ezgge: No such file or directory
-ls: cannot access ezgge: No such file or directory
-ls: cannot access ezgge: No such file or directory
-mcanal$
+tata
+titi
+tutu
+ls: cannot access 'ezgge': No such file or directory
+ls: cannot access 'ezgge': No such file or directory
+ls: cannot access 'ezgge': No such file or directory
+bob$
+hey youpla boum$
+tsoin tsoin$
+bye$
 exit
 42

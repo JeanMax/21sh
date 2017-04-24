@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2016/10/22 23:12:41 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/04/24 19:38:10 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,42 +22,44 @@
 
 extern pid_t	g_pid;
 
-static void		get_text(char **text, char *here, t_bool (*read_it)(char **))
+static void		get_text(t_arr *text, char *here, t_bool (*read_it)(char **))
 {
 	char			*buf;
-	char			*tmp;
-	size_t			len;
+	char			*swap;
 
-	*text = ft_strnew(1);
 	if (isatty(STDIN_FILENO))
 		ft_putstr("? ");
 	buf = NULL;
 	while (read_it(&buf) && ft_strcmp(buf, here))
 	{
-		tmp = ft_strjoin(buf, "\n");
+		swap = buf;
+		while (*swap)
+			ft_arrpush(text, (void *)(long)*swap++, -1);
+		ft_arrpush(text, (void *)(long)'\n', -1);
 		if (isatty(STDIN_FILENO))
 			ft_putstr("\n? ");
-		len = ft_strlen(*text);
-		*text = (char *)ft_realloc((void *)*text, len, len + ft_strlen(tmp));
-		ft_strcat(*text, tmp);
-		ft_memdel((void *)&tmp);
+		else
+			ft_memdel((void *)&buf);
+
 	}
-	/* ft_memdel((void *)&buf); */
 	if (isatty(STDIN_FILENO))
 		ft_putchar('\n');
+	else
+		ft_memdel((void *)&buf);
 }
 
 static void		write_to_pipe(char *here, int *pipe_fd)
 {
 	int			save_fd_out;
-	char		*text;
+	t_arr		*text;
 
-	get_text(&text, here, \
+	text = ft_arrnew(0, sizeof(char));
+	get_text(text, here, \
 				isatty(STDIN_FILENO) ? read_tty_brute : read_notty_brute);
 	save_fd_out = dup(STDOUT_FILENO);
 	close(pipe_fd[0]);
-	ft_putstr_fd(text, pipe_fd[1]);
-	ft_memdel((void *)&text);
+	write(pipe_fd[1], (char *)text->ptr, text->length);
+	ft_arrdel(&text);
 	close(pipe_fd[1]);
 	dup2(save_fd_out, STDOUT_FILENO);
 	close(save_fd_out);
@@ -81,17 +83,31 @@ static void		fork_that(char **cmd, char *here)
 void			here_doc(char **cmd)
 {
 	char	**swap;
-	char	**new_cmd;
+/* 	char	**new_cmd; */
+
+/* 	swap = cmd; */
+/* 	while (*(++swap) && !ft_strchr(*swap, R_HERE_DOC)) */
+/* 		; */
+/* 	new_cmd = (char **)malloc(sizeof(char *) * (size_t)(swap - cmd + 1)); */
+/* 	swap = new_cmd; */
+/* 	while (!ft_strchr(*cmd, R_HERE_DOC) && (*(swap++) = *(cmd++))) */
+/* 		; */
+/* 	*swap = NULL; */
+/* 	fork_that(new_cmd, *(++cmd)); */
+/* 	ft_memdel((void *)&new_cmd); */
+/* 	exec_cmd(++cmd); */
+
+	char	*here;
+	char	*tmp;
 
 	swap = cmd;
-	while (*(++swap) && !ft_strchr(*swap, R_HERE_DOC))
+	while (*(++swap) && !(tmp = ft_strchr(*swap, R_HERE_DOC)))
 		;
-	new_cmd = (char **)malloc(sizeof(char *) * (size_t)(swap - cmd + 1));
-	swap = new_cmd;
-	while (!ft_strchr(*cmd, R_HERE_DOC) && (*(swap++) = *(cmd++)))
-		;
-	*swap = NULL;
-	fork_that(new_cmd, *(++cmd));
-	ft_memdel((void *)&new_cmd);
-	exec_cmd(++cmd);
+	here = ft_strdup(*(++swap));
+	tmp = *swap;
+	ft_arr_delone(cmd, *(swap - 1));
+	ft_arr_delone(cmd, tmp);
+
+	fork_that(cmd, here);
+	ft_memdel((void *)&here);
 }
