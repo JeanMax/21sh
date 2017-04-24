@@ -1,10 +1,6 @@
 # 21SH #
 
-FISH inside!  
-(FISH Is Swimming Here)  
-(FISH Is Supa Hot)  
-(FISH Isn't SH)
-(Freaking Incredible SHell)
+it's a shell. yep
 
 ### TODO: ###
 
