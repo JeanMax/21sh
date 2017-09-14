@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 16:12:28 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/14 16:22:45 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,10 @@ enum					e_status
 	CMD_DONE
 };
 
-enum					e_mismatch
+enum					e_quote
 {
-	QUOTE = 0,
-	D_QUOTE = 1,
-	B_QUOTE = 2,
-	BRACKET = 3,
-	C_BRACKET = 4,
-	R_BRACKET = 5,
-	MIS_SIZE = 6
+	QUOTE = 39,
+	D_QUOTE = 34
 };
 
 /*

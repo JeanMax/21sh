@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:58:45 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/12 22:22:10 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/14 17:07:35 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void		assign_redirection(char **str, char **line)
 		*((*str)++) = R_PIPELINE;
 }
 
-// TODO: the "/' handling is bugged
 static void		assign(char **str, char **line, t_bool skip)
 {
 	if (skip)
@@ -50,8 +49,10 @@ static void		assign(char **str, char **line, t_bool skip)
 	}
 	if (**line == '\n' || **line == ';')
 		*((*str)++) = S_LINE;
-	else if (ft_isspace(**line) || **line == '\'' || **line == '"')
+	else if (ft_isspace(**line))
 		*((*str)++) = S_WORD;
+	else if (**line == '\'' || **line == '"')
+		;//(*line)++;
 	else if (**line == '<' || **line == '>' || **line == '|')
 	{
 		if (**line == '|' \
@@ -82,7 +83,7 @@ static void		to_string_loop(char *str, char *line)
 		else
 		{
 			assign(&str, &line, skip);
-			if (*line == '\'' || *line == '"')
+			if (!skip && (*line == '\'' || *line == '"'))
 				skip = *line;
 		}
 		line++;
