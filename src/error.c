@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 14:19:22 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/14 17:33:46 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ static int		get_index(t_uint flag)
 void			error(t_uint flag, char *msg)
 {
 	const char	*error[] = {
-		"21sh: command not found: ",
-		"21sh: no such file or directory: ",
-		"21sh: can't make file: ",
+		"command not found: ",
+		"no such file or directory: ",
+		"can't make file: ",
 		"Pipe failed. Try Again...",
 		"Fork failed. Try Again...",
-		"Too many arguments.",
+		"Ignoring extra arguments.",
 		"$PATH missing from env.",
 		"This is not a tty.",
 		"Getattr failed. Try Again...",
@@ -61,6 +61,7 @@ void			error(t_uint flag, char *msg)
 		"$TERM missing from env."
 	};
 
+	fail("21sh: ");
 	if (msg)
 	{
 		fail(error[get_index(flag & (t_uint)~E_NOEXIT)]);

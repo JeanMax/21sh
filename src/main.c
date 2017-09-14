@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/13 17:36:20 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/14 17:31:53 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int				main(int ac, char **av)
 {
 	(void)av;
 	if (ac > 1)
-		error(E_ARG, NULL);
+		error(E_ARG | E_NOEXIT, NULL);
 	init();
 	prompt_loop();
 	finit();

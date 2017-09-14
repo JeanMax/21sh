@@ -46,4 +46,10 @@ KTHX
 rm tata titi auteur
  rmdir	tutu
 cd ..
-	rmdir toto
+rmdir toto
+
+
+foo
+/bin/ls
+/bin/ls -laF
+/bin/ls -l -a -F
