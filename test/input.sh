@@ -18,7 +18,12 @@ cd /tmp/toto
 touch tata titi
 mkdir tutu
 
-	ls	 -a
+foo
+/bin/ls
+/bin/ls -laF
+/bin/ls -l -a -F
+
+ls	 -a
 ls; ls eglk
 ls > 1; echo 'yo' >> 1; cat 1; rm 1
 
@@ -47,9 +52,3 @@ rm tata titi auteur
  rmdir	tutu
 cd ..
 rmdir toto
-
-
-foo
-/bin/ls
-/bin/ls -laF
-/bin/ls -l -a -F

@@ -9,6 +9,22 @@ tototo=to
 21sh: command not found: ls
 21sh: command not found: ls
 mkdir: created directory '/tmp/toto'
+21sh: command not found: foo
+tata
+titi
+tutu
+total 0
+drwxr-xr-x  3 mc   users 100 sept. 14 18:36 ./
+drwxrwxrwt 14 root root  400 sept. 14 18:36 ../
+-rw-r--r--  1 mc   users   0 sept. 14 18:36 tata
+-rw-r--r--  1 mc   users   0 sept. 14 18:36 titi
+drwxr-xr-x  2 mc   users  40 sept. 14 18:36 tutu/
+total 0
+drwxr-xr-x  3 mc   users 100 sept. 14 18:36 ./
+drwxrwxrwt 14 root root  400 sept. 14 18:36 ../
+-rw-r--r--  1 mc   users   0 sept. 14 18:36 tata
+-rw-r--r--  1 mc   users   0 sept. 14 18:36 titi
+drwxr-xr-x  2 mc   users  40 sept. 14 18:36 tutu/
 .
 ..
 tata
