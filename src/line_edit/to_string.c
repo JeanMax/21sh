@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:58:45 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/23 14:37:01 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/12 22:22:10 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void		assign_redirection(char **str, char **line)
 		*((*str)++) = R_PIPELINE;
 }
 
+// TODO: the "/' handling is bugged
 static void		assign(char **str, char **line, t_bool skip)
 {
 	if (skip)

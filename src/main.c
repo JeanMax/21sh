@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/10 00:12:49 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/23 17:44:23 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/13 17:36:20 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void		init(void)
 static void		finit(void)
 {
 	finit_cursor();
+	ft_hdel(&get_env_struct()->bin_table);
 }
 
 int				main(int ac, char **av)

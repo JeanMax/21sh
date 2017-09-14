@@ -6,7 +6,7 @@
 #    By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/29 13:16:03 by mcanal            #+#    #+#              #
-#    Updated: 2017/04/24 16:21:15 by mc               ###   ########.fr        #
+#    Updated: 2017/09/14 13:16:45 by mc               ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -26,7 +26,7 @@ C_LIN = clear.c				cursor.c			insert.c			\
 		print_line.c		to_string.c			copy_paste.c		\
 		move_cursor_far.c	set_history.c
 C_ENV = bin.c				env.c				setenv.c			\
-		unsetenv.c
+		unsetenv.c			bin_table.c
 C_ARR = ft_arrdel.c			ft_arrdelone.c		ft_arrdup.c
 
 O_DIR = obj
@@ -85,7 +85,7 @@ GREEN =	\033[32;01m
 BLUE =	\033[34;01m
 BASIC =	\033[0m
 
-.PHONY: all debug sanitize me_cry clean fclean zclean re brute
+.PHONY: all debug sanitize me_cry test clean fclean zclean re brute
 
 all:
 	@$(MAKE) -C libft
@@ -98,7 +98,7 @@ debug:
 sanitize:
 	@$(MAKE) -C libft sanitize
 	@$(MAKE) $(NAME) \
-		"CFLAGS = -g -ggdb -O2 -fsanitize=address,undefined -ferror-limit=5"
+		"CFLAGS = -g -ggdb -fsanitize=address,undefined -ferror-limit=5"
 
 me_cry:
 	@$(MAKE) -C libft
@@ -108,6 +108,9 @@ me_cry:
 -Wmissing-declarations -Wfloat-equal -Wbad-function-cast -Wundef \
 -Waggregate-return -Wstrict-overflow=5 -Wold-style-definition -Wpadded \
 -Wredundant-decls -Wall -Werror -Wextra -O2" #-Wcast-qual
+
+test:
+	./test/check.sh
 
 -include $(DEPS)
 

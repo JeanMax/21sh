@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:30 by mcanal            #+#    #+#             */
-/*   Updated: 2015/12/14 18:33:20 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/09/13 17:41:23 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 static int		do_exit(int status)
 {
 	ft_putendl("exit");
+	finit_cursor();
+	ft_hdel(&get_env_struct()->bin_table);
 	exit(status);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:03 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 13:45:25 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/13 16:07:10 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_bool			syntax_error(char *s)
 
 static void		do_stuff(char **av, t_env *e)
 {
-	e->bin_root = NULL;
+	e->bin_table = NULL;
 	if (!ft_strcmp(*av, "-i"))
 	{
 		e->envp = (char **)malloc(sizeof(char *));
@@ -64,13 +64,13 @@ void		free_string(void *s, size_t n)
 
 void			ft_env(char **av)
 {
-	char	**old_env;
-	t_bst	*old_bin;
-	t_env	*e;
+	char		**old_env;
+	t_htable	*old_bin;
+	t_env		*e;
 
 	e = get_env_struct();
 	old_env = e->envp;
-	old_bin = e->bin_root;
+	old_bin = e->bin_table;
 	if (!*(++av))
 	{
 		print_env(old_env);
@@ -78,7 +78,7 @@ void			ft_env(char **av)
 	}
 	do_stuff(av, e);
 	ft_arr_del(&e->envp);
-	ft_bstdel(&e->bin_root, free_string);
+	ft_hdel(&e->bin_table);
 	e->envp = old_env;
-	e->bin_root = old_bin;
+	e->bin_table = old_bin;
 }

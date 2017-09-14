@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/22 17:11:23 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/14 13:25:36 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_env	t_env;
 struct					s_env
 {
 	char				**envp;
-	t_bst				*bin_root;
+	t_htable			*bin_table;
 	time_t				last_update;
 };
 
