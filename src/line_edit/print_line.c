@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:57:47 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 17:09:46 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/15 13:03:56 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void		print_line_loop(char *line, size_t count)
 			ft_putchar(*line);
 		if (!(++count % get_term_size()->ws_col))
 		{
-			tputs(tgetstr("cd", NULL), 0, tputs_output);
 			ft_putchar('\n');
+			tputs(tgetstr("cd", NULL), 0, tputs_output);
 		}
 		line++;
 	}
