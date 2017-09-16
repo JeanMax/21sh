@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:03 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/13 16:07:10 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/16 20:05:41 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_bool			syntax_error(char *s)
 {
 	if (*s == '=')
 		return (FALSE);
-	while (*s && ft_isalnum(*s))
+	while (*s && (ft_isalnum(*s) || *s == '_'))
 		s++;
 	return (*s != '=');
 }

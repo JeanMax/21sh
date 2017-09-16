@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/23 17:17:11 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/16 23:27:25 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ static void		do_something_with_line(char *line)
 	char		**cmd_arr;
 	char		**cmd;
 
-	if (!line || ft_strlen(line) > LINE_SIZE \
-			|| !(cmd_arr = ft_strsplit(line, S_LINE)))
+	if (!line)
+		return ;
+	if (ft_strlen(line) > LINE_SIZE * 10)
+		failn("21sh: expression over 9000!");
+	if (!(cmd_arr = ft_strsplit(line, S_LINE)))
 		return ;
 	swap = cmd_arr;
 	while (*swap)
