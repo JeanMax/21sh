@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/17 13:54:42 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:05:57 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void			prompt(void)
 {
 	char		*env1;
 	char		*env2;
+	t_bool		isdumb;
 
+	isdumb = !get_env("TERM") || !ft_strcmp("dumb", get_env("TERM") + 5);
 	env1 = get_env("USER");
 	ft_putstr_clr(env1 ? env1 + 5 : "marvin", CLR_RED);
 	ft_putstr_clr("@21sh", CLR_YELLOW);
@@ -42,6 +44,8 @@ void			prompt(void)
 	}
 	else
 		ft_putendl_clr(env1 + 4, CLR_GREEN);
+	if (!isdumb)
+		ft_putstr_clr("> ", CLR_GREEN);
 }
 
 static void		do_something_with_line(char *line)
@@ -86,15 +90,11 @@ void			prompt_loop(void)
 		exit(EXIT_SUCCESS);
 	}
 	prompt();
-	if (!isdumb)
-		ft_putstr_clr("> ", CLR_GREEN);
 	while (read_it(&line))
 	{
 		if (!isdumb)
 			ft_putendl("");
 		do_something_with_line(line);
 		prompt();
-		if (!isdumb)
-			ft_putstr_clr("> ", CLR_GREEN);
 	}
 }
