@@ -6,20 +6,13 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 10:02:01 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/14 16:48:21 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 14:17:49 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "line_edit.h"
 
-static void				print_error(enum e_quote e)
-{
-	move_end(NULL);
-	ft_putstr_clr("\n\tMismatched ", CLR_RED);
-	ft_putendl_clr(e == QUOTE ? "'." : "\".", CLR_RED);
-}
-
-static t_bool			got_mismatch(char *line)
+static enum e_quote		got_mismatch(char *line)
 {
 	char *quote;
 	char *d_quote;
@@ -39,30 +32,38 @@ static t_bool			got_mismatch(char *line)
 	if (line)
 	{
 		if (!(line = ft_strchr(line + 1, e)))
-		{
-			print_error(e);
-			return (TRUE);
-		}
+			return (e);
 		return (got_mismatch(line + 1));
 	}
-	return (FALSE);
+	return (NOP);
 }
 
 enum e_status			set_history(char *buf)
 {
-	t_cursor	*c;
+	t_cursor		*c;
+	char			*s;
+	enum e_quote	e;
+	static t_arr	*all_lines = NULL;
 
 	if (ft_memcmp(buf, K_RETURN, KEY_BUF_SIZE))
 		return (KEEP_TRYING);
+	if (!all_lines)
+		all_lines = ft_arrnew(LINE_SIZE, sizeof(char));
 	c = get_cursor();
-	if (got_mismatch((char *)c->line->ptr))
+	s = (char *)c->line->ptr;
+	while (*s)
+		ft_arrpush(all_lines, (void *)(long)*s++, -1);
+	if ((e = got_mismatch(all_lines->ptr)))
 	{
-		c->current_length = 0;
-		c->prompt_len = 0;
-		print_line();
+		clean_cursor();
+		ft_arrpush(all_lines, (void *)(long)'\n', -1);
+		ft_putstr(e == QUOTE ? "\nquote> " : "\ndquote> ");
 		move_end(NULL);
 		return (KEEP_READING);
 	}
+	ft_arrdel(&c->line);
+	c->line = all_lines;
+	all_lines = NULL;
 	if (c->line->length)
 		ft_arrpush(c->history, ft_arrdup(c->line), 0);
 	move_end(NULL);
