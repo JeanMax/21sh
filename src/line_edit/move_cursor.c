@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 16:19:41 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 16:03:42 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:12:04 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 enum e_status		move_up(char *buf)
 {
 	t_cursor	*c;
-	size_t	line_len;
+	size_t		line_len;
 
 	if (ft_memcmp(buf, K_CTRL_UP, KEY_BUF_SIZE))
 		return (KEEP_TRYING);

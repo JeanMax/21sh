@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/13 00:00:33 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/14 13:16:12 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:22:11 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,22 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+static void		relou(char *f_name, struct dirent *s_dir, struct stat *s_stat,
+						t_env *e)
+{
+	if ((!stat(f_name, s_stat) && S_ISREG(s_stat->st_mode)) \
+		&& (s_stat->st_mode & S_IXUSR)						\
+		&& !ft_hget(e->bin_table, s_dir->d_name))
+		ft_hset(e->bin_table, ft_strdup(s_dir->d_name), f_name);
+	else
+		ft_memdel((void *)&f_name);
+}
+
 static void		check_dir(char **path, t_env *e)
 {
 	DIR				*dir;
 	struct dirent	*s_dir;
 	struct stat		s_stat;
-	char			*f_name;
 	char			*tmp;
 
 	if (!path || !*path)
@@ -31,15 +41,7 @@ static void		check_dir(char **path, t_env *e)
 			e->last_update = s_stat.st_mtime;
 		tmp = ft_strjoin(*path, "/");
 		while ((s_dir = readdir(dir)))
-		{
-			f_name = ft_strjoin(tmp, s_dir->d_name);
-			if ((!stat(f_name, &s_stat) && S_ISREG(s_stat.st_mode)) \
-				&& (s_stat.st_mode & S_IXUSR) \
-				&& !ft_hget(e->bin_table, s_dir->d_name))
-				ft_hset(e->bin_table, ft_strdup(s_dir->d_name), f_name);
-			else
-				ft_memdel((void *)&f_name);
-		}
+			relou(ft_strjoin(tmp, s_dir->d_name), s_dir, &s_stat, e);
 		ft_memdel((void *)&tmp);
 		closedir(dir);
 	}

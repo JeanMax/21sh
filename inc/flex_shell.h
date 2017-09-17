@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 13:23:15 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/14 13:25:36 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:24:30 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ t_bool					read_notty_brute(char **line);
 void					init_cursor(void);
 void					finit_cursor(void);
 
-
 /*
 ** ENV
 ** env.c
@@ -143,7 +142,6 @@ void					unset_env(char *to_unset);
 */
 char					*get_full_bin(char *bin);
 void					update_bin(t_bool force_update);
-
 
 void					free_string(void *s, size_t n);
 void					free_char(void *c, size_t n);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 22:48:29 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 19:38:10 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:09:53 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void		get_text(t_arr *text, char *here, t_bool (*read_it)(char **))
 			ft_putstr("\n? ");
 		else
 			ft_memdel((void *)&buf);
-
 	}
 	if (isatty(STDIN_FILENO))
 		ft_putchar('\n');
@@ -83,20 +82,6 @@ static void		fork_that(char **cmd, char *here)
 void			here_doc(char **cmd)
 {
 	char	**swap;
-/* 	char	**new_cmd; */
-
-/* 	swap = cmd; */
-/* 	while (*(++swap) && !ft_strchr(*swap, R_HERE_DOC)) */
-/* 		; */
-/* 	new_cmd = (char **)malloc(sizeof(char *) * (size_t)(swap - cmd + 1)); */
-/* 	swap = new_cmd; */
-/* 	while (!ft_strchr(*cmd, R_HERE_DOC) && (*(swap++) = *(cmd++))) */
-/* 		; */
-/* 	*swap = NULL; */
-/* 	fork_that(new_cmd, *(++cmd)); */
-/* 	ft_memdel((void *)&new_cmd); */
-/* 	exec_cmd(++cmd); */
-
 	char	*here;
 	char	*tmp;
 
@@ -107,7 +92,6 @@ void			here_doc(char **cmd)
 	tmp = *swap;
 	ft_arr_delone(cmd, *(swap - 1));
 	ft_arr_delone(cmd, tmp);
-
 	fork_that(cmd, here);
 	ft_memdel((void *)&here);
 }

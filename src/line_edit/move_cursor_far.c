@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 17:28:15 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 15:17:24 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:11:06 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ enum e_status		move_next_word(char *buf)
 	if (!c->current_length)
 		move_right(NULL);
 	while (c->current_length < c->line->length	\
-		   && !ft_isspace(*((char *)c->line->ptr + c->current_length)))
+			&& !ft_isspace(*((char *)c->line->ptr + c->current_length)))
 		move_right(NULL);
 	while (c->current_length < c->line->length	\
-		   && ft_isspace(*((char *)c->line->ptr + c->current_length)))
+			&& ft_isspace(*((char *)c->line->ptr + c->current_length)))
 		move_right(NULL);
 	return (KEEP_READING);
 }
@@ -97,10 +97,10 @@ enum e_status		move_prev_word(char *buf)
 	if (!c->current_length)
 		return (KEEP_READING);
 	while (c->current_length \
-		   && ft_isspace(*((char *)c->line->ptr + c->current_length - 1)))
+			&& ft_isspace(*((char *)c->line->ptr + c->current_length - 1)))
 		move_left(NULL);
 	while (c->current_length \
-		   && !ft_isspace(*((char *)c->line->ptr + c->current_length - 1)))
+			&& !ft_isspace(*((char *)c->line->ptr + c->current_length - 1)))
 		move_left(NULL);
 	return (KEEP_READING);
 }

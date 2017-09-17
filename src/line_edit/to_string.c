@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:58:45 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/16 23:36:20 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:08:26 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		assign(t_arr *str, char **line, char skip)
 	{
 		if (**line == '|' \
 				|| ((*line) != get_cursor()->line->ptr \
-					&& !ft_isdigit(*((*line) - 1)))) //TODO: test
+					&& !ft_isdigit(*((*line) - 1))))
 			ft_arrpush(str, (void *)(long)S_WORD, -1);
 		assign_redirection(str, line);
 		ft_arrpush(str, (void *)(long)S_WORD, -1);

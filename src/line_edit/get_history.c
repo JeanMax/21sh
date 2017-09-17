@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 18:19:56 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 18:04:59 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:13:00 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_arr			**get_history_up(t_cursor *c, \
 	if (c->line == line_save)
 		c->line = *(t_arr **)c->history->ptr;
 	else if ((size_t)(history + 1 - (t_arr **)c->history->ptr) \
-			 < c->history->length)
+			< c->history->length)
 	{
 		history++;
 		c->line = *history;

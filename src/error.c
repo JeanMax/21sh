@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 03:39:12 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/14 17:33:46 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:15:26 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 #include "flex_shell.h"
 #include <stdlib.h>
 
-t_bool fail(const char *s)
+t_bool			fail(const char *s)
 {
 	ft_putstr_fd(s, STDERR_FILENO);
 	return (FALSE);
 }
 
-t_bool failn(const char *s)
+t_bool			failn(const char *s)
 {
 	ft_putendl_fd(s, STDERR_FILENO);
 	return (FALSE);

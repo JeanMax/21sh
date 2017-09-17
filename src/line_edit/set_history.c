@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 10:02:01 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/17 14:17:49 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:26:40 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static enum e_quote		got_mismatch(char *line)
 {
-	char *quote;
-	char *d_quote;
-	enum e_quote e;
+	char			*quote;
+	char			*d_quote;
+	enum e_quote	e;
 
 	quote = ft_strchr(line, QUOTE);
 	if ((d_quote = ft_strchr(line, D_QUOTE)) && quote)
@@ -38,6 +38,14 @@ static enum e_quote		got_mismatch(char *line)
 	return (NOP);
 }
 
+static void				relou(t_arr *all_lines, enum e_quote e)
+{
+	clean_cursor();
+	ft_arrpush(all_lines, (void *)(long)'\n', -1);
+	ft_putstr(e == QUOTE ? "\nquote> " : "\ndquote> ");
+	move_end(NULL);
+}
+
 enum e_status			set_history(char *buf)
 {
 	t_cursor		*c;
@@ -55,10 +63,7 @@ enum e_status			set_history(char *buf)
 		ft_arrpush(all_lines, (void *)(long)*s++, -1);
 	if ((e = got_mismatch(all_lines->ptr)))
 	{
-		clean_cursor();
-		ft_arrpush(all_lines, (void *)(long)'\n', -1);
-		ft_putstr(e == QUOTE ? "\nquote> " : "\ndquote> ");
-		move_end(NULL);
+		relou();
 		return (KEEP_READING);
 	}
 	ft_arrdel(&c->line);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 18:02:34 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/17 14:02:57 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:24:18 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@
 #  define K_CTRL_Y		"\x8\x0\x0\x0\x0\x0"
 # endif
 
-
 /*
 ** enum
 */
@@ -94,10 +93,10 @@ typedef struct s_cursor	t_cursor;
 struct					s_cursor
 {
 	size_t	prompt_len;
-	t_arr	*line; //char line[]
-	size_t	current_length; //TODO: rename
-	t_arr	*save; //char save[]
-	t_arr	*history; //t_arr *history[] -> char history[][]
+	t_arr	*line;
+	size_t	current_length;
+	t_arr	*save;
+	t_arr	*history;
 };
 
 /*

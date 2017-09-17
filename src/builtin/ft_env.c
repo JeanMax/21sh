@@ -6,7 +6,7 @@
 /*   By: mcanal <mcanal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/12 07:42:03 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/16 20:05:41 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:16:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ static void		do_stuff(char **av, t_env *e)
 		print_env(e->envp);
 }
 
-//TODO: move?
-void		free_string(void *s, size_t n)
+void			free_string(void *s, size_t n)
 {
 	(void)n;
 	ft_memdel(s);

@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 20:16:34 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 19:39:57 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:13:21 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ void			clean_cursor(void)
 	t_cursor *c;
 
 	c = get_cursor();
-/* 	if (!ft_lfind(&c->history, (void *)c->first_l, cmp)) */
-/* 		ft_ldel(&c->first_l, free_char); */
-/* 	c->first_l = NULL; */
-/* 	c->current_l = NULL; */
-
-	//TODO: wtf was that??
 	ft_bzero(c->line->ptr, c->line->length);
 	c->line->length = 0;
 	c->current_length = 0;

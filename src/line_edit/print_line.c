@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:57:47 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/15 13:03:56 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:12:39 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		print_line_loop(char *line, size_t count)
 		if (ft_isspace(*line))
 			ft_putchar(' ');
 		else if (!ft_isascii(*line) || ft_iscntrl(*line))
-			ft_putstr("�"); //TODO: pieg
+			ft_putstr("�");
 		else
 			ft_putchar(*line);
 		if (!(++count % get_term_size()->ws_col))
@@ -34,7 +34,7 @@ static void		print_line_loop(char *line, size_t count)
 enum e_status	print_line(void)
 {
 	t_cursor	*c;
-	size_t	current_length;
+	size_t		current_length;
 
 	c = get_cursor();
 	current_length = c->current_length;

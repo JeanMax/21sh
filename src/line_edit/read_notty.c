@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/08 16:34:22 by mcanal            #+#    #+#             */
-/*   Updated: 2017/04/24 19:38:24 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 18:11:45 by mcanal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ t_bool			read_notty(char **line)
 			ft_arrpush(c->line, (void *)(long)*swap++, -1);
 	ft_memdel((void *)line);
 	*line = to_string();
-	clean_cursor(); //TODO: no idea what I'm doing
+	clean_cursor();
 	return (*line ? TRUE : FALSE);
 }
