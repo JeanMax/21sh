@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/09 10:02:01 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/17 18:26:40 by mcanal           ###   ########.fr       */
+/*   Updated: 2017/09/17 23:20:01 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ enum e_status			set_history(char *buf)
 		ft_arrpush(all_lines, (void *)(long)*s++, -1);
 	if ((e = got_mismatch(all_lines->ptr)))
 	{
-		relou();
+		relou(all_lines, e);
 		return (KEEP_READING);
 	}
 	ft_arrdel(&c->line);
