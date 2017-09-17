@@ -6,7 +6,7 @@
 /*   By: mcanal <zboub@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 17:02:18 by mcanal            #+#    #+#             */
-/*   Updated: 2017/09/16 23:27:25 by mc               ###   ########.fr       */
+/*   Updated: 2017/09/17 13:54:42 by mc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void			prompt(void)
 	}
 	else
 		ft_putendl_clr(env1 + 4, CLR_GREEN);
-	ft_putstr_clr("> ", CLR_GREEN);
 }
 
 static void		do_something_with_line(char *line)
@@ -74,11 +73,12 @@ static void		do_something_with_line(char *line)
 void			prompt_loop(void)
 {
 	char		*line;
+	t_bool		isdumb;
 	int			(*read_it)(char **);
 
 	line = NULL;
-	read_it = (!isatty(STDIN_FILENO) || !get_env("TERM") || \
-	ft_strcmp("xterm-256color", get_env("TERM") + 5)) ? read_notty : read_tty;
+	isdumb = !get_env("TERM") || !ft_strcmp("dumb", get_env("TERM") + 5);
+	read_it = (!isatty(STDIN_FILENO) || isdumb) ? read_notty : read_tty;
 	if (!isatty(STDIN_FILENO))
 	{
 		while (read_it(&line))
@@ -86,10 +86,15 @@ void			prompt_loop(void)
 		exit(EXIT_SUCCESS);
 	}
 	prompt();
+	if (!isdumb)
+		ft_putstr_clr("> ", CLR_GREEN);
 	while (read_it(&line))
 	{
-		ft_putendl("");
+		if (!isdumb)
+			ft_putendl("");
 		do_something_with_line(line);
 		prompt();
+		if (!isdumb)
+			ft_putstr_clr("> ", CLR_GREEN);
 	}
 }
